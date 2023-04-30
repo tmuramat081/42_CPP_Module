@@ -2,7 +2,7 @@ NAME := a.out
 CC := c++
 CFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
 
-SRCS := main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+SRCS := main.cpp Replace.cpp
 OBJS := ${SRCS:.cpp=.o}
 INCS := -I.
 
