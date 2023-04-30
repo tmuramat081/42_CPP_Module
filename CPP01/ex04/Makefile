@@ -15,6 +15,7 @@ RED := \033[0;91m
 DEL := \033[2K
 MOVE := \033[1F
 CR := \033[1G
+
 # Commands
 ${NAME}: ${OBJS}
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} -o $@
