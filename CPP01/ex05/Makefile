@@ -2,7 +2,7 @@ NAME := a.out
 CC := c++
 CFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
 
-SRCS := main.cpp Replace.cpp
+SRCS := main.cpp Harl.cpp
 OBJS := ${SRCS:.cpp=.o}
 INCS := -I.
 
@@ -19,7 +19,7 @@ CR := \033[1G
 # Commands
 ${NAME}: ${OBJS}
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} -o $@
-	@{PRINTF} "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}\n"
+	@${PRINTF} "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}\n"
 
 #: Make executable file.
 all: ${NAME}
