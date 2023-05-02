@@ -6,8 +6,10 @@ public:
 	Harl();
 	~Harl();
 	void complain(std::string level);
+	void complainFilter(std::string level);
 
 private:
+	int	_hash(std::string str);
 	void debug(void);
 	void info(void);
 	void warning(void);
