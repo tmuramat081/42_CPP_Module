@@ -1,10 +1,10 @@
-NAME := a.out
+NAME := harlFilter
 CC := c++
 CFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
 
-SRCS := megaphone.cpp
+SRCS := main.cpp Harl.cpp
 OBJS := ${SRCS:.cpp=.o}
-INCS :=
+INCS := -I.
 
 # Print variables
 PRINTF := printf
@@ -13,11 +13,13 @@ BLUE := \033[0;94m
 GREEN := \033[0;92m
 RED := \033[0;91m
 DEL := \033[2K
+MOVE := \033[1F
+CR := \033[1G
 
 # Commands
 ${NAME}: ${OBJS}
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} -o $@
-	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
+	@${PRINTF} "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}\n"
 
 #: Make executable file.
 all: ${NAME}
@@ -34,7 +36,8 @@ fclean:	clean
 
 #: Remove and recompile all.
 re: fclean
+	@${MAKE} -s all
 
 .PHONY:
-	all clean fclean re run dev git norm nm help
+	all clean fclean re
 

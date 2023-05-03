@@ -25,6 +25,7 @@ int Account::getNbWithdrawals()
 {
 	return Account::_totalNbWithdrawals;
 }
+
 void Account::displayAccountsInfos()
 {
 	Account::_displayTimestamp();

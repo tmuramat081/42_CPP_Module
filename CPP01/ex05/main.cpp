@@ -1,13 +1,12 @@
 #include "Harl.hpp"
 
-int main(int argc, char **argv)
+int main()
 {
-	if (argc != 2)
-	{
-		return 0;
-	}
 	Harl harl;
 
-	harl.complainFilter(argv[1]);
+	harl.complain("DEBUG");
+	harl.complain("INFO");
+	harl.complain("WARNING");
+	harl.complain("ERROR");
 	return 0;
 }
