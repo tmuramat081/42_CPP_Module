@@ -2,9 +2,9 @@ NAME := a.out
 CC := c++
 CFLAGS := -std=c++98 -pedantic
 
-SRCS := main.cpp Contact.cpp PhoneBook.cpp
+SRCS := main.cpp Controller.cpp PhoneBook.cpp Contact.cpp
 OBJS := ${SRCS:.cpp=.o}
-INCS :=
+INCS := -I.
 
 
 # Print variables

@@ -6,6 +6,7 @@ public:
 	Harl();
 	~Harl();
 	void complain(std::string level);
+	void complainFilter(std::string level);
 
 private:
 	static const int N_LOG_LEVELS = 4;

@@ -1,5 +1,4 @@
 #include "Harl.hpp"
-#include <map>
 
 #define BLUE "\033[0;94m"
 #define GREEN "\033[0;92m"
@@ -22,14 +21,28 @@ Harl::Harl()
 
 Harl::~Harl(){};
 
-void Harl::complain(std::string _level)
+void Harl::complain(std::string level)
 {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < N_LOG_LEVELS; i++)
 	{
-		if (this->_levels[i] == _level)
+		if (this->_levels[i] == level)
 		{
 			(this->*(_logs[i]))();
 			return;
+		}
+	}
+}
+
+void Harl::complainFilter(std::string level)
+{
+	bool expected = false;
+
+	for (int i = 0; i < N_LOG_LEVELS; i++)
+	{
+		if (level == this->_levels[i] || expected == true)
+		{
+			(this->*(_logs[i]))();
+			expected = true;
 		}
 	}
 }

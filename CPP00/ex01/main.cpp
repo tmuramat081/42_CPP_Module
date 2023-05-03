@@ -1,21 +1,25 @@
 #include <iostream>
+#include "Controller.hpp"
 
-int main() {
-    std::string line;
+#define BLUE "\033[0;94m"
+#define GREEN "\033[0;92m"
+#define YELLOW "\033[0;93m"
+#define RED "\033[0;91m"
+#define DEFAULT "\033[0;39m"
 
-    std::cout << ">> TINY PHONE BOOK APP << " << std::endl;
-    while (true) {
-        std::cin >> line;
-        if (line == "ADD") {
-            
-        }
-        if (line == "SERCH") {
+int main()
+{
+	Controller controller;
+	std::string line;
 
-        }
-        if (line == "EXIT") {
-            return (0);
-        }  
-    }
+	std::cout << BLUE;
+	std::cout << ">> PhoneBook APP";
+	std::cout << DEFAULT << std::endl;
 
-    return 0;
+	ContactRepositry<Contact> repository;
+	while(42)
+	{
+		std::getline(std::cin, line);
+		controller.route(line);
+	}
 }
