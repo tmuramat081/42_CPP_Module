@@ -2,11 +2,9 @@
 #include <sstream>
 #include "Controller.hpp"
 #include "PhoneBook.hpp"
-#include "View/PhoneBookView.hpp"
+#include "PhoneBookView.hpp"
 
-Controller::Controller() {
-	this->_state = 0;
-}
+Controller::Controller() {};
 
 Controller::~Controller() {};
 
@@ -15,16 +13,16 @@ void Controller::routeController()
 	std::string line;
 	while (42)
 	{
-		PhoneBookView.displayInformation();
+		PhoneBookView::displayInformation();
 		std::getline(std::cin, line);
 		std::transform(line.begin(), line.end(), line.begin(), ::toupper);
 		if (line == "SEARCH")
 		{
-			this->findContact();
+			this->findContactController();
 		}
 		else if (line == "ADD")
 		{
-			this->createContact();
+			this->createContactController();
 		}
 		else if (line == "EXIT")
 		{
@@ -37,44 +35,31 @@ void Controller::findContactController(void)
 {
 	int index;
 
-	
-	std::cout << "Enter any index number" << std::endl;
 	while (42)
 	{
+		std::cout << "Enter any index number" << std::endl;
 		std::cin >> index;
-
+		book.findContact(index);
 	}
 }
 
 void Controller::createContactController(void)
 {
-	std::string line;
-	else
+	std::string word;
+	Contact contact;
+
+	while (42)
 	{
-		std::cout << "Invalid command" << std::endl;
-		return ERROR;
+		std::cout << "Enter a Fiest Name" << std::endl;
+		std::cin >> contact.firstName;
+		std::cout << "Enter a Last Name" << std::endl;
+		std::cin >> contact.lastName;
+		std::cout << "Enter a Nickname" << std::endl;
+		std::cin >> contact.nickname;
+		std::cout << "Enter a Phone Number" << std::endl;
+		std::cin >> contact.phoneNumber;
+		std::cout << "Enter a Darkest Secret" << std::endl;
+		std::cin >> contact.secret;
+		book.createContact(contact);
 	}
-}
-
-
-Controller::PhoneBookResponse Controller::createContactController(std::string line)
-{
-	std::string word[5];
-	for (int i = 0; i < 5; i++)
-	{
-		std::cin >> word[i];
-	}
-	Contact createContactDto(
-	book.createContact(createContactDto);
-	return SUCCESS;
-}
-
-Controller::PhoneBookResponse Controller::findContactController(std::string line)
-{
-	std::istringstream ss;
-	int index;
-
-	index = ::atoi(line.c_str());
-	book.findContact(index);
-	return SUCCESS;
 }

@@ -16,3 +16,5 @@ Contact::Contact(
 	this->phoneNumber = phoneNumber;
 	this->secret = secret;
 };
+
+Contact::Contact(){};

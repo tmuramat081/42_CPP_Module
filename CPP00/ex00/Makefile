@@ -1,7 +1,6 @@
 NAME := a.out
 CC := c++
-CFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
-
+CFLAGS := -Wall -Wextra -Werror -std=c++98
 SRCS := megaphone.cpp
 OBJS := ${SRCS:.cpp=.o}
 INCS :=
@@ -19,13 +18,16 @@ ${NAME}: ${OBJS}
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} -o $@
 	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
+%.o: %.c
+	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
+
 #: Make executable file.
 all: ${NAME}
 
 #: Remove all object files.
 clean:
-	@${RM} ${OBJS} ${DEPS}
-	@${PRINTF} "${RED}Cleaned up object files in ${basename ${NAME}} ${DEFAULT}\n"
+	@${RM} ${OBJS}
+	@${PRINTF} "${RED}Cleaned up object files in ${NAME} ${DEFAULT}\n"
 
 #: Remove all object and executable files.
 fclean:	clean

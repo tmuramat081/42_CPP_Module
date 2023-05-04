@@ -2,10 +2,7 @@
 #include "Repository.hpp"
 #include <iostream>
 
-PhoneBook::PhoneBook()
-{
-	static Contact contacts[8];
-}
+PhoneBook::PhoneBook(){};
 
 PhoneBook::~PhoneBook()
 {

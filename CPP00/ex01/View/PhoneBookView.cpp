@@ -42,5 +42,7 @@ void displayError(const std::string &message)
 
 void displayInformation(void)
 {
-	std::cout << "Enter a command (ADD, SEARCH, or EXIT)" << std::endl;
+	std::cout << RED;
+	std::cout << "Enter a command (ADD, SEARCH, or EXIT)";
+	std::cout << std::endl;
 }
