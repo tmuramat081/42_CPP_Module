@@ -1,5 +1,5 @@
 #ifndef CONTACT_REPOSITORY_HPP
-#define CONTACT_REPOSITORY_HPP
+# define CONTACT_REPOSITORY_HPP
 
 #include "Repository.hpp"
 
@@ -9,21 +9,21 @@ class ContactRepository : public Repository<T>
 public:
 	virtual void add(const T &contact)
 	{
-		_contact_store[_index % 8] = contact;
+		contactStore[_index % 8] = contact;
 	}
 
 	virtual T find(int id) const
 	{
-		for (int i = 0; i < 8; i++)
-		{
-			if (i == _contact_store[i].index)
-				return _contact_store[i];
-		}
-		return Contact() ;
+		return contactStore[id];
+	}
+
+	T *findAll(void) const
+	{
+		return contactStore;
 	}
 
 private:
-	T _contact_store[8];
+	T contactStore[8];
 	int _index;
 };
 

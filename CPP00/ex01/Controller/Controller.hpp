@@ -12,15 +12,15 @@ public:
 		RESPONSE_EOF,
 	};
 	enum PhoneBookMode {
-		MODE_NORMAL,
-		MODE_CREATE,
-		MODE_FIND,
+		REQUEST_NORMAL,
+		REQUEST_GET,
+		REQUEST_POST,
 	};
 	Controller();
 	~Controller();
-	PhoneBookResponse route(std::string line);
-	PhoneBookResponse createContactController(std::string line);
-	PhoneBookResponse findContactController(std::string line);
+	void routeController();
+	void createContactController();
+	void findContactController(std::string line);
 
 private:
 	PhoneBook book;

@@ -4,6 +4,7 @@
 
 PhoneBook::PhoneBook()
 {
+	static Contact contacts[8];
 }
 
 PhoneBook::~PhoneBook()
@@ -11,12 +12,13 @@ PhoneBook::~PhoneBook()
 
 }
 
-void PhoneBook::addContact(Contact& contact)
+void PhoneBook::createContact(Contact& contact)
 {
+
 	_repository.add(contact);
 }
 
-Contact PhoneBook::findContact(int index)
+Contact PhoneBook::findContact(const int index)
 {
 	Contact contact = _repository.find(index);
 	return contact;
