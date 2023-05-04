@@ -7,17 +7,24 @@ class Controller
 {
 public:
 	enum PhoneBookResponse {
-		OK,
-		NG,
+		SUCCESS,
 		ERROR,
-		END,
+		RESPONSE_EOF,
 	};
-	Controller(){};
-	~Controller(){};
-	PhoneBookResponse route(std::string command);
+	enum PhoneBookMode {
+		MODE_NORMAL,
+		MODE_CREATE,
+		MODE_FIND,
+	};
+	Controller();
+	~Controller();
+	PhoneBookResponse route(std::string line);
+	PhoneBookResponse createContactController(std::string line);
+	PhoneBookResponse findContactController(std::string line);
 
 private:
 	PhoneBook book;
+	int _state;
 	void _add(void);
 	void _search(void);
 	void _exit(void);

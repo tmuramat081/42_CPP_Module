@@ -2,14 +2,13 @@
 # define REPOSITORY_HPP
 
 template<typename T>
-class Repsoitory
+class Repository
 {
 public:
 	virtual ~Repository(){};
 
 	virtual void add(const T& item) = 0;
-	virtual T get(int id) = 0;
-	virtual T[] getAll() const = 0;
+	virtual T find(int id) const = 0;
 };
 
 #endif

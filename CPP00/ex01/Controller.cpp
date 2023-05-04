@@ -1,64 +1,64 @@
 #include <iostream>
+#include <sstream>
 #include "Controller.hpp"
+#include "PhoneBook.hpp"
+
+Controller::Controller() {
+	this->_state = 0;
+}
+
+Controller::~Controller() {};
 
 Controller::PhoneBookResponse Controller::route(std::string line)
 {
 	std::transform(line.begin(), line.end(), line.begin(), ::toupper);
+	if (this->_state == MODE_CREATE)
+	{
+		return this->createContactController(line);
+	}
+	else if (this->_state == MODE_FIND)
+	{
+		return this->findContactController(line);
+	}
 	if (line == "ADD")
 	{
-		this->_add();
-		return OK;
+		std::cout << "ADD: save a new contact." << std::endl;
+		this->_state = MODE_CREATE;
+		return SUCCESS;
 
 	}
 	else if (line == "SEARCH")
 	{
-		this->_search();
-		return OK;
+		std::cout << "SEARCH: display a specific contact." << std::endl;
+		this->_state = MODE_FIND;
+		return SUCCESS;
 	}
 	else if (line == "EXIT")
 	{
-		this->_exit();
-		return OK;
+		std::cout << "EXIT: Have a great day!" << std::endl;
+		return RESPONSE_EOF;
 	}
 	else
 	{
 		std::cout << "Invalid command" << std::endl;
-		return NG;
+		return ERROR;
 	}
 }
 
-Controller::PhoneBookResponse Controller::_add(void)
+#include <stdio.h>
+
+Controller::PhoneBookResponse Controller::createContactController(std::string line)
 {
-	std::string;
-
-	std::cout << "ADD: save a new contact" << std::endl;
-	while (true)
-	{
-		std::cin >> line
-	}
-
-	this->book.addContact(contact);
+	
+	return SUCCESS;
 }
 
-Controller::PhoneBookResponse Controller::_search(void)
+Controller::PhoneBookResponse Controller::findContactController(std::string line)
 {
+	std::istringstream ss;
 	int index;
 
-	std::cout << "SEARCH: display a specific contact" << std::endl;
-	while (true)
-	{
-		std::cin >> index;
-		if (!index)
-		{
-			break;
-		}
-		std::cout << "Search... " << index;
-		std::cout << std::endl;
-		Contact contact = this->book.findContact(index);
-	}
-}
-
-Controller::PhoneBookResponse Controller::_exit(void)
-{
-	PhoneBook pb;
+	index = ::atoi(line.c_str());
+	book.findContact(index);
+	return SUCCESS;
 }

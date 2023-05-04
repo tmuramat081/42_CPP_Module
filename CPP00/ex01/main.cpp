@@ -16,7 +16,6 @@ int main()
 	std::cout << ">> PhoneBook APP";
 	std::cout << DEFAULT << std::endl;
 
-	ContactRepositry<Contact> repository;
 	while(42)
 	{
 		std::getline(std::cin, line);
