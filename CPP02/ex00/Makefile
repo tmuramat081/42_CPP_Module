@@ -1,16 +1,10 @@
 NAME := a.out
 CC := c++
-CFLAGS := -std=c++98 -pedantic
+CFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
 
-SRCS := \
-	main.cpp \
-	Model/Contact.cpp \
-	Controller/Controller.cpp \
-	Service/PhoneBook.cpp \
-	View./PhoneBookView.cpp
-
+SRCS := main.cpp Fixed.cpp
 OBJS := ${SRCS:.cpp=.o}
-INCS := -I./Controller/ -I./Model/ -I./Repository/ -I./Service/ ./View/
+INCS := -I.
 
 # Print variables
 PRINTF := printf
@@ -19,11 +13,13 @@ BLUE := \033[0;94m
 GREEN := \033[0;92m
 RED := \033[0;91m
 DEL := \033[2K
+MOVE := \033[1F
+CR := \033[1G
 
 # Commands
 ${NAME}: ${OBJS}
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} -o $@
-	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
+	@${PRINTF} "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}\n"
 
 #: Make executable file.
 all: ${NAME}
@@ -31,7 +27,7 @@ all: ${NAME}
 #: Remove all object files.
 clean:
 	@${RM} ${OBJS} ${DEPS}
-	@${PRINTF} "${RED}Cleaned up object files in ${NAME} ${DEFAULT}\n"
+	@${PRINTF} "${RED}Cleaned up object files in ${basename ${NAME}} ${DEFAULT}\n"
 
 #: Remove all object and executable files.
 fclean:	clean
@@ -43,5 +39,5 @@ re: fclean
 	@${MAKE} -s all
 
 .PHONY:
-	all clean fclean re run dev git norm nm help
+	all clean fclean re
 

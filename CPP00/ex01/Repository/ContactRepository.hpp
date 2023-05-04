@@ -7,18 +7,23 @@ template <typename T>
 class ContactRepository : public Repository<T>
 {
 public:
-	virtual void add(const T& contact)
+	virtual void add(const T &contact)
 	{
-		_contact_store[_index % 8] = contact;
+		contactStore[_index % 8] = contact;
 	}
 
-	virtual T[] getAll() const
+	virtual T find(int id) const
 	{
-		return _contact_store;
+		return contactStore[id];
+	}
+
+	T *findAll(void) const
+	{
+		return contactStore;
 	}
 
 private:
-	T[8] _contact_store;
+	T contactStore[8];
 	int _index;
 };
 
