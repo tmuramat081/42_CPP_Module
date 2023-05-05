@@ -9,10 +9,10 @@ PhoneBook::~PhoneBook()
 
 }
 
-void PhoneBook::createContact(Contact& contact)
+void PhoneBook::createContact(Contact& newContact)
 {
-
-	_repository.add(contact);
+	// validate
+	_repository.add(newContact);
 }
 
 Contact PhoneBook::findContact(const int index)
