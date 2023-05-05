@@ -20,7 +20,13 @@ Contact PhoneBook::findContact(const int index)
 	return contact;
 }
 
-FindAllContactsResponse PhoneBook::findAllContacts(Contact *contacts)
+PhoneBook::FindAllContactsResponse PhoneBook::findAllContacts(void)
 {
-	`
+	FindAllContactsResponse response;
+
+	for (int i = 0; i < 8; i++)
+	{
+		response.contacts[i] = _repository.select(i);
+	}
+	return response;	
 }

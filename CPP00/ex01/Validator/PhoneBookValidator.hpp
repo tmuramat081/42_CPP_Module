@@ -4,9 +4,11 @@
 #include <iostream>
 
 /** 入力値のバリデーション用クラス */
-class PhoneBookValidator()
+class PhoneBookValidator
 {
 public:
-	static bool isValidName(const std::string &name)
+	static bool isValidName(const std::string &name);
 	static bool isValidPhoneNumber(const std::string &phoneNumber);
+};
+
 #endif

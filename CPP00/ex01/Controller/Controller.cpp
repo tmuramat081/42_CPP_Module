@@ -42,12 +42,11 @@ void Controller::findContactController(void)
 {
 	int index;
 
-	while (42)
-	{
-		std::cout << "Enter any index number" << std::endl;
-		std::cin >> index;
-		book.findContact(index);
-	}
+	PhoneBook::FindAllContactsResponse contacts = book.findAllContacts();
+	PhoneBookView::displayContacts(contacts);
+	std::cout << "Enter any index number" << std::endl;
+	std::cin >> index;
+	book.findContact(index);
 }
 
 void Controller::createContactController(void)
@@ -55,21 +54,17 @@ void Controller::createContactController(void)
 	std::string word;
 	Contact contact;
 
-	while (42)
-	{
-		std::cout << "Enter a First Name" << std::endl;
-		std::cin >> contact.firstName;
-		std::cout << "Enter a Last Name" << std::endl;
-		std::cin >> contact.lastName;
-		std::cout << "Enter a Nickname" << std::endl;
-		std::cin >> contact.nickname;
-		std::cout << "Enter a Phone Number" << std::endl;
-		std::cin >> contact.phoneNumber;
-		std::cout << "Enter a Darkest Secret" << std::endl;
-		std::cin >> contact.secret;
-		book.createContact(contact);
-		std::cout << "Enter a Darkest Secret" << std::endl;
-	}
+	std::cout << "Enter a First Name:" << std::endl;
+	std::cin >> contact.firstName;
+	std::cout << "Enter a Last Name:" << std::endl;
+	std::cin >> contact.lastName;
+	std::cout << "Enter a Nickname:" << std::endl;
+	std::cin >> contact.nickname;
+	std::cout << "Enter a Phone Number:" << std::endl;
+	std::cin >> contact.phoneNumber;
+	std::cout << "Enter a Darkest Secret:" << std::endl;
+	std::cin >> contact.secret;
+	book.createContact(contact);
 }
 
 void Controller::exitController(void)

@@ -1,4 +1,5 @@
 #include "PhoneBookView.hpp"
+#include "PhoneBook.hpp"
 #include <iostream>
 
 #define BLUE "\033[0;94m"
@@ -20,16 +21,16 @@ void PhoneBookView::displayBanner(void)
 }
 
 /** 連絡先一覧を出力する */
-void PhoneBookView::displayContacts(const Contact &contact)
+void PhoneBookView::displayContacts(const PhoneBook::FindAllContactsResponse &response)
 {
 	std::cout << "|  First Name  |  Last Name |  Nickname | Phone Number | Darkest Secret |" << std::endl;
 	for (int i = 0; i < 8; i++)
 	{
-		std::cout << contact.firstName;
-		std::cout << contact.lastName;
-		std::cout << contact.nickname;
-		std::cout << contact.phoneNumber;
-		std::cout << contact.secret;
+		std::cout << response.contacts[i].firstName;
+		std::cout << response.contacts[i].lastName;
+		std::cout << response.contacts[i].nickname;
+		std::cout << response.contacts[i].phoneNumber;
+		std::cout << response.contacts[i].secret;
 	}
 	std::cout << std::endl;
 }

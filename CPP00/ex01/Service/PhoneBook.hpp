@@ -10,13 +10,13 @@ class PhoneBook
 public:
 	typedef struct s_findAllContactsResponse{
 		Contact contacts[8];
-	} FindAllCountactsResponse;
+	} FindAllContactsResponse;
 	PhoneBook();
 	~PhoneBook();
 
 	void createContact(Contact& contact);
 	Contact findContact(const int index);
-	FindAllCountactsResponse findAllContacts(Contact *contacts);
+	FindAllContactsResponse findAllContacts(void);
 
 private:
 	ContactRepository<Contact> _repository;
