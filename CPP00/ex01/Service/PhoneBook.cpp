@@ -11,12 +11,16 @@ PhoneBook::~PhoneBook()
 
 void PhoneBook::createContact(Contact& newContact)
 {
-	// validate
-	_repository.add(newContact);
+	_repository.insert(newContact);
 }
 
 Contact PhoneBook::findContact(const int index)
 {
-	Contact contact = _repository.find(index);
+	Contact contact = _repository.select(index);
 	return contact;
+}
+
+FindAllContactsResponse PhoneBook::findAllContacts(Contact *contacts)
+{
+	`
 }

@@ -8,7 +8,7 @@
 #define DEFAULT "\033[0;39m"
 
 /** 起動時のバナーを出力する */
-void displayBanner(void)
+void PhoneBookView::displayBanner(void)
 {
 	std::cout << BLUE;
 	std::cout << "  ___ _                 ___           _   " << std::endl;
@@ -20,7 +20,7 @@ void displayBanner(void)
 }
 
 /** 連絡先一覧を出力する */
-void displayContacts(const Contact &contact)
+void PhoneBookView::displayContacts(const Contact &contact)
 {
 	std::cout << "|  First Name  |  Last Name |  Nickname | Phone Number | Darkest Secret |" << std::endl;
 	for (int i = 0; i < 8; i++)
@@ -34,15 +34,25 @@ void displayContacts(const Contact &contact)
 	std::cout << std::endl;
 }
 
-/** エラー出力　*/
-void displayError(const std::string &message)
+/** メッセージ出力 */
+void PhoneBookView::displayMessage(const std::string &message)
 {
-	std::cerr << "Error: " << message << std::endl;
+	std::cout << GREEN;
+	std::cout << message;
+	std::cout << DEFAULT << std::endl;
 }
 
-void displayInformation(void)
+/** エラー出力　*/
+void PhoneBookView::displayError(const std::string &message)
 {
 	std::cout << RED;
+	std::cerr << "Error: " << message << std::endl;
+	std::cout << DEFAULT << std::endl;
+}
+
+void PhoneBookView::displayInformation(void)
+{
+	std::cout << GREEN;
 	std::cout << "Enter a command (ADD, SEARCH, or EXIT)";
-	std::cout << std::endl;
+	std::cout << DEFAULT << std::endl;
 }

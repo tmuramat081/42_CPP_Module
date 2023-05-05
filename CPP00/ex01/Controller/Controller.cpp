@@ -11,6 +11,8 @@ Controller::~Controller() {};
 void Controller::routeController()
 {
 	std::string line;
+
+	PhoneBookView::displayBanner();
 	while (42)
 	{
 		PhoneBookView::displayInformation();
@@ -26,7 +28,12 @@ void Controller::routeController()
 		}
 		else if (line == "EXIT")
 		{
+			this->exitController();
 			return ;
+		}
+		else
+		{
+			PhoneBookView::displayError("Invalid command");
 		}
 	}
 }
@@ -50,7 +57,7 @@ void Controller::createContactController(void)
 
 	while (42)
 	{
-		std::cout << "Enter a Fiest Name" << std::endl;
+		std::cout << "Enter a First Name" << std::endl;
 		std::cin >> contact.firstName;
 		std::cout << "Enter a Last Name" << std::endl;
 		std::cin >> contact.lastName;
@@ -61,5 +68,12 @@ void Controller::createContactController(void)
 		std::cout << "Enter a Darkest Secret" << std::endl;
 		std::cin >> contact.secret;
 		book.createContact(contact);
+		std::cout << "Enter a Darkest Secret" << std::endl;
 	}
 }
+
+void Controller::exitController(void)
+{
+	std::cout << "Exiting the phonebook application." << std::endl;
+}
+

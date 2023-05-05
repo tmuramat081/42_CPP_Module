@@ -7,23 +7,19 @@ template <typename T>
 class ContactRepository : public Repository<T>
 {
 public:
-	virtual void add(const T &contact)
+	static const int MAX_RECORD = 8;
+	virtual void insert(const T &contact)
 	{
-		contactStore[_index % 8] = contact;
+		contactStore[_index % MAX_RECORD] = contact;
 	}
 
-	virtual T find(int id) const
+	virtual T select(int id) const
 	{
 		return contactStore[id];
 	}
 
-	T *findAll(void) const
-	{
-		return contactStore;
-	}
-
 private:
-	T contactStore[8];
+	T contactStore[MAX_RECORD];
 	int _index;
 };
 

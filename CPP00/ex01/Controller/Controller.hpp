@@ -11,6 +11,7 @@ public:
 	void routeController(void);
 	void createContactController(void);
 	void findContactController(void);
+	void exitController(void);
 
 private:
 	PhoneBook book;
