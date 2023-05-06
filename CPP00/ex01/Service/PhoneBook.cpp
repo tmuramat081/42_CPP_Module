@@ -10,6 +10,7 @@ PhoneBook::~PhoneBook()
 
 }
 
+/** 連絡先を登録する */
 int PhoneBook::createContact(Contact& newContact)
 {
 	newContact.isDeleted = false;
@@ -17,6 +18,7 @@ int PhoneBook::createContact(Contact& newContact)
 	return (index);
 }
 
+/** 連絡先詳細を取得する */
 PhoneBook::FindOneContactResponse PhoneBook::findOneContact(const size_t index)
 {
 	FindOneContactResponse response;
@@ -24,6 +26,7 @@ PhoneBook::FindOneContactResponse PhoneBook::findOneContact(const size_t index)
 	try
 	{
 		response.contact = _repository.select(index);
+		response.index = index;
 	}
 	catch(...)
 	{
@@ -32,6 +35,7 @@ PhoneBook::FindOneContactResponse PhoneBook::findOneContact(const size_t index)
 	return response;
 }
 
+/**　連絡先一覧を取得する */
 PhoneBook::FindAllContactsResponse PhoneBook::findAllContacts(void)
 {
 	FindAllContactsResponse response;

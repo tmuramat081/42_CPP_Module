@@ -41,12 +41,16 @@ void PhoneBookView::displayContacts(const PhoneBook::FindAllContactsResponse &re
 /**　連絡先詳細を出力する */
 void PhoneBookView::displayOneContact(const PhoneBook::FindOneContactResponse &response)
 {
-	std::cout << "Contact..." << std::endl;
-	std::cout << response.contact.firstName << std::endl;
-	std::cout << response.contact.lastName << std::endl;
-	std::cout << response.contact.nickname << std::endl;
-	std::cout << response.contact.phoneNumber << std::endl;
-	std::cout << response.contact.secret << std::endl;
+	std::cout << "+------------------------------------+" << std::endl;
+	std::cout << "| No." << response.index + 1 << "\t|" << "\tContact Details\t" << std::setw(6) << std::right << "|" << std::endl;
+	std::cout << "+------------------------------------+" << std::endl;
+
+	std::cout << std::setw"|First Name: " << response.contact.firstName << std::endl;
+	std::cout << "|Last Name: " << response.contact.lastName << std::endl;
+	std::cout << "|Nickname: " << response.contact.nickname << std::endl;
+	std::cout << "|Phone Number:" << response.contact.phoneNumber << std::endl;
+	std::cout << "|Secret: " << response.contact.secret << std::endl;
+	std::cout << "+------------------------------------+" << std::endl;
 }
 
 std::string PhoneBookView::truncateString(const std::string &str, const size_t length)

@@ -33,7 +33,6 @@ void Controller::routeController()
 		else if (line == PhoneBookConstant::Command::EXIT)
 		{
 			this->exitController();
-			return ;
 		}
 		else
 		{
@@ -98,13 +97,21 @@ void Controller::exitController(void)
 {
 	std::string line;
 
-
-	std::cout << MessageConstant::EXIT_CHECK << std::endl;
-	std::cin >> line;
-	if (line == "YES")
+	while (true)
 	{
+		std::cout << MessageConstant::EXIT_CHECK << std::endl;
+		std::cin >> line;
 		std::transform(line.begin(), line.end(), line.begin(), ::toupper);
-		std::cout << MessageConstant::EXIT_APP << std::endl;
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		if (line == "YES")
+		{
+			std::cout << MessageConstant::EXIT_APP << std::endl;
+			std::exit(EXIT_SUCCESS);
+		}
+		else if (line == "NO")
+		{
+			return ;
+		}
 	}
 }
 

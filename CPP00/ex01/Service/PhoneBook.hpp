@@ -9,6 +9,7 @@ class PhoneBook
 {
 public:
 	typedef struct s_findOneContactResponse{
+		int index;
 		Contact contact;
 	} FindOneContactResponse;
 	typedef struct s_findAllContactsResponse{
