@@ -1,14 +1,16 @@
 NAME := a.out
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98
-CXXFLAGS += -I./Model/ -I./Controller/ -I./Repository -I./Service -I./View -I./Validator/
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
+CXXFLAGS += -I./Model/ -I./Controller/ -I./Repository -I./Service -I./View -I./Validator/ -I./Constant/
 SRCS := \
 	main.cpp \
 	Model/Contact.cpp \
 	Controller/Controller.cpp \
 	Service/PhoneBook.cpp \
 	View/PhoneBookView.cpp \
-	Validator/PhoneBookValidator.cpp
+	Validator/PhoneBookValidator.cpp \
+	Constant/MessageConstant.cpp \
+	Constant/PhoneBookConstant.cpp \
 
 OBJS := ${SRCS:%.cpp=%.o}
 

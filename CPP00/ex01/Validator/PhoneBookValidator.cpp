@@ -17,10 +17,28 @@ bool PhoneBookValidator::isValidPhoneNumber(const std::string &phoneNumber)
 		if (std::isdigit(phoneNumber[i]))
 		{
 			++digits_count;
-		} else if (phoneNumber[i] != '-' && phoneNumber[i] != ' ')
+		}
+		else if (phoneNumber[i] != '-' && phoneNumber[i] != ' ')
 		{
 			return false;
 		}
 	}
 	return digits_count >= 10 && digits_count <= 15;
+}
+
+bool PhoneBookValidator::isValidIndex(const std::string &str)
+{
+	try
+	{
+		int n = std::stoi(str);
+		if (n < 1 || 8 < n)
+		{
+			return true;
+		}
+	}
+	catch (...)
+	{
+		return false;
+	}
+	return false;
 }

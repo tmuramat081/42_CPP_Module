@@ -8,14 +8,17 @@
 class PhoneBook
 {
 public:
+	typedef struct s_findOneContactResponse{
+		Contact contact;
+	} FindOneContactResponse;
 	typedef struct s_findAllContactsResponse{
 		Contact contacts[8];
 	} FindAllContactsResponse;
 	PhoneBook();
 	~PhoneBook();
 
-	void createContact(Contact& contact);
-	Contact findContact(const int index);
+	int createContact(Contact& contact);
+	FindOneContactResponse findOneContact(const size_t index);
 	FindAllContactsResponse findAllContacts(void);
 
 private:

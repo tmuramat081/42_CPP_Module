@@ -8,13 +8,25 @@ class ContactRepository : public Repository<T>
 {
 public:
 	static const int MAX_RECORD = 8;
-	virtual void insert(const T &contact)
+	ContactRepository(): _index(0) {};
+	~ContactRepository(){};
+
+	virtual int insert(const T &contact)
 	{
-		contactStore[_index % MAX_RECORD] = contact;
+		int insert_index;
+
+		insert_index = _index % MAX_RECORD;
+		contactStore[insert_index] = contact;
+		_index += 1;
+		return insert_index;
 	}
 
 	virtual T select(int id) const
 	{
+		if (id < 0 || MAX_RECORD <= id)
+		{
+			throw std::out_of_range("Index out of range");
+		}
 		return contactStore[id];
 	}
 

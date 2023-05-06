@@ -7,7 +7,7 @@ class Repository
 public:
 	virtual ~Repository(){};
 
-	virtual void insert(const T& item) = 0;
+	virtual int insert(const T& item) = 0;
 	virtual T select(int id) const = 0;
 };
 

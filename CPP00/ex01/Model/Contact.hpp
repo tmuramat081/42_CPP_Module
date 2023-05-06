@@ -11,19 +11,18 @@ class Contact
 {
 public:
 	Contact(
-		int index,
 		std::string &firstName,
 		std::string &lastName,
 		std::string &nickname,
 		std::string &phoneNumber,
 		std::string &secret);
 	Contact();
-	int index;
 	std::string firstName;
 	std::string lastName;
 	std::string nickname;
 	std::string phoneNumber;
 	std::string secret;
+	bool isDeleted;
 };
 
 #endif
