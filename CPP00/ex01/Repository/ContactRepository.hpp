@@ -1,43 +1,45 @@
 #ifndef CONTACT_REPOSITORY_HPP
-# define CONTACT_REPOSITORY_HPP
+#define CONTACT_REPOSITORY_HPP
 
 #include "Repository.hpp"
 #include "PhoneBookConstant.hpp"
 
+/** 連絡先リポジトリ */
 template <typename T>
 class ContactRepository : public Repository<T>
 {
 public:
-	static const int MAX_RECORD = 8;
-	ContactRepository(): _index(0) {
-		for(int i = 0; i < PhoneBookConstant::RECORD_MAX; ++i)
+	static const int RECORD_MAX = PhoneBookConstant::RECORD_MAX;
+
+	ContactRepository() : _index(0)
+	{
+		for (int i = 0; i < RECORD_MAX; ++i)
 		{
-			contactStore[i].isDeleted = true;
+			_contactStore[i].isDeleted = true;
 		}
-	};
-	~ContactRepository(){};
+	}
 
 	virtual int insert(const T &contact)
 	{
 		int insert_index;
 
-		insert_index = _index % MAX_RECORD;
-		contactStore[insert_index] = contact;
-		_index += 1;
+		insert_index = this->_index % RECORD_MAX;
+		this->_contactStore[insert_index] = contact;
+		this->_index += 1;
 		return insert_index;
 	}
 
 	virtual T select(int id) const
 	{
-		if (id < 0 || MAX_RECORD <= id)
+		if (id < 0 || RECORD_MAX <= id)
 		{
 			throw std::out_of_range("Index out of range");
 		}
-		return contactStore[id];
+		return this->_contactStore[id];
 	}
 
 private:
-	T contactStore[MAX_RECORD];
+	T _contactStore[RECORD_MAX];
 	int _index;
 };
 
