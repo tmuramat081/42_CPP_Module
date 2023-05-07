@@ -26,6 +26,7 @@ int Account::getNbWithdrawals()
 	return t::_totalNbWithdrawals;
 }
 
+/** 全インスタンスの口座情報を表示 */
 void Account::displayAccountsInfos()
 {
 	t::_displayTimestamp();
@@ -104,7 +105,7 @@ bool Account::makeWithdrawal(int withdrawal)
 int Account::checkAmount(void) const
 {
 	return this->_amount;
-};
+}
 
 /**　インスタンスの口座情報を表示 */
 void Account::displayStatus(void) const
@@ -114,7 +115,6 @@ void Account::displayStatus(void) const
 	std::cout << "amount:" << this->_amount << ";";
 	std::cout << "deposits:" << this->_nbDeposits << ";";
 	std::cout << "withdrawals:" << this->_nbWithdrawals << std::endl;
-	return;
 }
 
 /** 現在時刻の表示 */
@@ -136,4 +136,4 @@ void Account::_displayTimestamp()
 	std::cout << buffer;
 }
 
-Account::Account(){};
+Account::Account(){}

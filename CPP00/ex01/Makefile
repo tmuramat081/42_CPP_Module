@@ -1,6 +1,6 @@
 NAME := a.out
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic -Wconversion	
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
 CXXFLAGS += -I./Model/ -I./Controller/ -I./Repository -I./Service -I./View -I./Validator/ -I./Constant/
 SRCS := \
 	main.cpp \
@@ -26,9 +26,6 @@ ${NAME}: ${OBJS}
 	${CXX} ${CXXFLAGS} ${OBJS} -o $@
 	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
-%.o: %.c
-	${CXX} ${CXXFLAGS} -I./Controller/ -c $< -o $@
-
 #: Make executable file.
 all: ${NAME}
 
@@ -43,8 +40,7 @@ fclean:	clean
 	@${PRINTF} "${RED}Removed object and executable files in ${NAME} ${DEFAULT}\n"
 
 #: Remove and recompile all.
-re: fclean
-	@${MAKE} -s all
+re: fclean all
 
 .PHONY:
 	all clean fclean re

@@ -1,6 +1,6 @@
 NAME := a.out
-CC := c++
-CFLAGS := -std=c++98 -pedantic
+CXX := c++
+CXXFLAGS := -std=c++98 -pedantic
 
 SRCS := Account.cpp tests.cpp
 OBJS := ${SRCS:.cpp=.o}
@@ -14,7 +14,7 @@ RED := \033[0;91m
 
 # Commands
 ${NAME}: ${OBJS}
-	@${CC} ${CFLAGS} ${INCS} ${OBJS} -o $@
+	@${CXX} ${CXXFLAGS} ${OBJS} -o $@
 	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 #: Make executable file.
@@ -31,8 +31,7 @@ fclean:	clean
 	@${PRINTF} "${RED}Removed object and executable files in ${NAME} ${DEFAULT}\n"
 
 #: Remove and recompile all.
-re: fclean
-	@${MAKE} -s all
+re: fclean all
 
 #: Display all commands.
 .PHONY:

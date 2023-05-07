@@ -5,12 +5,12 @@
 #include "Contact.hpp"
 #include <iostream>
 
-PhoneBook::PhoneBook(){}
+PhoneBook::PhoneBook() {}
 
-PhoneBook::~PhoneBook(){}
+PhoneBook::~PhoneBook() {}
 
 /** 連絡先を登録する */
-int PhoneBook::createContact(OneContactDto& newContact)
+int PhoneBook::createContact(OneContactDto &newContact)
 {
 	std::string name;
 
@@ -20,8 +20,7 @@ int PhoneBook::createContact(OneContactDto& newContact)
 		newContact.lastName,
 		newContact.nickname,
 		newContact.phoneNumber,
-		newContact.secret
-	);
+		newContact.secret);
 
 	/** レコード追加 */
 	int index = _repository.insert(contact);
@@ -31,7 +30,7 @@ int PhoneBook::createContact(OneContactDto& newContact)
 /** 連絡先詳細を取得する */
 PhoneBook::OneContactDto PhoneBook::findOneContact(const int index)
 {
-	Contact	contact;
+	Contact contact;
 	OneContactDto response;
 
 	try
@@ -48,7 +47,7 @@ PhoneBook::OneContactDto PhoneBook::findOneContact(const int index)
 		response.isDeleted = contact.isDeleted;
 		return response;
 	}
-	catch(...)
+	catch (...)
 	{
 		throw "Record Error";
 	}

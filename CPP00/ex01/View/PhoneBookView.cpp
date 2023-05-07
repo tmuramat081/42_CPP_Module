@@ -45,10 +45,10 @@ void PhoneBookView::displayOneContact(const PhoneBook::OneContactDto &contact)
 	std::cout << "|          Contact Details          |" << std::endl;
 	std::cout << "+-----------------------------------+" << std::endl;
 
-	std::cout << "|" << std::right << std::setw(15) << "First Name|" << std::right << std::setw(20) << contact.firstName <<  "|" << std::endl;
-	std::cout << "|" << std::right << std::setw(15) << "Last Name|" << std::right << std::setw(20) << contact.lastName <<  "|" << std::endl;
-	std::cout << "|" << std::right << std::setw(15) << "Nickname|" << std::right << std::setw(20) << contact.nickname <<  "|" << std::endl;
-	std::cout << "|" << std::right << std::setw(15) << "Phone Number|" << std::right << std::setw(20) << contact.phoneNumber <<  "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "First Name|" << std::right << std::setw(20) << contact.firstName << "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Last Name|" << std::right << std::setw(20) << contact.lastName << "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Nickname|" << std::right << std::setw(20) << contact.nickname << "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Phone Number|" << std::right << std::setw(20) << contact.phoneNumber << "|" << std::endl;
 	std::cout << "|" << std::right << std::setw(15) << "Secret|" << std::right << std::setw(20) << contact.secret << "|" << std::endl;
 	std::cout << "+-----------------------------------+" << std::endl;
 }

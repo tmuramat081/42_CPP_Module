@@ -16,4 +16,4 @@ Contact::Contact(
 	this->isDeleted = false;
 }
 
-Contact::Contact(){}
+Contact::Contact() {}
