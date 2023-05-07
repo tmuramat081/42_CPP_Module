@@ -12,8 +12,6 @@ PhoneBook::~PhoneBook() {}
 /** 連絡先を登録する */
 int PhoneBook::createContact(OneContactDto &newContact)
 {
-	std::string name;
-
 	/** レコード作成　*/
 	Contact contact(
 		newContact.firstName,

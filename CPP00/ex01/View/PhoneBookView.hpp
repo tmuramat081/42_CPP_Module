@@ -11,12 +11,14 @@
 class PhoneBookView
 {
 public:
-	static void displayBanner(void);
-	static void displayContacts(const PhoneBook::AllContactsDto &response);
-	static void displayOneContact(const PhoneBook::OneContactDto &response);
-	static void displayMessage(const std::string &message);
-	static void displayError(const std::string &message);
-	static std::string truncateString(const std::string &str, const size_t length);
+	void displayBanner(void);
+	void displayContacts(const PhoneBook::AllContactsDto &response);
+	void displayOneContact(const PhoneBook::OneContactDto &response);
+	void displayMessage(const std::string &message);
+	void displayError(const std::string &message);
+
+private:
+	std::string truncateString(const std::string &str, const size_t length);
 };
 
 #endif

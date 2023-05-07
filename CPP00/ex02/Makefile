@@ -1,6 +1,6 @@
 NAME := a.out
 CXX := c++
-CXXFLAGS := -std=c++98 -pedantic
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
 
 SRCS := Account.cpp tests.cpp
 OBJS := ${SRCS:.cpp=.o}

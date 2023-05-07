@@ -7,9 +7,9 @@
 class PhoneBookValidator
 {
 public:
-	static bool isValidName(const std::string &name);
-	static bool isValidPhoneNumber(const std::string &phoneNumber);
-	static bool isValidIndex(const int index);
+	bool isValidName(const std::string &name);
+	bool isValidPhoneNumber(const std::string &phoneNumber);
+	bool isValidIndex(const int index);
 };
 
 #endif

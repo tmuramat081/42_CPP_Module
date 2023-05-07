@@ -18,14 +18,16 @@ void Controller::routeController()
 	std::string line;
 
 	/** バナー出力 */
-	PhoneBookView::displayBanner();
+	view.displayBanner();
 
 	while (42)
 	{
 		/** コマンド入力 */
-		PhoneBookView::displayMessage(MessageConstant::ENTER_COMMAND);
+		view.displayMessage(MessageConstant::ENTER_COMMAND);
 		line = this->readStringInput();
 		std::transform(line.begin(), line.end(), line.begin(), ::toupper);
+
+		/** ルーティング */
 		if (line == PhoneBookConstant::Command::SEARCH)
 		{
 			this->findContactController();
@@ -40,7 +42,7 @@ void Controller::routeController()
 		}
 		else
 		{
-			PhoneBookView::displayError(MessageConstant::Error::INVALID_COMMAND);
+			view.displayError(MessageConstant::Error::INVALID_COMMAND);
 		}
 	}
 }
@@ -54,15 +56,15 @@ void Controller::findContactController(void)
 	PhoneBook::AllContactsDto contacts = phoneBook.findAllContacts();
 
 	/** 連絡先一覧をテーブル表示 */
-	PhoneBookView::displayContacts(contacts);
+	view.displayContacts(contacts);
 
 	/** インデックス入力 */
-	PhoneBookView::displayMessage(MessageConstant::ENTER_INDEX);
+	view.displayMessage(MessageConstant::ENTER_INDEX);
 	index = this->readIntegerInput();
 	/** 入力値バリデーション */
-	if (!PhoneBookValidator::isValidIndex(index))
+	if (!validator.isValidIndex(index))
 	{
-		PhoneBookView::displayError(MessageConstant::Error::INVALID_INPUT);
+		view.displayError(MessageConstant::Error::INVALID_INPUT);
 		return;
 	}
 
@@ -71,38 +73,48 @@ void Controller::findContactController(void)
 	/** 連絡先が存在しない場合はエラーとする */
 	if (contact.isDeleted == true)
 	{
-		PhoneBookView::displayError(MessageConstant::Error::NOT_EXIST_CONTACT);
+		view.displayError(MessageConstant::Error::NOT_EXIST_CONTACT);
 		return;
 	}
 
 	/** 連絡先詳細を表示 */
-	PhoneBookView::displayOneContact(contact);
+	view.displayOneContact(contact);
 }
 
 /** 連絡先の登録 */
 void Controller::createContactController(void)
 {
-	std::string word;
-	std::string line;
 	PhoneBook::OneContactDto contact;
+	std::string line;
 
 	/** 新規連絡先の入力 */
-	std::cout << ">> Enter a First Name" << std::endl;
+	view.displayMessage(MessageConstant::inputItemMessage(MessageConstant::FIRST_NAME));
 	contact.firstName = readStringInput(20);
-	std::cout << ">> Enter a Last Name" << std::endl;
+	view.displayMessage(MessageConstant::inputItemMessage(MessageConstant::LAST_NAME));
 	contact.lastName = readStringInput(20);
-	std::cout << ">> Enter a Nickname" << std::endl;
+	view.displayMessage(MessageConstant::inputItemMessage(MessageConstant::NICKNAME));
 	contact.nickname = readStringInput(20);
-	std::cout << ">> Enter a Phone Number" << std::endl;
+	view.displayMessage(MessageConstant::inputItemMessage(MessageConstant::PHONE_NUMBER));
 	contact.phoneNumber = readStringInput(20);
-	std::cout << ">> Enter a Darkest Secret" << std::endl;
+	view.displayMessage(MessageConstant::inputItemMessage(MessageConstant::SECRET));
 	contact.secret = readStringInput(20);
 
+	if (!validator.isValidName(contact.firstName) || !validator.isValidName(contact.lastName))
+	{
+		view.displayError(MessageConstant::Error::INVALID_NAME);
+		return;
+	}
+	else if (!validator.isValidPhoneNumber(contact.phoneNumber))
+	{
+		view.displayError(MessageConstant::Error::INVALID_PHONE_NUMBER);
+		return ;
+	}
+
 	/** 入力した連絡先詳細を表示 */
-	PhoneBookView::displayOneContact(contact);
+	view.displayOneContact(contact);
 
 	/** 入力確認 */
-	PhoneBookView::displayMessage(MessageConstant::CREATE_CHECK);
+	view.displayMessage(MessageConstant::CREATE_CHECK);
 	while (true)
 	{
 		line = readStringInput();
@@ -129,12 +141,12 @@ void Controller::exitController(void)
 	while (true)
 	{
 		/** 終了確認 */
-		PhoneBookView::displayMessage(MessageConstant::EXIT_CHECK);
+		view.displayMessage(MessageConstant::EXIT_CHECK);
 		line = this->readStringInput();
 		std::transform(line.begin(), line.end(), line.begin(), ::toupper);
 		if (line == PhoneBookConstant::Command::YES)
 		{
-			PhoneBookView::displayMessage(MessageConstant::EXIT_APP);
+			view.displayMessage(MessageConstant::EXIT_APP);
 			std::exit(EXIT_SUCCESS);
 		}
 		else if (line == PhoneBookConstant::Command::NO)
@@ -161,11 +173,11 @@ int Controller::readIntegerInput(void)
 		}
 		catch (const std::invalid_argument &e)
 		{
-			PhoneBookView::displayError(MessageConstant::Error::INVALID_INPUT);
+			view.displayError(MessageConstant::Error::INVALID_INPUT);
 		}
 		catch (const std::out_of_range &e)
 		{
-			PhoneBookView::displayError(MessageConstant::Error::OUT_OF_RANGE);
+			view.displayError(MessageConstant::Error::OUT_OF_RANGE);
 		}
 	}
 	return number;
@@ -180,12 +192,16 @@ std::string Controller::readStringInput(const size_t maxLength)
 	{
 		if (!std::getline(std::cin, line))
 		{
-			PhoneBookView::displayMessage(MessageConstant::EXIT_APP);
+			view.displayMessage(MessageConstant::EXIT_APP);
 			std::exit(EXIT_SUCCESS);
+		}
+		else if (line.length() == 0)
+		{
+			view.displayError(MessageConstant::Error::EMPTY_LINE);
 		}
 		else if (maxLength && line.length() > maxLength)
 		{
-			PhoneBookView::displayError(MessageConstant::Error::INVALID_LENGTH);
+			view.displayError(MessageConstant::Error::INVALID_LENGTH);
 		}
 		else
 			break;

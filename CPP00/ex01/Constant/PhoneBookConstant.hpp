@@ -22,5 +22,4 @@ public:
 	static const int RECORD_MAX = 8;
 };
 
-
 #endif
