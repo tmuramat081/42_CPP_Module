@@ -13,7 +13,7 @@ Contact::Contact(
 	this->nickname = nickname;
 	this->phoneNumber = phoneNumber;
 	this->secret = secret;
-	this->isDeleted = true;
+	this->isDeleted = false;
 }
 
 Contact::Contact(){}

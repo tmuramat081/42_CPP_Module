@@ -3,24 +3,32 @@
 
 #include "Contact.hpp"
 #include "ContactRepository.hpp"
-# include <iostream>
+#include <iostream>
 
 class PhoneBook
 {
 public:
-	typedef struct s_findOneContactResponse{
-		int index;
-		Contact contact;
-	} FindOneContactResponse;
-	typedef struct s_findAllContactsResponse{
-		Contact contacts[8];
-	} FindAllContactsResponse;
+	class OneContactDto
+	{
+	public:
+		std::string firstName;
+		std::string lastName;
+		std::string nickname;
+		std::string phoneNumber;
+		std::string secret;
+		bool isDeleted;
+	};
+	class AllContactsDto
+	{
+	public:
+		Contact contacts[PhoneBookConstant::RECORD_MAX];
+	};
 	PhoneBook();
 	~PhoneBook();
 
-	int createContact(Contact& contact);
-	FindOneContactResponse findOneContact(const int index);
-	FindAllContactsResponse findAllContacts(void);
+	int createContact(OneContactDto &contact);
+	OneContactDto findOneContact(const int index);
+	AllContactsDto findAllContacts(void);
 
 private:
 	ContactRepository<Contact> _repository;

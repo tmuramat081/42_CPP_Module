@@ -1,48 +1,75 @@
 #include "PhoneBookConstant.hpp"
+#include "PhoneBookValidator.hpp"
 #include "PhoneBook.hpp"
 #include "Repository.hpp"
+#include "Contact.hpp"
 #include <iostream>
 
 PhoneBook::PhoneBook(){}
 
-PhoneBook::~PhoneBook()
-{
-
-}
+PhoneBook::~PhoneBook(){}
 
 /** 連絡先を登録する */
-int PhoneBook::createContact(Contact& newContact)
+int PhoneBook::createContact(OneContactDto& newContact)
 {
-	newContact.isDeleted = false;
-	int index = _repository.insert(newContact);
+	std::string name;
+
+	/** レコード作成　*/
+	Contact contact(
+		newContact.firstName,
+		newContact.lastName,
+		newContact.nickname,
+		newContact.phoneNumber,
+		newContact.secret
+	);
+
+	/** レコード追加 */
+	int index = _repository.insert(contact);
 	return (index);
 }
 
 /** 連絡先詳細を取得する */
-PhoneBook::FindOneContactResponse PhoneBook::findOneContact(const int index)
+PhoneBook::OneContactDto PhoneBook::findOneContact(const int index)
 {
-	FindOneContactResponse response;
+	Contact	contact;
+	OneContactDto response;
 
 	try
 	{
-		response.contact = _repository.select(index);
-		response.index = index;
+		/* レコード取得 */
+		contact = _repository.select(index);
+
+		/** レスポンス整形 */
+		response.firstName = contact.firstName;
+		response.lastName = contact.lastName;
+		response.nickname = contact.nickname;
+		response.phoneNumber = contact.phoneNumber;
+		response.secret = contact.secret;
+		response.isDeleted = contact.isDeleted;
+		return response;
 	}
 	catch(...)
 	{
-		throw "No Object";
+		throw "Record Error";
 	}
-	return response;
 }
 
 /**　連絡先一覧を取得する */
-PhoneBook::FindAllContactsResponse PhoneBook::findAllContacts(void)
+PhoneBook::AllContactsDto PhoneBook::findAllContacts(void)
 {
-	FindAllContactsResponse response;
+	AllContactsDto response;
 
-	for (int i = 0; i < PhoneBookConstant::RECORD_MAX; ++i)
+	try
 	{
-		response.contacts[i] = _repository.select(i);
+		/** レコード全件取得 */
+		for (int i = 0; i < PhoneBookConstant::RECORD_MAX; ++i)
+		{
+			response.contacts[i] = _repository.select(i);
+		}
+		return response;
 	}
-	return response;
+	catch (...)
+	{
+		throw "Record Error.";
+	}
 }

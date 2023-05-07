@@ -22,7 +22,7 @@ void PhoneBookView::displayBanner(void)
 }
 
 /** 連絡先一覧を出力する */
-void PhoneBookView::displayContacts(const PhoneBook::FindAllContactsResponse &response)
+void PhoneBookView::displayContacts(const PhoneBook::AllContactsDto &response)
 {
 	std::cout << "+------------------------------------+" << std::endl;
 	std::cout << "|No.|First Name| Last Name|  Nickname|" << std::endl;
@@ -39,17 +39,17 @@ void PhoneBookView::displayContacts(const PhoneBook::FindAllContactsResponse &re
 }
 
 /**　連絡先詳細を出力する */
-void PhoneBookView::displayOneContact(const PhoneBook::FindOneContactResponse &response)
+void PhoneBookView::displayOneContact(const PhoneBook::OneContactDto &contact)
 {
 	std::cout << "+-----------------------------------+" << std::endl;
-	std::cout << "|          No." << response.index + 1 << "| Contact Details" << std::setw(5) << std::right << "|" << std::endl;
+	std::cout << "|          Contact Details          |" << std::endl;
 	std::cout << "+-----------------------------------+" << std::endl;
 
-	std::cout << "|" << std::right << std::setw(15) << "First Name|" << std::right << std::setw(20) << response.contact.firstName <<  "|" << std::endl;
-	std::cout << "|" << std::right << std::setw(15) << "Last Name|" << std::right << std::setw(20) << response.contact.lastName <<  "|" << std::endl;
-	std::cout << "|" << std::right << std::setw(15) << "Nickname|" << std::right << std::setw(20) << response.contact.nickname <<  "|" << std::endl;
-	std::cout << "|" << std::right << std::setw(15) << "Phone Number|" << std::right << std::setw(20) << response.contact.phoneNumber <<  "|" << std::endl;
-	std::cout << "|" << std::right << std::setw(15) << "Secret|" << std::right << std::setw(20) << response.contact.secret << "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "First Name|" << std::right << std::setw(20) << contact.firstName <<  "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Last Name|" << std::right << std::setw(20) << contact.lastName <<  "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Nickname|" << std::right << std::setw(20) << contact.nickname <<  "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Phone Number|" << std::right << std::setw(20) << contact.phoneNumber <<  "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Secret|" << std::right << std::setw(20) << contact.secret << "|" << std::endl;
 	std::cout << "+-----------------------------------+" << std::endl;
 }
 
@@ -75,6 +75,6 @@ void PhoneBookView::displayMessage(const std::string &message)
 void PhoneBookView::displayError(const std::string &message)
 {
 	std::cout << RED;
-	std::cerr << "Error: " << message << std::endl;
+	std::cerr << "Error: " << message;
 	std::cout << DEFAULT << std::endl;
 }

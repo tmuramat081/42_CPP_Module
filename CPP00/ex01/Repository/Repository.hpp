@@ -10,7 +10,6 @@ public:
 
 	virtual int insert(const T &item) = 0;
 	virtual T select(int id) const = 0;
-
 };
 
 #endif

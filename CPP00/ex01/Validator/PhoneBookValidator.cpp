@@ -1,4 +1,5 @@
 #include "PhoneBookValidator.hpp"
+#include "PhoneBookConstant.hpp"
 #include <iostream>
 
 /** 名前が有効かどうか判定する */
@@ -26,19 +27,10 @@ bool PhoneBookValidator::isValidPhoneNumber(const std::string &phoneNumber)
 	return digits_count >= 10 && digits_count <= 15;
 }
 
-bool PhoneBookValidator::isValidIndex(const std::string &str)
+/** インデックスが有効かどうか判定する */
+bool PhoneBookValidator::isValidIndex(const int index)
 {
-	try
-	{
-		int n = std::stoi(str);
-		if (n < 1 || 8 < n)
-		{
-			return true;
-		}
-	}
-	catch (...)
-	{
+	if (index < 1 || PhoneBookConstant::RECORD_MAX < index)
 		return false;
-	}
-	return false;
+	return true;
 }
