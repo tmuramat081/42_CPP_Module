@@ -19,7 +19,7 @@ int PhoneBook::createContact(Contact& newContact)
 }
 
 /** 連絡先詳細を取得する */
-PhoneBook::FindOneContactResponse PhoneBook::findOneContact(const size_t index)
+PhoneBook::FindOneContactResponse PhoneBook::findOneContact(const int index)
 {
 	FindOneContactResponse response;
 

@@ -21,6 +21,7 @@ void Controller::routeController()
 	PhoneBookView::displayBanner();
 	while (42)
 	{
+		/** コマンド入力 */
 		PhoneBookView::displayMessage(MessageConstant::ENTER_COMMAND);
 		std::getline(std::cin, line);
 		std::transform(line.begin(), line.end(), line.begin(), ::toupper);
@@ -79,6 +80,7 @@ void Controller::createContactController(void)
 	std::string word;
 	Contact contact;
 
+	/** 新規連絡先の入力 */
 	std::cout << ">> Enter a First Name" << std::endl;
 	std::cin >> contact.firstName;
 	std::cout << ">> Enter a Last Name" << std::endl;
@@ -95,22 +97,24 @@ void Controller::createContactController(void)
 	book.createContact(contact);
 }
 
+/** アプリケーションの終了 */
 void Controller::exitController(void)
 {
 	std::string line;
 
 	while (true)
 	{
+		/** 終了確認 */
 		std::cout << MessageConstant::EXIT_CHECK << std::endl;
 		std::cin >> line;
 		std::transform(line.begin(), line.end(), line.begin(), ::toupper);
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		if (line == "YES")
+		if (line == PhoneBookConstant::Command::YES)
 		{
 			std::cout << MessageConstant::EXIT_APP << std::endl;
 			std::exit(EXIT_SUCCESS);
 		}
-		else if (line == "NO")
+		else if (line == PhoneBookConstant::Command::NO)
 		{
 			return ;
 		}

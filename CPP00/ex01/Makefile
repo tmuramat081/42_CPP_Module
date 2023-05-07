@@ -1,6 +1,6 @@
 NAME := a.out
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic -Wconversion	
 CXXFLAGS += -I./Model/ -I./Controller/ -I./Repository -I./Service -I./View -I./Validator/ -I./Constant/
 SRCS := \
 	main.cpp \

@@ -2,13 +2,19 @@
 # define CONTACT_REPOSITORY_HPP
 
 #include "Repository.hpp"
+#include "PhoneBookConstant.hpp"
 
 template <typename T>
 class ContactRepository : public Repository<T>
 {
 public:
 	static const int MAX_RECORD = 8;
-	ContactRepository(): _index(0) {};
+	ContactRepository(): _index(0) {
+		for(int i = 0; i < PhoneBookConstant::RECORD_MAX; ++i)
+		{
+			contactStore[i].isDeleted = true;
+		}
+	};
 	~ContactRepository(){};
 
 	virtual int insert(const T &contact)

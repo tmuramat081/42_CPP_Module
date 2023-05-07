@@ -19,7 +19,7 @@ public:
 	~PhoneBook();
 
 	int createContact(Contact& contact);
-	FindOneContactResponse findOneContact(const size_t index);
+	FindOneContactResponse findOneContact(const int index);
 	FindAllContactsResponse findAllContacts(void);
 
 private:

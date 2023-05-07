@@ -41,16 +41,16 @@ void PhoneBookView::displayContacts(const PhoneBook::FindAllContactsResponse &re
 /**　連絡先詳細を出力する */
 void PhoneBookView::displayOneContact(const PhoneBook::FindOneContactResponse &response)
 {
-	std::cout << "+------------------------------------+" << std::endl;
-	std::cout << "|          No." << response.index + 1 << "| Contact Details " << std::setw(5) << std::right << "|" << std::endl;
-	std::cout << "+------------------------------------+" << std::endl;
+	std::cout << "+-----------------------------------+" << std::endl;
+	std::cout << "|          No." << response.index + 1 << "| Contact Details" << std::setw(5) << std::right << "|" << std::endl;
+	std::cout << "+-----------------------------------+" << std::endl;
 
-	std::cout << "|" << std::right << std::setw(15) << "First Name|" << response.contact.firstName << std::endl;
-	std::cout << "|" << std::right << std::setw(15) << "Last Name|" << response.contact.lastName << std::endl;
-	std::cout << "|" << std::right << std::setw(15) << "Nickname|" << response.contact.nickname << std::endl;
-	std::cout << "|" << std::right << std::setw(15) << "Phone Number|" << response.contact.phoneNumber << std::endl;
-	std::cout << "|" << std::right << std::setw(15) << "Secret|" << response.contact.secret << std::endl;
-	std::cout << "+------------------------------------+" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "First Name|" << std::right << std::setw(20) << response.contact.firstName <<  "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Last Name|" << std::right << std::setw(20) << response.contact.lastName <<  "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Nickname|" << std::right << std::setw(20) << response.contact.nickname <<  "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Phone Number|" << std::right << std::setw(20) << response.contact.phoneNumber <<  "|" << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Secret|" << std::right << std::setw(20) << response.contact.secret << "|" << std::endl;
+	std::cout << "+-----------------------------------+" << std::endl;
 }
 
 /** 表示文字列を短縮する */
