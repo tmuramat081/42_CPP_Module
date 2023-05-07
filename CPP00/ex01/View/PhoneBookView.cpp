@@ -16,7 +16,7 @@ void PhoneBookView::displayBanner(void)
 	std::cout << "  ___ _                 ___           _   " << std::endl;
 	std::cout << " | _ \\ |_  ___ _ _  ___| _ ) ___  ___| |__" << std::endl;
 	std::cout << " |  _/ ' \\/ _ \\ ' \\/ -_) _ \\/ _ \\/ _ \\ / /" << std::endl;
-	std::cout << " |_| |_||_\\___/_||_\\___|___/\\___/\\___/_\\__\\" << std::endl;
+	std::cout << " |_| |_||_\\___/_||_\\___|___/\\___/\\___/_\\_\\" << std::endl;
 	std::cout << "                                          ";
 	std::cout << DEFAULT << std::endl;
 }
@@ -42,17 +42,18 @@ void PhoneBookView::displayContacts(const PhoneBook::FindAllContactsResponse &re
 void PhoneBookView::displayOneContact(const PhoneBook::FindOneContactResponse &response)
 {
 	std::cout << "+------------------------------------+" << std::endl;
-	std::cout << "| No." << response.index + 1 << "\t|" << "\tContact Details\t" << std::setw(6) << std::right << "|" << std::endl;
+	std::cout << "|          No." << response.index + 1 << "| Contact Details " << std::setw(5) << std::right << "|" << std::endl;
 	std::cout << "+------------------------------------+" << std::endl;
 
-	std::cout << std::setw"|First Name: " << response.contact.firstName << std::endl;
-	std::cout << "|Last Name: " << response.contact.lastName << std::endl;
-	std::cout << "|Nickname: " << response.contact.nickname << std::endl;
-	std::cout << "|Phone Number:" << response.contact.phoneNumber << std::endl;
-	std::cout << "|Secret: " << response.contact.secret << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "First Name|" << response.contact.firstName << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Last Name|" << response.contact.lastName << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Nickname|" << response.contact.nickname << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Phone Number|" << response.contact.phoneNumber << std::endl;
+	std::cout << "|" << std::right << std::setw(15) << "Secret|" << response.contact.secret << std::endl;
 	std::cout << "+------------------------------------+" << std::endl;
 }
 
+/** 表示文字列を短縮する */
 std::string PhoneBookView::truncateString(const std::string &str, const size_t length)
 {
 	if (str.length() <= length)

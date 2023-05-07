@@ -12,10 +12,12 @@ Controller::Controller() {}
 
 Controller::~Controller() {}
 
+/** ルート */
 void Controller::routeController()
 {
 	std::string line;
 
+	/** バナー出力 */
 	PhoneBookView::displayBanner();
 	while (42)
 	{
@@ -52,7 +54,7 @@ void Controller::findContactController(void)
 	/** 連絡先一覧をテーブル表示 */
 	PhoneBookView::displayContacts(contacts);
 
-	/** インデックスを入力 */
+	/** インデックスの入力 */
 	PhoneBookView::displayMessage(MessageConstant::ENTER_INDEX);
 	std::cin >> index;
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

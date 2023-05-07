@@ -14,6 +14,8 @@ public:
 		static const std::string SEARCH;
 		static const std::string ADD;
 		static const std::string EXIT;
+		static const std::string YES;
+		static const std::string NO;
 	};
 
 	/** 保持できるレコードの最大数 */
