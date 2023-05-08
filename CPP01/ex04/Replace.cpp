@@ -20,7 +20,7 @@ void Replace::replaceAll()
 	std::ifstream src_file(this->_filename);
 	if (!src_file)
 	{
-		std::cerr << "Error: can't open file:" << this->_filename << std::endl;
+		std::cerr << "Error: can't open file: " << this->_filename << std::endl;
 		return;
 	}
 
@@ -43,8 +43,8 @@ void Replace::replaceAll()
 	std::ofstream dst_file(_filename + ".replace");
 	if (!dst_file)
 	{
-		std::cerr << "Error: can't open file: " << this->_filename << std::endl;
-		dst_file.close();
+		std::cerr << "Error: can't open file: " << this->_filename + ".replace "<< std::endl;
+		src_file.close();
 		return;
 	}
 
