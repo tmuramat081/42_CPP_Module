@@ -4,7 +4,7 @@
 Weapon::Weapon()
 {
 	std::cout << "Weapon's default constructor is called." << std::endl;
-};
+}
 
 Weapon::Weapon(std::string type)
 {
@@ -15,7 +15,7 @@ Weapon::Weapon(std::string type)
 Weapon::~Weapon()
 {
 	std::cout << "Weapon's destructor is called." << std::endl;
-};
+}
 
 std::string const &Weapon::getType() const
 {

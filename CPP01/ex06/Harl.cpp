@@ -17,9 +17,9 @@ Harl::Harl()
 	this->_levels[1] = "INFO";
 	this->_levels[2] = "WARNING";
 	this->_levels[3] = "ERROR";
-};
+}
 
-Harl::~Harl(){};
+Harl::~Harl(){}
 
 void Harl::complain(std::string level)
 {
@@ -36,6 +36,7 @@ void Harl::complain(std::string level)
 void Harl::complainFilter(std::string level)
 {
 	bool expected = false;
+	std::cout << "[ " << level << " ]" << std::endl;
 
 	for (int i = 0; i < N_LOG_LEVELS; i++)
 	{

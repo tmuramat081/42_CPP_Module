@@ -5,7 +5,6 @@ CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
 SRCS := main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 OBJS := ${SRCS:.cpp=.o}
 
-
 # Print variables
 PRINTF := printf
 DEFAULT := \033[0;39m
@@ -24,7 +23,7 @@ all: ${NAME}
 #: Remove all object files.
 clean:
 	@${RM} ${OBJS} ${DEPS}
-	@${PRINTF} "${RED}Cleaned up object files in ${basename ${NAME}} ${DEFAULT}\n"
+	@${PRINTF} "${RED}Cleaned up object files in ${NAME} ${DEFAULT}\n"
 
 #: Remove all object and executable files.
 fclean:	clean
@@ -32,8 +31,7 @@ fclean:	clean
 	@${PRINTF} "${RED}Removed object and executable files in ${NAME} ${DEFAULT}\n"
 
 #: Remove and recompile all.
-re: fclean
-	@${MAKE} -s all
+re: fclean all
 
 .PHONY:
 	all clean fclean re run dev git norm nm help

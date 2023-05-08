@@ -18,9 +18,9 @@ Harl::Harl()
 	this->_levels[1] = "INFO";
 	this->_levels[2] = "WARNING";
 	this->_levels[3] = "ERROR";
-};
+}
 
-Harl::~Harl(){};
+Harl::~Harl(){}
 
 void Harl::complain(std::string _level)
 {

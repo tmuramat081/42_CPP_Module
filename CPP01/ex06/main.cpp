@@ -7,7 +7,7 @@ int main(int argc, char **argv)
 		return 0;
 	}
 	Harl harl;
-
 	harl.complainFilter(argv[1]);
+
 	return 0;
 }
