@@ -12,7 +12,7 @@ int main()
 	Zombie *z2 = new Zombie("Heap zombie");
 	z2->announce();
 
-	randomChump("Romero");
+	randomChump("Freddy");
 
 	delete z2;
 }
