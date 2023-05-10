@@ -23,7 +23,7 @@ all: ${NAME}
 #: Remove all object files.
 clean:
 	@${RM} ${OBJS} ${DEPS}
-	@${PRINTF} "${RED}Cleaned up object files in ${basename ${NAME}} ${DEFAULT}\n"
+	@${PRINTF} "${RED}Cleaned up object files in $${NAME} ${DEFAULT}\n"
 
 #: Remove all object and executable files.
 fclean:	clean
