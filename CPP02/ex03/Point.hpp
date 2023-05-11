@@ -11,11 +11,16 @@ public:
 	Point(const Point &);
 	Point::~Point();
 
-	Point &operator=(const Point &p);
+	Point &operator=(const Point &other);
+
+	Fixed dot(const Point &other) const;
+	Fixed cross(const Point &other) const;
+	Fixed getX() const;
+	Fixed getY() const;
 
 private:
-	Fixed x;
-	Fixed y;
+	Fixed _x;
+	Fixed _y;
 };
 
 #endif
