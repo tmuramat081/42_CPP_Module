@@ -13,6 +13,16 @@ Point &Point::operator=(const Point &other)
     return *this;
 }
 
+Point &Point::operator+(const Point &other) const
+{
+    return Point(this->getX() + other.getX(), this->getY() + other.getX());
+}
+
+Point &Point::operator-(const Point &other) const
+{
+    return Point(this->getX() + other.getX(), this->getY() + other.getX());
+}
+
 /* 内積 */
 Fixed Point::dot(const Point &other) const
 {
@@ -22,9 +32,8 @@ Fixed Point::dot(const Point &other) const
 /** 外積 */
 Fixed Point::cross(const Point &other) const
 {
-    return this->getX() * other.getY() - this->getY() * other.getY();
+    return this->getX() * other.getY() - this->getY() * other.getX();
 }
-
 
 Fixed Point::getX() const
 {
