@@ -34,5 +34,5 @@ fclean:	clean
 re: fclean all
 
 .PHONY:
-	all clean fclean re run dev git norm nm help
+	all clean fclean re
 

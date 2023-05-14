@@ -2,7 +2,7 @@ NAME := a.out
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -Wconversion -pedantic
 
-SRCS := main.cpp Fixed.cpp Point.cpp bsp.cpp
+SRCS := main.cpp ClapTrap.cpp
 OBJS := ${SRCS:.cpp=.o}
 
 # Print variables

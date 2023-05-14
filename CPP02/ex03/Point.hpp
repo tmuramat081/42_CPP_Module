@@ -6,16 +6,16 @@
 class Point
 {
 public:
-	Point::Point();
-	explicit Point::Point(Fixed x, Fixed y);
-	explicit Point::Point(const Fixed x, const Fixed y);
-	Point(const Point &);
-	Point::~Point();
+	Point();
+	explicit Point(float const &x, float const &y);
+	explicit Point(int const &x, int const &y);
+	Point(const Point &other);
+	~Point();
 
 	Point &operator=(const Point &other);
 
-	Point &operator+(const Point &other) const;
-	Point &operator-(const Point &other) const;
+	Point operator+(const Point &other) const;
+	Point operator-(const Point &other) const;
 
 	Fixed dot(const Point &other) const;
 	Fixed cross(const Point &other) const;
@@ -23,8 +23,10 @@ public:
 	Fixed getY() const;
 
 private:
-	Fixed _x;
-	Fixed _y;
+	const Fixed x;
+	const Fixed y;
 };
+
+std::ostream &operator<<(std::ostream &os, const Point &point);
 
 #endif
