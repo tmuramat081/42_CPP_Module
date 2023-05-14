@@ -6,13 +6,20 @@ void randomChump(std::string name);
 
 int main()
 {
-	Zombie z1("Stack zombie");
-	z1.announce();
+	/** ヒープ領域を用いた確保 */
+	try
+	{
+		Zombie *z = newZombie("Heap zombie");
+		z->announce();
+		delete z;
+	}
+	catch(std::bad_alloc &e)
+	{
+		std::cerr << "Memory: allocation failed.: " << e.what() << std::endl;
+	}
 
-	Zombie *z2 = new Zombie("Heap zombie");
-	z2->announce();
+	/** スタック領域を用いた確保 */
+	randomChump("Stack zombie");
 
-	randomChump("Freddy");
-
-	delete z2;
+	return 0;
 }
