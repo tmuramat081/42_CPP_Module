@@ -1,10 +1,11 @@
-class Fixed {
+class Fixed
+{
 public:
 	Fixed();
-	Fixed(const Fixed&);
-	Fixed& operator =(const Fixed&);
+	Fixed(const Fixed &);
+	Fixed &operator=(const Fixed &);
 	~Fixed();
-	int getRawBits()const;
+	int getRawBits() const;
 	void setRawBits(int const raw);
 
 private:

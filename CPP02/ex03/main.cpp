@@ -29,7 +29,7 @@ int main()
 	else
 	{
 		std::cout << RED;
-		std::cout << "× P is outside the triangle.";
+		std::cout << "x P is outside the triangle.";
 		std::cout << DEFAULT << std::endl;
 	}
 

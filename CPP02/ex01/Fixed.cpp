@@ -23,13 +23,13 @@ Fixed::Fixed(const float num)
 Fixed::Fixed(const Fixed &other)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	setRawBits(other.getRawBits());
+	this->_fixedPointNum = other._fixedPointNum;
 }
 
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	setRawBits(rhs.getRawBits());
+	this->_fixedPointNum = rhs._fixedPointNum;
 	return *this;
 }
 
@@ -50,13 +50,13 @@ void Fixed::setRawBits(int const raw)
 
 float Fixed::toFloat() const
 {
-	int raw_bits = getRawBits();
+	int raw_bits = this->_fixedPointNum;
 	return static_cast<float>(raw_bits) / (1 << FRACTIONAL_BITS);
 }
 
 int Fixed::toInt() const
 {
-	int raw_bits = getRawBits();
+	int raw_bits = this->_fixedPointNum;
 	return static_cast<int>(std::roundf(raw_bits >> this->FRACTIONAL_BITS));
 }
 
