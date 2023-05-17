@@ -5,23 +5,16 @@ Zombie *newZombie(std::string name);
 
 Zombie *zombieHorde(int N, std::string name)
 {
-	Zombie
-	if (N <= 0)
+	if (N < 0)
 	{
-		return NULL;
+		throw std::invalid_argument("N must be positive");
 	}
-	try
-	{
-		Zombie *zombies = new Zombie[N];
 
-		for (int i = 0; i < N; i++)
-		{
-			zombies[i] = Zombie(name + "_" + std::to_string(i));
-		}
-	}
-	catch(std::bad_alloc &e)
+	Zombie *zombies = new Zombie[N];
+	for (int i = 0; i < N; i++)
 	{
-		std::cerr << "Memory: allocation failed.: " << e.what() << std::endl;
+		zombies[i].setName(name);
 	}
+
 	return zombies;
 }

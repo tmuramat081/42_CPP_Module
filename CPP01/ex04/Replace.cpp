@@ -16,6 +16,13 @@ Replace::~Replace() {}
 /** キーワードを一括置換する */
 void Replace::replaceAll()
 {
+	/** バリデーション */
+	if (this->_filename.empty() || this->_s1.empty() || this->_s2.empty())
+	{
+		std::cerr << "Error: invalid argument" << std::endl;
+		return;
+	}
+
 	/** 読む込むファイルを開く */
 	std::ifstream src_file(this->_filename);
 	if (!src_file)

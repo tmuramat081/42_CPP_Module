@@ -19,32 +19,44 @@ Harl::Harl()
 	this->_levels[3] = "ERROR";
 }
 
-Harl::~Harl(){}
+Harl::~Harl() {}
 
-void Harl::complain(std::string level)
+int Harl::getErrorLevelKey(std::string level)
 {
-	for (int i = 0; i < N_LOG_LEVELS; i++)
+	int index;
+
+	for (index = 0; index < N_LOG_LEVELS; ++index)
 	{
-		if (this->_levels[i] == level)
+		if (this->_levels[index] == level)
 		{
-			(this->*(_logs[i]))();
-			return;
+			return index;
 		}
 	}
+	return index;
 }
 
 void Harl::complainFilter(std::string level)
 {
-	bool expected = false;
+	int key = getErrorLevelKey(level);
+	if (key == NONE)
+	{
+		std::cerr << "Error: invalid log level." << std::endl;
+		return;
+	}
 	std::cout << "[ " << level << " ]" << std::endl;
 
-	for (int i = 0; i < N_LOG_LEVELS; i++)
+	switch (key)
 	{
-		if (level == this->_levels[i] || expected == true)
-		{
-			(this->*(_logs[i]))();
-			expected = true;
-		}
+	case Harl::DEBUG:
+		(this->*_logs[DEBUG])();
+	case Harl::INFO:
+		(this->*_logs[INFO])();
+	case Harl::WARNING:
+		(this->*_logs[WARNING])();
+	case Harl::ERROR:
+		(this->*_logs[ERROR])();
+	default:
+		break;
 	}
 }
 

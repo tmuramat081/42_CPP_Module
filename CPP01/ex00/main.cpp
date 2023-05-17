@@ -6,7 +6,7 @@ void randomChump(std::string name);
 
 int main()
 {
-	/** ヒープ領域を用いた確保 */
+	/** ヒープ領域によるインスタンス化 */
 	try
 	{
 		Zombie *z = newZombie("Heap zombie");
@@ -16,9 +16,10 @@ int main()
 	catch(std::bad_alloc &e)
 	{
 		std::cerr << "Memory: allocation failed.: " << e.what() << std::endl;
+		return 0;
 	}
 
-	/** スタック領域を用いた確保 */
+	/** スタック領域によるインスタンス化 */
 	randomChump("Stack zombie");
 
 	return 0;
