@@ -1,6 +1,6 @@
 NAME := a.out
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -Wconversion -pedantic
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -Wconversion -pedantic  -Wshadow -Wno-shadow
 
 SRCS := main.cpp ClapTrap.cpp ScavTrap.cpp FlagTrap.cpp
 OBJS := ${SRCS:.cpp=.o}
