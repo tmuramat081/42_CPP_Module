@@ -12,6 +12,11 @@ Point::~Point(){}
 
 Point &Point::operator=(const Point &other)
 {
+	if (this != &other)
+	{
+		this->getX() = other.getX();
+		this->getY() = other.getY();
+	}
     return *this;
 }
 
