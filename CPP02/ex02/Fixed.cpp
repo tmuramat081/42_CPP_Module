@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 
+// Constructors
 Fixed::Fixed()
 {
 	this->_fixedPointNum = 0;
@@ -14,7 +15,6 @@ Fixed::Fixed(const int num)
 
 Fixed::Fixed(const float num)
 {
-
 	this->_fixedPointNum = static_cast<int>(std::roundf(num * (1 << this->FRACTIONAL_BITS)));
 }
 
@@ -23,15 +23,17 @@ Fixed::Fixed(const Fixed &other)
 	this->_fixedPointNum = other._fixedPointNum;
 }
 
-/** Asignement operator */
+// Destructor
+Fixed::~Fixed() {}
+
+// Asignement operator
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
 	this->_fixedPointNum = rhs._fixedPointNum;
 	return *this;
 }
 
-Fixed::~Fixed() {}
-
+// Getter / Setters
 int Fixed::getRawBits() const
 {
 	return this->_fixedPointNum;
@@ -42,9 +44,11 @@ void Fixed::setRawBits(int const raw)
 	this->_fixedPointNum = raw;
 }
 
+//  Member functions
 float Fixed::toFloat() const
 {
-	return this->_fixedPointNum / (1 << FRACTIONAL_BITS);
+	int raw_bits = this->_fixedPointNum;
+	return static_cast<float>(raw_bits) / (1 << FRACTIONAL_BITS);
 }
 
 int Fixed::toInt() const
@@ -72,7 +76,7 @@ const Fixed &Fixed::max(Fixed const &a, Fixed const &b)
 	return a > b ? a : b;
 }
 
-/** Comparison operators */
+// Comparison operators
 bool Fixed::operator==(const Fixed &rhs) const
 {
 	return this->_fixedPointNum == rhs._fixedPointNum;
@@ -103,16 +107,22 @@ bool Fixed::operator>=(const Fixed &rhs) const
 	return rhs <= *this;
 }
 
-/** Arithmatic operators */
+// Arithmatic operators
 Fixed Fixed::operator+(const Fixed &rhs) const
 {
 	Fixed result;
 	const int a = this->_fixedPointNum;
 	const int b = rhs._fixedPointNum;
 
-	if (a + b > INT_MAX)
-
-		result._fixedPointNum = a + b;
+	if (a > 0 && a > std::numeric_limits<int>::max() - b)
+	{
+		throw std::overflow_error("\033[0;31mError: Addition overflow\033[0m");
+	}
+	if (a < 0 && a < std::numeric_limits<int>::min() - b)
+	{
+		throw std::overflow_error("\033[0;31mError: Addition overflow\033[0m");
+	}
+	result._fixedPointNum = a + b;
 	return result;
 }
 
@@ -122,49 +132,22 @@ Fixed Fixed::operator-(const Fixed &rhs) const
 	const int a = this->_fixedPointNum;
 	const int b = rhs._fixedPointNum;
 
+	if (b > 0 && a < std::numeric_limits<int>::min() + b)
+	{
+		throw std::overflow_error("\033[0;31mError: Subtraction overflow\033[0m");
+	}
+	if (b < 0 && a > std::numeric_limits<int>::max() + b)
+	{
+		throw std::overflow_error("\033[0;31mError: Subtraction overflow\033[0m");
+	}
 	result._fixedPointNum = a - b;
 	return result;
 }
 
 Fixed Fixed::operator*(const Fixed &rhs) const
 {
-	Fixed result;
-	const int a = this->_fixedPointNum;
-	const int b = rhs._fixedPointNum;
-
-	if (a == 0 && b == 0)
-	{
-		result._fixedPointNum = 0;
-		return result;
-	}
-
-	if (a == INT_MIN && b == -1)
-	{
-		throw std::overflow_error("Error: Multiplication overflow.");
-	}
-	if (b == INT_MIN && a == -1)
-	{
-		throw std::overflow_error("Error: Multiplication overflow.");
-	}
-	if (a > 0 && b > 0 && a > (INT_MAX / b))
-	{
-		throw std::overflow_error("Error: Multiplication overflow.");
-	}
-	if (a > 0 && b < 0 && b < (INT_MIN / a))
-	{
-		throw std::overflow_error("Error: Multiplication overflow.");
-	}
-	if (a < 0 && b > 0 && a < (INT_MIN / b))
-	{
-		throw std::overflow_error("Error: Multiplication overflow.");
-	}
-	if (a < 0 && b < 0 && a < (INT_MAX / b))
-	{
-		throw std::overflow_error("Error: Multiplication overflow.");
-	}
-
-	result._fixedPointNum = (a * b) >> Fixed::FRACTIONAL_BITS;
-	return result;
+	// TODO: 算術オーバーフローを検出する
+	return  Fixed(this->toFloat() * rhs.toFloat());
 }
 
 Fixed Fixed::operator/(const Fixed &rhs) const
@@ -175,11 +158,11 @@ Fixed Fixed::operator/(const Fixed &rhs) const
 
 	if (b == 0)
 	{
-		throw std::invalid_argument("Error: Division by zero.");
+		throw std::invalid_argument("\033[0;31mError: Division by zero\033[0m");
 	}
-	if (a == INT_MIN && b == -1)
+	if (a == std::numeric_limits<int>::min() && b == -1)
 	{
-		throw std::overflow_error("Error: Division overflow.");
+		throw std::overflow_error("\033[0;31mError: Division overflow\033[0m");
 	}
 	result._fixedPointNum = (a << Fixed::FRACTIONAL_BITS) / b;
 	return result;

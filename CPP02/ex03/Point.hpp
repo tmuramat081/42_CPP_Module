@@ -7,8 +7,8 @@ class Point
 {
 public:
 	Point();
-	explicit Point(float const &x, float const &y);
-	explicit Point(int const &x, int const &y);
+	explicit Point(float const x, float const y);
+	explicit Point(int const x, int const y);
 	Point(const Point &other);
 	~Point();
 

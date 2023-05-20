@@ -33,13 +33,16 @@ int main()
 	std::cout << GREEN << ">> Test arithmatic operators." << DEFAULT << std::endl;
 
 	std::cout << "a + b = " << a + b << std::endl;
+	std::cout << "a + b + c = " << a + b + c << std::endl;
 	std::cout << "a - c = " << a - c << std::endl;
+	std::cout << "a - c - b = " << a - c - b << std::endl;
 	std::cout << "a * c = " << a * c << std::endl;
+	std::cout << "a * c * b = " << a * c * b << std::endl;
 	std::cout << "a / c = " << a / c << std::endl;
 
 	std::cout << GREEN << ">> Test increment and decrement operators." << DEFAULT << std::endl;
 
-	Fixed e;
+	Fixed e = a;
 	std::cout << "e is " << e << std::endl;
 	std::cout << "++e is " << ++e << std::endl;
 	std::cout << "e is " << e << std::endl;
@@ -71,7 +74,7 @@ int main()
 	try
 	{
 		std::cout << "a / 0 = " << std::endl;
-		std::cout << a / zero << std::endl;
+		a / zero;
 	}
 	catch (std::invalid_argument &e)
 	{
@@ -80,7 +83,25 @@ int main()
 	try
 	{
 		std::cout << "8388608 / -0.002 = " << std::endl;
-		std::cout << Fixed(-8388608) / Fixed(-0.002f) << std::endl;
+		Fixed(-8388608) / Fixed(-0.002f);
+	}
+	catch (std::overflow_error &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	try
+	{
+		std::cout << "8388608 + 1 = " << std::endl;
+		Fixed(8388607) + Fixed(1);
+	}
+	catch (std::overflow_error &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	try
+	{
+		std::cout << "-8388608 - 1 = " << std::endl;
+		Fixed(-8388608) - Fixed(1);
 	}
 	catch (std::overflow_error &e)
 	{

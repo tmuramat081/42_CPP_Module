@@ -6,16 +6,23 @@
 class Fixed
 {
 public:
+	// Constructors
 	Fixed();
 	explicit Fixed(const int num);
 	explicit Fixed(const float num);
 	Fixed(const Fixed &other);
+
+	// Destructor
 	~Fixed();
 
+	// Operators
 	Fixed &operator=(const Fixed &fixed);
 
+	// Getter / Setters
 	int getRawBits() const;
 	void setRawBits(int const raw);
+
+	// Member functions
 	float toFloat() const;
 	int toInt() const;
 

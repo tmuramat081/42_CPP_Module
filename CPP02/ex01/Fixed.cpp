@@ -2,42 +2,47 @@
 #include <iostream>
 #include <cmath>
 
+// Constructors
 Fixed::Fixed()
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "\033[0;33mDefault constructor called\033[0m" << std::endl;
 	this->_fixedPointNum = 0;
 }
 
 Fixed::Fixed(const int num)
 {
-	std::cout << "Int constructor called" << std::endl;
+	std::cout << "\033[0;33mInt constructor called\033[0m" << std::endl;
 	this->_fixedPointNum = num << this->FRACTIONAL_BITS;
 }
 
 Fixed::Fixed(const float num)
 {
-	std::cout << "Float constructor called" << std::endl;
-	this->_fixedPointNum = static_cast<int>(num * (1 << this->FRACTIONAL_BITS));
+	std::cout << "\033[0;33mFloat constructor called\033[0m" << std::endl;
+	this->_fixedPointNum = static_cast<int>(std::roundf(num * (1 << this->FRACTIONAL_BITS)));
 }
 
 Fixed::Fixed(const Fixed &other)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "\033[0;33mCopy constructor called\033[0m" << std::endl;
 	this->_fixedPointNum = other._fixedPointNum;
 }
 
+
+// Operator
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "\033[0;33mCopy assignment operator called\033[0m" << std::endl;
 	this->_fixedPointNum = rhs._fixedPointNum;
 	return *this;
 }
 
+// Destructor
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "\033[0;33mDestructor called\033[0m" << std::endl;
 }
 
+// Getters / Setters
 int Fixed::getRawBits() const
 {
 	return this->_fixedPointNum;
@@ -57,7 +62,7 @@ float Fixed::toFloat() const
 int Fixed::toInt() const
 {
 	int raw_bits = this->_fixedPointNum;
-	return static_cast<int>(std::roundf(raw_bits >> this->FRACTIONAL_BITS));
+	return raw_bits >> this->FRACTIONAL_BITS;
 }
 
 std::ostream &operator<<(std::ostream &os, const Fixed &fixed)

@@ -8,19 +8,14 @@
 
 bool bsp(Point const a, Point const b, Point const c, Point const point);
 
-int main()
+void test(Point const a, Point const b, Point const c, Point const point, bool expected)
 {
-	Point a(0, 0);
-	Point b(0, 6);
-	Point c(8, 0);
-	Point p(2, 2);
+	bool res;
 
-	std::cout << "A" << a << ", ";
-	std::cout << "B" << b << ", ";
-	std::cout << "C" << c << ", ";
-	std::cout << "P" << p << std::endl;
+	std::cout << "P" << point << std::endl;
 
-	if (bsp(p, a, b, c))
+	res = bsp(a, b, c, point);
+	if (res)
 	{
 		std::cout << GREEN;
 		std::cout << "○ P is inside the triangle.";
@@ -32,6 +27,32 @@ int main()
 		std::cout << "x P is outside the triangle.";
 		std::cout << DEFAULT << std::endl;
 	}
+	(void)expected;
+//	assert(res == expected);
+}
+
+int main()
+{
+	Point a(0.0f, 0.0f);
+	Point b(0.0f, 1.0f);
+	Point c(1.0f, 0.0f);
+
+	std::cout << "A" << a << ", ";
+	std::cout << "B" << b << ", ";
+	std::cout << "C" << c << std::endl;
+
+	// 三角形の内側
+	Point p0(0.2f, 0.2f);
+	test(a, b, c, p0, true);
+	// 三角形の頂点上
+	Point p1(0.0f, 0.0f);
+	test(a, b, c, p1, true);
+	// 三角形の辺上
+	Point p2(0.5f, 0.0f);
+	test(a, b, c, p2, true);
+	// 三角形の外側
+	Point p3(1.0f, 1.0f);
+	test(a, b, c, p3, false);
 
 	return 0;
 }

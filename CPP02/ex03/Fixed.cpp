@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 
+// Constructors
 Fixed::Fixed()
 {
 	this->_fixedPointNum = 0;
@@ -14,23 +15,28 @@ Fixed::Fixed(const int num)
 
 Fixed::Fixed(const float num)
 {
-	this->_fixedPointNum = static_cast<int>(num * (1 << this->FRACTIONAL_BITS));
+	this->_fixedPointNum = static_cast<int>(std::roundf(num * (1 << this->FRACTIONAL_BITS)));
 }
 
 Fixed::Fixed(const Fixed &other)
 {
-	setRawBits(other.getRawBits());
+	this->_fixedPointNum = other._fixedPointNum;
 }
 
-/** Asignement operator */
+// Destructor
+Fixed::~Fixed() {}
+
+// Asignement operator
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
-	setRawBits(rhs.getRawBits());
+	if (this != &rhs)
+	{
+		this->_fixedPointNum = rhs._fixedPointNum;
+	}
 	return *this;
 }
 
-Fixed::~Fixed(){}
-
+// Getter / Setters
 int Fixed::getRawBits() const
 {
 	return this->_fixedPointNum;
@@ -41,16 +47,16 @@ void Fixed::setRawBits(int const raw)
 	this->_fixedPointNum = raw;
 }
 
+//  Member functions
 float Fixed::toFloat() const
 {
-	int raw_bits = getRawBits();
+	int raw_bits = this->_fixedPointNum;
 	return static_cast<float>(raw_bits) / (1 << FRACTIONAL_BITS);
 }
 
 int Fixed::toInt() const
 {
-	int raw_bits = getRawBits();
-	return static_cast<int>(std::roundf(raw_bits >> this->FRACTIONAL_BITS));
+	return this->_fixedPointNum >> this->FRACTIONAL_BITS;
 }
 
 Fixed &Fixed::min(Fixed &a, Fixed &b)
@@ -73,10 +79,10 @@ const Fixed &Fixed::max(Fixed const &a, Fixed const &b)
 	return a > b ? a : b;
 }
 
-/** Comparison operators */
+// Comparison operators
 bool Fixed::operator==(const Fixed &rhs) const
 {
-	return this->getRawBits() == rhs.getRawBits();
+	return this->_fixedPointNum == rhs._fixedPointNum;
 }
 
 bool Fixed::operator!=(const Fixed &rhs) const
@@ -86,7 +92,7 @@ bool Fixed::operator!=(const Fixed &rhs) const
 
 bool Fixed::operator<(const Fixed &rhs) const
 {
-	return this->getRawBits() < rhs.getRawBits();
+	return this->_fixedPointNum < rhs._fixedPointNum;
 }
 
 bool Fixed::operator>(const Fixed &rhs) const
@@ -104,37 +110,77 @@ bool Fixed::operator>=(const Fixed &rhs) const
 	return rhs <= *this;
 }
 
-/** Arithmatic operators */
+// Arithmatic operators
 Fixed Fixed::operator+(const Fixed &rhs) const
 {
-	return Fixed(this->toFloat() + rhs.toFloat());
+	Fixed result;
+	const int a = this->_fixedPointNum;
+	const int b = rhs._fixedPointNum;
+
+	if (a > 0 && a > std::numeric_limits<int>::max() - b)
+	{
+		throw std::overflow_error("\033[0;31mError: Addition overflow\033[0m");
+	}
+	if (a < 0 && a < std::numeric_limits<int>::min() - b)
+	{
+		throw std::overflow_error("\033[0;31mError: Addition overflow\033[0m");
+	}
+	result._fixedPointNum = a + b;
+	return result;
 }
 
 Fixed Fixed::operator-(const Fixed &rhs) const
 {
-	return Fixed(this->toFloat() - rhs.toFloat());
+	Fixed result;
+	const int a = this->_fixedPointNum;
+	const int b = rhs._fixedPointNum;
+
+	if (b > 0 && a < std::numeric_limits<int>::min() + b)
+	{
+		throw std::overflow_error("\033[0;31mError: Subtraction overflow\033[0m");
+	}
+	if (b < 0 && a > std::numeric_limits<int>::max() + b)
+	{
+		throw std::overflow_error("\033[0;31mError: Subtraction overflow\033[0m");
+	}
+	result._fixedPointNum = a - b;
+	return result;
 }
 
 Fixed Fixed::operator*(const Fixed &rhs) const
 {
-	return Fixed(this->toFloat() * rhs.toFloat());
+	// TODO: 算術オーバーフローを検出する
+	return  Fixed(this->toFloat() * rhs.toFloat());
 }
 
 Fixed Fixed::operator/(const Fixed &rhs) const
 {
-	return Fixed(this->toFloat() / rhs.toFloat());
+	Fixed result;
+	const int a = this->_fixedPointNum;
+	const int b = rhs._fixedPointNum;
+
+	if (b == 0)
+	{
+		throw std::invalid_argument("\033[0;31mError: Division by zero\033[0m");
+	}
+	if (a == std::numeric_limits<int>::min() && b == -1)
+	{
+		throw std::overflow_error("\033[0;31mError: Division overflow\033[0m");
+	}
+	result._fixedPointNum = (a << Fixed::FRACTIONAL_BITS) / b;
+	return result;
 }
 
 /** Increment and decrement operators */
 Fixed Fixed::operator++()
 {
-	*this = Fixed(this->toInt() + 1);
+	this->_fixedPointNum = this->_fixedPointNum + (1 << FRACTIONAL_BITS);
 	return *this;
 }
 
 Fixed Fixed::operator--()
 {
-	*this = Fixed(this->toInt() - 1);
+	this->_fixedPointNum = this->_fixedPointNum - (1 << FRACTIONAL_BITS);
 	return *this;
 }
 

@@ -1,37 +1,45 @@
 #include "Fixed.hpp"
 #include <iostream>
 
+// Constructors
 Fixed::Fixed()
 {
+	std::cout << "\033[0;33mDefault constructor called\033[0m" << std::endl;
 	this->_fixedPointNum = 0;
-	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &other)
 {
-	this->_fixedPointNum = other.getRawBits();
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "\033[0;33mCopy constructor called\033[0m" << std::endl;
+	*this = other;
 }
 
+// Destructors
+Fixed::~Fixed()
+{
+	std::cout << "\033[0;33mDestructor called\033[0m" << std::endl;
+}
+
+// Operators
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->_fixedPointNum = this->getRawBits();
+	std::cout << "\033[0;33mCopy assignment operator called\033[0m" << std::endl;
+	if (this != &rhs)
+	{
+		this->_fixedPointNum = rhs.getRawBits();
+	}
 	return *this;
 }
 
-Fixed::~Fixed()
-{
-	std::cout << "Destructor called" << std::endl;
-};
-
+// Getters / Setters
 int Fixed::getRawBits() const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	std::cout << "\033[0;32mgetRawBits member function called\033[0m" << std::endl;
 	return this->_fixedPointNum;
 }
 
-void setRawBits(int const raw)
+void Fixed::setRawBits(int const raw)
 {
-	std::cout << "setRawBits member function called" << std::endl;
+	(void)raw;
+	std::cout << "\033[0;32msetRawBits member function called\033[0m" << std::endl;
 }

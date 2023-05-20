@@ -6,12 +6,16 @@
 class Fixed
 {
 public:
+	// Constructors
 	Fixed();
 	explicit Fixed(const int num);
 	explicit Fixed(const float num);
-	Fixed(const Fixed &);
+	Fixed(const Fixed &other);
+
+	// Destructor
 	~Fixed();
 
+	// Operater
 	Fixed &operator=(const Fixed &fixed);
 
 	int getRawBits() const;
