@@ -6,12 +6,12 @@
 
 int main()
 {
-	DiamondTrap diamondTrap("Diamond");
+	DiamondTrap diamondTrap("Idle");
 
 	std::cout << diamondTrap << std::endl;
 
 	/** 攻撃する */
-	diamondTrap.attack("Bad guy");
+	diamondTrap.ClapTrap::attack("bad guy");
 	std::cout << diamondTrap << std::endl;
 	/** ダメージを受ける */
 	diamondTrap.takeDamage(50);
@@ -23,8 +23,9 @@ int main()
 	diamondTrap.takeDamage(50);
 	std::cout << diamondTrap << std::endl;
 	/** 私は誰？ */
-	diamondTrap.highFiveGuys();
+	diamondTrap.whoAmI();
 	std::cout << diamondTrap << std::endl;
+
 
 	return 0;
 }

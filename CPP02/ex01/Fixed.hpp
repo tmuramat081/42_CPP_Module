@@ -18,10 +18,13 @@ public:
 	// Operater
 	Fixed &operator=(const Fixed &fixed);
 
-	int getRawBits() const;
-	void setRawBits(int const raw);
+	// Member functions
 	float toFloat() const;
 	int toInt() const;
+
+	// Setter / Getter
+	int getRawBits() const;
+	void setRawBits(int const raw);
 
 private:
 	int _fixedPointNum;

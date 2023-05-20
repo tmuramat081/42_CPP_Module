@@ -20,7 +20,7 @@ public:
 
 private:
 	int _fixedPointNum;
-	static const int _rawBits = 8;
+	static const int _FRACTIONAL_BITS = 8;
 };
 
 #endif

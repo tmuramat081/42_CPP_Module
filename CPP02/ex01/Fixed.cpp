@@ -27,7 +27,6 @@ Fixed::Fixed(const Fixed &other)
 	this->_fixedPointNum = other._fixedPointNum;
 }
 
-
 // Operator
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
@@ -42,17 +41,7 @@ Fixed::~Fixed()
 	std::cout << "\033[0;33mDestructor called\033[0m" << std::endl;
 }
 
-// Getters / Setters
-int Fixed::getRawBits() const
-{
-	return this->_fixedPointNum;
-}
-
-void Fixed::setRawBits(int const raw)
-{
-	this->_fixedPointNum = raw;
-}
-
+// Member functions
 float Fixed::toFloat() const
 {
 	int raw_bits = this->_fixedPointNum;
@@ -65,6 +54,18 @@ int Fixed::toInt() const
 	return raw_bits >> this->FRACTIONAL_BITS;
 }
 
+// Getters / Setters
+int Fixed::getRawBits() const
+{
+	return this->_fixedPointNum;
+}
+
+void Fixed::setRawBits(int const raw)
+{
+	this->_fixedPointNum = raw;
+}
+
+// Shift oprator
 std::ostream &operator<<(std::ostream &os, const Fixed &fixed)
 {
 	float n = fixed.toFloat();
