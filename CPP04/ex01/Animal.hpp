@@ -19,11 +19,9 @@ public:
 	Animal operator=(const Animal &rhs);
 	virtual void makeSound()const;
 	virtual std::string getType() const;
-	Brain *getBrain()const;
 
 protected:
 	std::string type;
-	Brain *_brain;
 };
 
 #endif

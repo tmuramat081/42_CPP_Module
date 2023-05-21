@@ -19,7 +19,7 @@ public:
 
 	// Getters / Setters
 	std::string getIdea(const int index) const;
-	void setIdea(const int index, std::string &idea);
+	void setIdea(const int index, const std::string &idea);
 
 private:
 	static const int IDEA_MAX = 100;

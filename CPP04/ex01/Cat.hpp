@@ -18,6 +18,7 @@ public:
 
 private:
 	std::string type;
+	Brain *_brain;
 };
 
 #endif
