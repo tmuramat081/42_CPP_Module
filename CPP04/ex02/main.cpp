@@ -1,5 +1,5 @@
 #include <cstdlib>
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 #include "Brain.hpp"
@@ -39,23 +39,15 @@ void setIdeas(Brain *brain, const std::string ideas[100])
 
 int main()
 {
-	const Dog *dog = new Dog();
 	Cat *cat = new Cat();
-	const Cat *copy_cat = new Cat(*cat);
+//	AAnimal *animal = new AAnimal();
 
 	Brain *cat_brain = cat->getBrain();
-	Brain *copy_cat_brain = copy_cat->getBrain();
 
-	setIdeas(cat_brain, fantasticIdeas);
-
-	putIdeas(cat_brain);
-
+	setIdeas(cat_brain, sillyIdeas);
 	putIdeaByRandom(cat_brain);
-	putIdeaByRandom(copy_cat_brain);
 
-	delete dog;
 	delete cat;
-	delete copy_cat;
 
 	return 0;
 }
