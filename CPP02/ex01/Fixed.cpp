@@ -31,7 +31,10 @@ Fixed::Fixed(const Fixed &other)
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
 	std::cout << "\033[0;33mCopy assignment operator called\033[0m" << std::endl;
-	this->_fixedPointNum = rhs._fixedPointNum;
+	if (this != &rhs)
+	{
+		this->_fixedPointNum = rhs._fixedPointNum;
+	}
 	return *this;
 }
 

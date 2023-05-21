@@ -6,15 +6,27 @@
 class FlagTrap : virtual public ClapTrap
 {
 public:
+	// Constructor
 	FlagTrap(const std::string &name);
 	FlagTrap();
+
+	// Copy constructor
 	FlagTrap(const FlagTrap &other);
-	FlagTrap operator=(const FlagTrap &other);
+
+	// Operator
+	FlagTrap &operator=(const FlagTrap &other);
+
+	// Destructor
 	~FlagTrap();
+
+	// Member functions
 	void highFiveGuys();
 
+	// Getters / setters
+	bool getMode()const;
+
 private:
-	bool _isHighMode;
+	bool _isHighLevel;
 };
 
 std::ostream &operator<<(std::ostream &os, const FlagTrap &flagTrap);

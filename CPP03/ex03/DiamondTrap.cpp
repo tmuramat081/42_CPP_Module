@@ -14,14 +14,42 @@ DiamondTrap::DiamondTrap(const std::string &name) : ClapTrap(name + "_clap_name"
 	std::cout << "DiamondTrap " << this->_name << " is born." << std::endl;
 }
 
-DiamondTrap::DiamondTrap()
+DiamondTrap::DiamondTrap() : ClapTrap(), _name("default")
 {
+	this->_hitPoint = 100;
+	this->_energyPoint = 50;
+	this->_attackDamage = 30;
 	std::cout << "DiamondTrap " << this->_name << " is born." << std::endl;
+}
+
+DiamondTrap::DiamondTrap(const DiamondTrap &other)
+{
+	this->_name = other._name;
+	this->_hitPoint = other._hitPoint;
+	this->_energyPoint = other._energyPoint;
+	this->_attackDamage = other._attackDamage;
+}
+
+DiamondTrap &DiamondTrap::operator=(const DiamondTrap &rhs)
+{
+	if (this != &rhs)
+	{
+		this->_name = rhs._name;
+		this->_hitPoint = rhs._hitPoint;
+		this->_energyPoint = rhs._energyPoint;
+		this->_attackDamage = rhs._attackDamage;
+	}
+	return *this;
 }
 
 DiamondTrap::~DiamondTrap() {
 	std::cout << "DiamondTrap " << this->_name << " goes to sleep." << std::endl;
 
+}
+
+void DiamondTrap::attack(const std::string& target)
+{
+	ScavTrap::attack(target);
 }
 
 void DiamondTrap::whoAmI()
@@ -30,6 +58,11 @@ void DiamondTrap::whoAmI()
 	std::cout << "I am " << this->_name << ", inherited of " << ClapTrap::_name << ".";
 	std::cout << DEFAULT << std::endl;
 	// std::cout << "Address: " << this << std::endl;
+}
+
+std::string DiamondTrap::getName() const
+{
+	return this->_name;
 }
 
 std::ostream &operator<<(std::ostream &os, const DiamondTrap &diamondTrap)

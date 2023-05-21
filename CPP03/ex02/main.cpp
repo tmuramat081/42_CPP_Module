@@ -24,6 +24,9 @@ int main()
 	/** ハイタッチ */
 	flagTrap.highFiveGuys();
 	std::cout << flagTrap << std::endl;
+	/** ハイタッチ */
+	flagTrap.highFiveGuys();
+	std::cout << flagTrap << std::endl;
 
 	return 0;
 }

@@ -9,7 +9,7 @@ int main()
 	std::cout << scavTrap << std::endl;
 
 	/** 攻撃する */
-	scavTrap.attack("Enemy");
+	scavTrap.attack("Bad guy");
 	std::cout << scavTrap << std::endl;
 	/** ダメージを受ける */
 	scavTrap.takeDamage(50);
@@ -22,6 +22,10 @@ int main()
 	std::cout << scavTrap << std::endl;
 	/** モード移行 */
 	scavTrap.guardGate();
+	std::cout << scavTrap << std::endl;
+	/** モード移行 */
+	scavTrap.guardGate();
+	std::cout << scavTrap << std::endl;
 
 	return 0;
 }

@@ -12,7 +12,7 @@ FlagTrap::FlagTrap()
 	this->_hitPoint = 100;
 	this->_energyPoint = 100;
 	this->_attackDamage = 30;
-	this->_isHighMode = false;
+	this->_isHighLevel = false;
 
 	std::cout << "FlagTrap " << this->_name << " is born." << std::endl;
 }
@@ -22,7 +22,7 @@ FlagTrap::FlagTrap(const std::string &name) : ClapTrap(name)
 	this->_hitPoint = 100;
 	this->_energyPoint = 100;
 	this->_attackDamage = 30;
-	this->_isHighMode = false;
+	this->_isHighLevel = false;
 
 	std::cout << "FlagTrap " << this->_name << " is born." << std::endl;
 }
@@ -33,7 +33,7 @@ FlagTrap::FlagTrap(const FlagTrap &other)
 	this->_hitPoint = other._hitPoint;
 	this->_energyPoint = other._energyPoint;
 	this->_attackDamage = other._attackDamage;
-	this->_isHighMode = false;
+	this->_isHighLevel = false;
 }
 
 FlagTrap::~FlagTrap()
@@ -44,17 +44,22 @@ FlagTrap::~FlagTrap()
 /** ハイタッチ */
 void FlagTrap::highFiveGuys()
 {
-	if (this->_isHighMode == true)
+	if (this->_isHighLevel == true)
 	{
 		std::cout << YELLOW;
-		std::cout << this->_name << " Already on the high-five mode.";
+		std::cout << this->_name << " already on the high-level mode.";
 		std::cout << DEFAULT << std::endl;
 		return;
 	}
-	this->_isHighMode = true;
+	this->_isHighLevel = true;
 	std::cout << YELLOW;
-	std::cout << this->_name << " Turn ON the high-five mode.";
+	std::cout << this->_name << " turn ON the high-level mode.";
 	std::cout << DEFAULT << std::endl;
+}
+
+bool FlagTrap::getMode()const
+{
+	return this->_isHighLevel;
 }
 
 std::ostream &operator<<(std::ostream &os, const FlagTrap &flagTrap)
@@ -64,6 +69,7 @@ std::ostream &operator<<(std::ostream &os, const FlagTrap &flagTrap)
 	os << " HP:" << flagTrap.getHitPoint();
 	os << " EP:" << flagTrap.getEnergyPoint();
 	os << " AD:" << flagTrap.getAttackDamage();
+	os << " Mode: " << (flagTrap.getMode() ? "on" : "off");
 	os << " ]";
 	return os;
 }

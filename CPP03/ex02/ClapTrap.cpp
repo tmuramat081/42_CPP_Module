@@ -16,9 +16,24 @@ ClapTrap::ClapTrap(const std::string &name) : _name(name), _hitPoint(10), _energ
 	std::cout << "ClapTrap " << this->_name << " is born." << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &other) : _name(other._name + "(copy)"), _hitPoint(other._hitPoint), _energyPoint(other._energyPoint), _attackDamage(other._attackDamage)
+ClapTrap::ClapTrap(const ClapTrap &other)
 {
-	std::cout << "ClapTrap " << this->_name << " is born." << std::endl;
+	this->_name = other._name;
+	this->_hitPoint = other._hitPoint;
+	this->_energyPoint = other._energyPoint;
+	this->_attackDamage = other._attackDamage;
+}
+
+ClapTrap ClapTrap::operator=(const ClapTrap &rhs)
+{
+	if (this != &rhs)
+	{
+		this->_name = rhs._name;
+		this->_hitPoint = rhs._hitPoint;
+		this->_energyPoint = rhs._energyPoint;
+		this->_attackDamage = rhs._attackDamage;
+	}
+	return *this;
 }
 
 ClapTrap::~ClapTrap()
@@ -107,6 +122,18 @@ void ClapTrap::beRepaired(unsigned int amount)
 	std::cout << DEFAULT << std::endl;
 }
 
+/** 死亡状態か判定する */
+bool ClapTrap::isDied()
+{
+	return this->_hitPoint == 0;
+}
+
+/**　枯渇状態か判定する */
+bool ClapTrap::isStarved()
+{
+	return this->_energyPoint == 0;
+}
+
 std::string ClapTrap::getName() const
 {
 	return this->_name;
@@ -127,17 +154,6 @@ unsigned int ClapTrap::getAttackDamage() const
 	return this->_attackDamage;
 }
 
-/** 死亡状態か判定する */
-bool ClapTrap::isDied()
-{
-	return this->_hitPoint == 0;
-}
-
-/**　枯渇状態か判定する */
-bool ClapTrap::isStarved()
-{
-	return this->_energyPoint == 0;
-}
 
 std::ostream &operator<<(std::ostream &os, const ClapTrap &clapTrap)
 {

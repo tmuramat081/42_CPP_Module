@@ -8,7 +8,7 @@
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
-	this->_name = "John Doe";
+	this->_name = "default";
 	this->_hitPoint = 100;
 	this->_energyPoint = 50;
 	this->_attackDamage = 20;
@@ -78,7 +78,7 @@ std::ostream &operator<<(std::ostream &os, const ScavTrap &scavTrap)
 	os << " HP:" << scavTrap.getHitPoint();
 	os << " EP:" << scavTrap.getEnergyPoint();
 	os << " AD:" << scavTrap.getAttackDamage();
-	os << " GateKeeperMode:" << (scavTrap.getMode() ? "ON" : "OFF");
+	os << " Mode:" << (scavTrap.getMode() ? "on" : "off");
 	os << " ]";
 	return os;
 }

@@ -29,7 +29,10 @@ Fixed::~Fixed() {}
 // Asignement operator
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
-	this->_fixedPointNum = rhs._fixedPointNum;
+	if (this != &rhs)
+	{
+		this->_fixedPointNum = rhs._fixedPointNum;
+	}
 	return *this;
 }
 

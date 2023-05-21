@@ -6,16 +6,25 @@
 class ClapTrap
 {
 public:
+	// Constructors
 	ClapTrap();
 	ClapTrap(const std::string &name);
+
+	// Copy costructor
 	ClapTrap(const ClapTrap &other);
-	ClapTrap operator=(const ClapTrap &other);
+
+	// Operator
+	ClapTrap operator=(const ClapTrap &rhs);
+
+	// Destructor
 	~ClapTrap();
 
+	// Member functions
 	void attack(const std::string &target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
 
+	// Getter / Setter
 	std::string getName() const;
 	unsigned int getHitPoint() const;
 	unsigned int getEnergyPoint() const;
@@ -25,7 +34,7 @@ protected:
 	static const unsigned int HP_MAX = 100;
 	bool isDied();
 	bool isStarved();
-	const std::string _name;
+	std::string _name;
 	unsigned int _hitPoint;
 	unsigned int _energyPoint;
 	unsigned int _attackDamage;

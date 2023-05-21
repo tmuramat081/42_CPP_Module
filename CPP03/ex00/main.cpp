@@ -3,18 +3,17 @@
 
 int main()
 {
-	std::string name("Aqua");
+	std::string name("Ai");
 	ClapTrap crapTrap(name);
 
 	std::cout << "[ " << crapTrap << " ]" << std::endl;
 
 	/** 攻撃する */
-	crapTrap.attack("Ruvy");
-	crapTrap.attack("Ruvy");
-	crapTrap.attack("Ruvy");
-	crapTrap.attack("Ruvy");
-	crapTrap.attack("Ruvy");
-	crapTrap.attack("Ruvy");
+	crapTrap.attack("Bad guy");
+	crapTrap.attack("Bad guy");
+	crapTrap.attack("Bad guy");
+	crapTrap.attack("Bad guy");
+	crapTrap.attack("Bad guy");
 	std::cout << "[ " << crapTrap << " ]" << std::endl;
 
 	/** ダメージを受ける */
@@ -44,6 +43,15 @@ int main()
 	std::cout << "[ " << crapTrap << " ]" << std::endl;
 	/** ダメージを受ける */
 	crapTrap.takeDamage(1);
+	std::cout << "[ " << crapTrap << " ]" << std::endl;
+	/** ダメージを受ける（死んでいる） */
+	crapTrap.takeDamage(1);
+	std::cout << "[ " << crapTrap << " ]" << std::endl;
+	/** 攻撃する（死んでいる） */
+	crapTrap.attack("Bad guy");
+	std::cout << "[ " << crapTrap << " ]" << std::endl;
+	/** 体力を回復（死んでいる） */
+	crapTrap.beRepaired(10);
 	std::cout << "[ " << crapTrap << " ]" << std::endl;
 
 	return 0;
