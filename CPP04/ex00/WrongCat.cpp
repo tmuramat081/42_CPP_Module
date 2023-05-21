@@ -21,7 +21,7 @@ WrongCat::~WrongCat()
 
 void WrongCat::makeSound()const
 {
-	std::cout << "WrongCat" << std::endl;
+	std::cout << "(^._.^) < \"Nyan Nyan!\"" << std::endl;
 }
 
 // Operators

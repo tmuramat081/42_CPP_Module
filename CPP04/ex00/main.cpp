@@ -15,9 +15,9 @@ int main()
 	std::cout << "Type: " << c->getType() << " " << std::endl;
 	std::cout << "Type: " << d->getType() << " " << std::endl;
 
+	meta->makeSound();
 	c->makeSound();
 	d->makeSound();
-	meta->makeSound();
 
 	delete meta;
 	delete c;

@@ -22,7 +22,9 @@ WrongAnimal::~WrongAnimal()
 // Member functions
 void WrongAnimal::makeSound() const
 {
-	std::cout << "<< WrongAnimal" << std::endl;
+	std::cout << RED;
+	std::cout << "[ Wrong animal does not make sound. ]";
+	std::cout << DEFAULT << std::endl;
 }
 
 // Operators
