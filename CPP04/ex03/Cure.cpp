@@ -1,42 +1,34 @@
 #include "Cure.hpp"
 
 // Constructors
-Cure::Cure()
-{
-	_clone() = 0;
-	std::cout << "\e[0;33mDefault Constructor called of Cure\e[0m" << std::endl;
-}
+Cure::Cure() : AMateria("cure") {}
 
-Cure::Cure(const Cure &copy)
+// Copy constructor
+Cure::Cure(const Cure &other)
 {
-	_clone() = copy.getClone()();
-	std::cout << "\e[0;33mCopy Constructor called of Cure\e[0m" << std::endl;
+	(void)other;
+	return ;
 }
-
-Cure::Cure(void clone())
-{
-	_clone() = clone();
-	std::cout << "\e[0;33mFields Constructor called of Cure\e[0m" << std::endl;
-}
-
 
 // Destructor
-Cure::~Cure()
-{
-	std::cout << "\e[0;31mDestructor called of Cure\e[0m" << std::endl;
-}
-
+Cure::~Cure() {}
 
 // Operators
-Cure & Cure::operator=(const Cure &assign)
+Cure &Cure::operator=(const Cure &rhs)
 {
-	_clone() = assign.getClone()();
+	if (this != &rhs)
+	{
+	}
 	return *this;
 }
 
-
-// Getters / Setters
-void Cure::getClone()() const
+Cure *Cure::clone() const
 {
-	return _clone();
+	return new Cure();
+}
+
+void Cure::use(ICharacter &target)
+{
+	std::cout << "* heals " << target.getName();
+	std::cout << "s wounds " << std::cout;
 }

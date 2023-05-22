@@ -1,10 +1,17 @@
-class AMateria
+#include "AMateria.hpp"
+#include <iostream>
+
+AMateria::AMateria(std::string const &type) : _type(type) {}
+
+AMateria::~AMateria() {}
+
+std::string const &AMateria::getType() const
 {
-protected:
+	return this->_type;
+}
 
-public: AMateria(std::string const &type);
-
-	std::string const &getType() const;
-
-	virtual AMateria *clone() const = 0;
-};
+void use(ICharacter& target)
+{
+	(void)target;
+	return ;
+}

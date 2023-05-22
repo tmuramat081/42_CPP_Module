@@ -1,42 +1,28 @@
 #include "Ice.hpp"
 
 // Constructors
-Ice::Ice()
-{
-	_clone() = 0;
-	std::cout << "\e[0;33mDefault Constructor called of Ice\e[0m" << std::endl;
-}
+Ice::Ice() : AMateria("cure") {}
 
-Ice::Ice(const Ice &copy)
-{
-	_clone() = copy.getClone()();
-	std::cout << "\e[0;33mCopy Constructor called of Ice\e[0m" << std::endl;
+Ice::Ice(const Ice &other) {
+	(void)other;
 }
-
-Ice::Ice(void clone())
-{
-	_clone() = clone();
-	std::cout << "\e[0;33mFields Constructor called of Ice\e[0m" << std::endl;
-}
-
 
 // Destructor
-Ice::~Ice()
-{
-	std::cout << "\e[0;31mDestructor called of Ice\e[0m" << std::endl;
-}
-
+Ice::~Ice() {}
 
 // Operators
-Ice & Ice::operator=(const Ice &assign)
+Ice &Ice::operator=(const Ice &rhs)
 {
-	_clone() = assign.getClone()();
+	(void)rhs;
 	return *this;
 }
 
-
-// Getters / Setters
-void Ice::getClone()() const
+Ice *Ice::clone() const
 {
-	return _clone();
+	return new Ice();
+}
+
+void Ice::use(ICharacter &target)
+{
+	std::cout << "* shoot an ice bolt at " << target.getName();
 }

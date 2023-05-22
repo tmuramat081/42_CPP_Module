@@ -1,28 +1,28 @@
 #ifndef CURE_HPP
-# define CURE_HPP
+#define CURE_HPP
 
-# include <iostream>
-# include <string>
+#include <iostream>
+#include <string>
+#include "ICharacter.hpp"
+#include "AMateria.hpp"
 
-class Cure
+class Cure : public AMateria
 {
-	public:
-		// Constructors
-		Cure();
-		Cure(const Cure &copy);
-		Cure(void clone());
+public:
+	// Constructors
+	Cure();
+	Cure(const Cure &other);
 
-		// Destructor
-		~Cure();
+	// Destructor
+	~Cure();
 
-		// Operators
-		Cure & operator=(const Cure &assign);
+	// Operators
+	Cure &operator=(const Cure &assign);
 
-		// Getters / Setters
-		void getClone()() const;
+	// Getters / Setters
+	Cure *clone() const;
 
-	private:
-		void _clone();
+	void use(ICharacter &target);
 
 };
 
