@@ -15,7 +15,6 @@ int main()
 	// 各マテリアをセット
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
-
 	std::cout << *src << std::endl;
 
 	// エアリス登場
