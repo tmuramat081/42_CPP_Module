@@ -1,6 +1,6 @@
 NAME := a.out
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -Wconversion -pedantic -Wshadow
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -Wconversion -pedantic -Wshadow -D LEAKS_CHECK
 
 SRCS := main.cpp AMateria.cpp Cure.cpp Ice.cpp MateriaSource.cpp Character.cpp
 OBJS := ${SRCS:.cpp=.o}

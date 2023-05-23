@@ -8,11 +8,22 @@
 class Dog : public AAnimal
 {
 public:
+	// Constructors
 	Dog();
-	virtual ~Dog();
+
+	// Copy constructor
 	Dog(Dog &other);
+
+	// Destructor
+	virtual ~Dog();
+
+	// Operators
 	Dog operator=(const Dog &rhs);
+
+	// Member functions
 	virtual void makeSound() const;
+
+	// Getters / setters
 	virtual std::string getType() const;
 	Brain *getBrain()const;
 

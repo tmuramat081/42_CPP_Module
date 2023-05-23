@@ -13,11 +13,22 @@
 class AAnimal
 {
 public:
+	// Constructors
 	AAnimal();
-	virtual ~AAnimal();
+
+	// Copy constructor
 	AAnimal(AAnimal &other);
+
+	// Destructor
+	virtual ~AAnimal();
+
+	// Operator
 	AAnimal &operator=(const AAnimal &rhs);
+
+	// Member functions
 	virtual void makeSound() const = 0;
+
+	// Getters / setters
 	virtual std::string getType() const = 0;
 
 protected:

@@ -1,10 +1,10 @@
 #include "Ice.hpp"
 
 // Constructors
-Ice::Ice() : AMateria("cure") {}
+Ice::Ice() : AMateria("ice") {}
 
 Ice::Ice(const Ice &other) {
-	(void)other;
+	*this = other;
 }
 
 // Destructor
@@ -13,7 +13,10 @@ Ice::~Ice() {}
 // Operators
 Ice &Ice::operator=(const Ice &rhs)
 {
-	(void)rhs;
+	if (this != &rhs)
+	{
+		*this = rhs;
+	}
 	return *this;
 }
 
@@ -24,5 +27,5 @@ Ice *Ice::clone() const
 
 void Ice::use(ICharacter &target)
 {
-	std::cout << "* shoot an ice bolt at " << target.getName();
+	std::cout << "* shoot an ice bolt at " << target.getName() << " *" << std::endl;
 }

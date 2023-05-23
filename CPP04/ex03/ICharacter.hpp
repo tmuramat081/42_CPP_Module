@@ -20,6 +20,7 @@ public:
 
 	// Getters
 	virtual std::string const &getName() const = 0;
+	virtual AMateria const * getInvestory(int idx) const = 0;
 };
 
 #endif

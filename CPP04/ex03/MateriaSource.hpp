@@ -15,17 +15,22 @@ public:
 	MateriaSource(const MateriaSource &other);
 
 	// Destructor
-	~MateriaSource();
+	virtual ~MateriaSource();
 
 	// Operators
 	MateriaSource &operator=(const MateriaSource &rhs);
 
 	// Member functions
-	void learnMateria(AMateria *materia);
-	AMateria *createMateria(std::string const &type);
+	virtual void learnMateria(AMateria *materia);
+	virtual AMateria *createMateria(std::string const &type);
+
+	// Getters
+	AMateria *getInvestory(int idx) const;
 
 private:
 	AMateria *_investory[4];
 };
+
+std::ostream &operator<<(std::ostream &os, const IMateriaSource &MateriaSource);
 
 #endif

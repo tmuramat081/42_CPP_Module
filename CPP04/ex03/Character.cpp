@@ -1,7 +1,13 @@
 #include "Character.hpp"
 
 // Constructors
-Character::Character(const std::string &name) : _name(name) {}
+Character::Character(const std::string &name) : _name(name)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		this->_inventory[i] = NULL;
+	}
+}
 
 Character::Character(const Character &other)
 {
@@ -12,7 +18,13 @@ Character::Character(const Character &other)
 }
 
 // Destructor
-Character::~Character() {}
+Character::~Character()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		delete this->_inventory[i];
+	}
+}
 
 // Operators
 Character &Character::operator=(const Character &rhs)
@@ -34,6 +46,7 @@ void Character::equip(AMateria *materia)
 	{
 		if (this->_inventory[i] == NULL)
 		{
+			std::cout << "equip" << std::endl;
 			this->_inventory[i] = materia;
 			return;
 		}
@@ -43,15 +56,50 @@ void Character::equip(AMateria *materia)
 
 void Character::unequip(int idx)
 {
+	if (idx < 0 || 4 < idx)
+	{
+		std::cout << "invalid index" << std::endl;
+		return;
+	}
 	this->_inventory[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter &target)
 {
+	if (idx < 0 || 4 < idx)
+	{
+		std::cout << "invalid index" << std::endl;
+		return;
+	}
 	this->_inventory[idx]->use(target);
 }
 
 std::string const &Character::getName() const
 {
 	return this->_name;
+}
+
+AMateria const *Character::getInvestory(int idx) const
+{
+	return this->_inventory[idx];
+}
+
+std::ostream &operator<<(std::ostream &os, const ICharacter &character)
+{
+	os << "== " << character.getName() << "'s materias ==" << std::endl;
+	for (int i = 0; i < 4; i++)
+	{
+		os << "No." << i << " ";
+		if (character.getInvestory(i))
+		{
+			os << character.getInvestory(i)->getType();
+		}
+		else
+		{
+			os << "NONE";
+		}
+		os << std::endl;
+	}
+	os << "=======================";
+	return os;
 }
