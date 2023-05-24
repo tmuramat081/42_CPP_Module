@@ -9,7 +9,7 @@ class AMateria
 {
 public:
 	// Constructor
-	explicit AMateria(std::string const &type);
+	AMateria(std::string const &type);
 	AMateria();
 
 	// Copy constructor

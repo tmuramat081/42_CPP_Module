@@ -26,7 +26,7 @@ public:
 
 	// Getters / Setters
 	std::string const &getName() const;
-	AMateria const * getInvestory(int idx) const;
+	AMateria const * getInventory(int idx) const;
 
 private:
 	std::string _name;

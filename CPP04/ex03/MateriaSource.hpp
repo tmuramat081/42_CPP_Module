@@ -25,10 +25,10 @@ public:
 	virtual AMateria *createMateria(std::string const &type);
 
 	// Getters
-	AMateria *getInvestory(int idx) const;
+	virtual AMateria *getInventory(int idx) const;
 
 private:
-	AMateria *_investory[4];
+	AMateria *_inventory[4];
 };
 
 std::ostream &operator<<(std::ostream &os, const IMateriaSource &MateriaSource);

@@ -1,8 +1,9 @@
 NAME := a.out
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -Wconversion -pedantic -Wshadow -D LEAKS_CHECK
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -Wconversion -pedantic -Wshadow
+# LEAKS := -D LEAKS_CHECK
 
-SRCS := main.cpp AMateria.cpp Cure.cpp Ice.cpp MateriaSource.cpp Character.cpp
+SRCS := main.cpp AMateria.cpp Cure.cpp Ice.cpp Fire.cpp MateriaSource.cpp Character.cpp
 OBJS := ${SRCS:.cpp=.o}
 
 # Print variables
@@ -14,7 +15,7 @@ RED := \033[0;91m
 
 # Commands
 ${NAME}: ${OBJS}
-	@${CXX} ${CXXFLAGS} ${OBJS} -o $@
+	@${CXX} ${CXXFLAGS} ${LEAKS} ${OBJS} -o $@
 	@${PRINTF} "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}\n"
 
 #: Make executable file.

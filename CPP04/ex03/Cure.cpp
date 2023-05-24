@@ -10,10 +10,7 @@ Cure::Cure(const Cure &other)
 }
 
 // Destructor
-Cure::~Cure()
-{
-
-}
+Cure::~Cure(){}
 
 // Operators
 Cure &Cure::operator=(const Cure &rhs)
@@ -32,6 +29,6 @@ Cure *Cure::clone() const
 
 void Cure::use(ICharacter &target)
 {
-	std::cout << "* heals " << target.getName();
-	std::cout << "'s wounds *" << std::endl;
+	std::cout << "\033[0;32m* heals " << target.getName();
+	std::cout << "'s wounds *\033[0]" << std::endl;
 }

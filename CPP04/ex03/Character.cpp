@@ -33,7 +33,10 @@ Character &Character::operator=(const Character &rhs)
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			// delete this->_inventory[i];
+			if (this->_inventory[i])
+			{
+				delete this->_inventory[i];
+			}
 			this->_inventory[i] = _inventory[i]->clone();
 		}
 	}
@@ -46,7 +49,7 @@ void Character::equip(AMateria *materia)
 	{
 		if (this->_inventory[i] == NULL)
 		{
-			std::cout << "equip" << std::endl;
+			std::cout << "\033[0;34mNew equipment: " << materia->getType() << "\033[0m" << std::endl;
 			this->_inventory[i] = materia;
 			return;
 		}
@@ -56,19 +59,26 @@ void Character::equip(AMateria *materia)
 
 void Character::unequip(int idx)
 {
-	if (idx < 0 || 4 < idx)
+	if (idx < 0 || 3 < idx)
 	{
-		std::cout << "invalid index" << std::endl;
+		std::cerr << "\033[0;31mError: invalid index.\033[0m" << std::endl;
 		return;
 	}
+	std::cout << "\033[0;34mDelete equipment: " << this->_inventory[idx]->getType() << "\033[0m" << std::endl;
+	delete this->_inventory[idx];
 	this->_inventory[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter &target)
 {
-	if (idx < 0 || 4 < idx)
+	if (idx < 0 || 3 < idx)
 	{
-		std::cout << "invalid index" << std::endl;
+		std::cerr << "\033[0;31mError: invalid index.\033[0m" << std::endl;
+		return;
+	}
+	else if (!this->_inventory[idx])
+	{
+		std::cerr << "\033[0;31mError: no equipment.\033[0m" << std::endl;
 		return;
 	}
 	this->_inventory[idx]->use(target);
@@ -79,7 +89,7 @@ std::string const &Character::getName() const
 	return this->_name;
 }
 
-AMateria const *Character::getInvestory(int idx) const
+AMateria const *Character::getInventory(int idx) const
 {
 	return this->_inventory[idx];
 }
@@ -90,16 +100,16 @@ std::ostream &operator<<(std::ostream &os, const ICharacter &character)
 	for (int i = 0; i < 4; i++)
 	{
 		os << "No." << i << " ";
-		if (character.getInvestory(i))
+		if (character.getInventory(i))
 		{
-			os << character.getInvestory(i)->getType();
+			os << character.getInventory(i)->getType();
 		}
 		else
 		{
-			os << "NONE";
+			os << "(none)";
 		}
 		os << std::endl;
 	}
-	os << "=======================";
+	os << "======================";
 	return os;
 }

@@ -27,5 +27,5 @@ Ice *Ice::clone() const
 
 void Ice::use(ICharacter &target)
 {
-	std::cout << "* shoot an ice bolt at " << target.getName() << " *" << std::endl;
+	std::cout << "\033[0;32m* shoot an ice bolt at " << target.getName() << " *\033[0m" << std::endl;
 }

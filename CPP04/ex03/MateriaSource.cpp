@@ -5,7 +5,7 @@ MateriaSource::MateriaSource()
 {
 	for (int i = 0; i < 4; i++)
 	{
-		this->_investory[i] = NULL;
+		this->_inventory[i] = NULL;
 	}
 }
 
@@ -13,7 +13,7 @@ MateriaSource::MateriaSource(const MateriaSource &other)
 {
 	for (int i = 0; i < 4; i++)
 	{
-		this->_investory[i] = other._investory[i];
+		this->_inventory[i] = other._inventory[i];
 	}
 }
 
@@ -22,7 +22,8 @@ MateriaSource::~MateriaSource()
 {
 	for (int i = 0; i < 4; i++)
 	{
-		delete this->_investory[i];
+		delete this->_inventory[i];
+		this->_inventory[i] = NULL;
 	}
 }
 
@@ -33,7 +34,11 @@ MateriaSource & MateriaSource::operator=(const MateriaSource &rhs)
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			this->_investory[i] = rhs._investory[i];
+			if (this->_inventory[i])
+			{
+				delete this->_inventory[i];
+			}
+			this->_inventory[i] = rhs._inventory[i];
 		}
 	}
 	return *this;
@@ -43,33 +48,33 @@ void MateriaSource::learnMateria(AMateria *materia)
 {
 	for (int i = 0; i < 4; i++)
 	{
-		if (this->_investory[i] == NULL)
+		if (this->_inventory[i] == NULL)
 		{
-			std::cout << "leean materia " << materia->getType() << std::endl;
-			this->_investory[i] = materia->clone();
+			this->_inventory[i] = materia;
+			std::cout << "\033[0;33mLearn materia: " << materia->getType() << "\033[0m" << std::endl;
 			return ;
 		}
 	}
-	std::cout << "Investory is full!" << std::endl;
+	std::cout << "Inventory is full!" << std::endl;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)
 {
 	for (int i = 0; i < 4; i++)
 	{
-		if (this->_investory[i] && _investory[i]->getType() == type)
+		if (this->_inventory[i] && _inventory[i]->getType() == type)
 		{
-			std::cout << "create materia of " << _investory[i]->getType() << std::endl;
-			return this->_investory[i]->clone();
+			std::cout << "\033[0;33mCreate materia: " << _inventory[i]->getType() << "\033[0m" << std::endl;
+			return this->_inventory[i]->clone();
 		}
 	}
-	std::cout << "invalid type" << std::endl;
+	std::cerr << "Error: invalid type." << std::endl;
 	return NULL;
 }
 
-AMateria *MateriaSource::getInvestory(int idx) const
+AMateria *MateriaSource::getInventory(int idx) const
 {
-	return this->_investory[idx];
+	return this->_inventory[idx];
 }
 
 std::ostream &operator<<(std::ostream &os, const IMateriaSource &materiaSource)
@@ -78,13 +83,13 @@ std::ostream &operator<<(std::ostream &os, const IMateriaSource &materiaSource)
 	for (int i = 0; i < 4; i++)
 	{
 		os << "No." << i << " ";
-		if (materiaSource.getInvestory(i))
+		if (materiaSource.getInventory(i))
 		{
-			os << materiaSource.getInvestory(i)->getType();
+			os << materiaSource.getInventory(i)->getType();
 		}
 		else
 		{
-			os << "NONE";
+			os << "(none)";
 		}
 		os << std::endl;
 	}
