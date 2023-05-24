@@ -10,6 +10,7 @@
 #define GREEN "\033[0;92m"
 #define RED "\033[0;91m"
 
+// 100個のアイデアをすべて出力
 void putIdeas(const Brain *brain)
 {
 	for (int i = 0; i < 100; i++)
@@ -18,6 +19,7 @@ void putIdeas(const Brain *brain)
 	}
 }
 
+// ランダムにアイデアを出力
 void putIdeaByRandom(const Brain *brain)
 {
 	srand(static_cast<unsigned int>(time(0)));
@@ -29,6 +31,7 @@ void putIdeaByRandom(const Brain *brain)
 	std::cout << DEFAULT << std::endl;
 }
 
+// アイデアを100個保存
 void setIdeas(Brain *brain, const std::string ideas[100])
 {
 	for (int index = 0; index < 100; index++)
@@ -39,18 +42,26 @@ void setIdeas(Brain *brain, const std::string ideas[100])
 
 int main()
 {
+	// 動物クラスのインスタンスを生成
 	const Dog *dog = new Dog();
 	Cat *cat = new Cat();
+
+	// コピーを生成
 	const Cat *copy_cat = new Cat(*cat);
 
+	// 猫の脳を取得
 	Brain *cat_brain = cat->getBrain();
 	Brain *copy_cat_brain = copy_cat->getBrain();
 
+	// 猫の脳にアイデアを保存
 	setIdeas(cat_brain, fantasticIdeas);
 
+	// 猫の脳のアイデアをすべて出力
 	putIdeas(cat_brain);
 
+	// 猫の脳のアイデアをランダムに出力
 	putIdeaByRandom(cat_brain);
+	// コピー先の無影響確認
 	putIdeaByRandom(copy_cat_brain);
 
 	delete dog;

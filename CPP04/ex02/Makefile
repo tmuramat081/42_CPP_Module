@@ -1,6 +1,7 @@
 NAME := a.out
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -Wconversion -pedantic -Wshadow -D LEAK_CHECK
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -Wconversion -pedantic -Wshadow
+#LEAKS:= -D LEAK_CHECK
 
 SRCS := main.cpp AAnimal.cpp Cat.cpp Dog.cpp Brain.cpp Constant.cpp
 OBJS := ${SRCS:.cpp=.o}
@@ -14,7 +15,7 @@ RED := \033[0;91m
 
 # Commands
 ${NAME}: ${OBJS}
-	@${CXX} ${CXXFLAGS} ${OBJS} -o $@
+	@${CXX} ${CXXFLAGS} ${LEAKS} ${OBJS} -o $@
 	@${PRINTF} "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}\n"
 
 #: Make executable file.
@@ -23,7 +24,7 @@ all: ${NAME}
 #: Remove all object files.
 clean:
 	@${RM} ${OBJS} ${DEPS}
-	@${PRINTF} "${RED}Cleaned up object files in $${NAME} ${DEFAULT}\n"
+	@${PRINTF} "${RED}Cleaned up object files in ${NAME} ${DEFAULT}\n"
 
 #: Remove all object and executable files.
 fclean:	clean

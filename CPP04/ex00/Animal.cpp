@@ -18,7 +18,7 @@ Animal::Animal(Animal &other)
 
 Animal Animal::operator=(const Animal &rhs)
 {
-	if (this != rhs)
+	if (this != &rhs)
 	{
 		this->type = rhs.type;
 	}
