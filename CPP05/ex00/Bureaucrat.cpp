@@ -1,29 +1,49 @@
 #include "Bureaucrat.hpp"
 
 // Constructors
-Bureaucrat::Bureaucrat()
-{
-	std::cout << "\e[0;33mDefault Constructor called of Bureaucrat\e[0m" << std::endl;
-}
+Bureaucrat::Bureaucrat(){}
 
-Bureaucrat::Bureaucrat(const Bureaucrat &copy)
+Bureaucrat::Bureaucrat(const std::string &name, const int grade): _name(name), _grade(grade)
 {
-	(void) copy;
-	std::cout << "\e[0;33mCopy Constructor called of Bureaucrat\e[0m" << std::endl;
+	if (_grade < 1)
+	{
+		throw Bureaucrat::GradeTooHighException();
+	}
+	else if (_grade > 150)
+	{
+		throw Bureaucrat::GradeTooLowException();
+	}
 }
-
 
 // Destructor
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "\e[0;31mDestructor called of Bureaucrat\e[0m" << std::endl;
 }
 
+// Getters / setters
+const std::string &Bureaucrat::getName() const
+{
+	return this->_name;
+}
+
+int Bureaucrat::getGrade() const
+{
+	return this->_grade;
+}
 
 // Operators
-Bureaucrat & Bureaucrat::operator=(const Bureaucrat &assign)
+Bureaucrat & Bureaucrat::operator=(const Bureaucrat &rhs)
 {
-	(void) assign;
+	if (this != &rhs)
+	{
+	}
 	return *this;
 }
 
+Bureaucrat::GradeTooHighException::GradeTooHighException(){}
+Bureaucrat::GradeTooHighException::~GradeTooHighException() throw(){}
+Bureaucrat::GradeTooHighException char* what() const {}
+
+Bureaucrat::GradeTooLowException::GradeTooLowException(){}
+Bureaucrat::GradeTooLowException::~GradeTooLowException() throw(){}
+Bureaucrat::GradeTooLowException char* what() const {}
