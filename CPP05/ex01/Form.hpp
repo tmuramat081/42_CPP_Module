@@ -19,8 +19,8 @@ class Form
 
 	private:
 		const std::string _name;
-		bool sign;
-		int _grade;
+		bool _is_signed;
+		const int _required_grade;
 
 };
 

@@ -1,15 +1,12 @@
 #include "Form.hpp"
 
 // Constructors
-Form::Form()
-{
-	std::cout << "\e[0;33mDefault Constructor called of Form\e[0m" << std::endl;
-}
+Form::Form(): _name("default"), _is_signed(false), _required_grade(100){}
 
-Form::Form(const Form &copy)
+Form::Form(const Form &other)
 {
-	(void) copy;
-	std::cout << "\e[0;33mCopy Constructor called of Form\e[0m" << std::endl;
+	this->_is_signed = other._is_signed;
+	this->_required_grade = other._required_grade;
 }
 
 
