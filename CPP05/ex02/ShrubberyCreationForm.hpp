@@ -11,7 +11,7 @@ class ShrubberyCreationForm : public AForm
 public:
 	// Constructors
 	ShrubberyCreationForm();
-	ShrubberyCreationForm(const std::string target);
+	ShrubberyCreationForm(const std::string &target);
 
 	// Destructor
 	virtual ~ShrubberyCreationForm();

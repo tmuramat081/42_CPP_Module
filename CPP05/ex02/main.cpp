@@ -1,5 +1,6 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 #define BLUE "\033[0;94m"
 #define GREEN "\033[0;92m"
@@ -13,19 +14,20 @@ void successfulCaseTest()
 	Bureaucrat b("Tom", 1);
 	std::cout << GREEN << b << DEFAULT << std::endl;
 
-	// 書類1
+	// 書類クラスを実体化
 	ShrubberyCreationForm f0("contract");
-	// 書類2
 	RobotomyRequestForm f1("contract");
+	PresidentialPardonForm f2("contract");
 
-	// 署名に成功する
+	// 署名と履行
 	f0.beSigned(b);
-
-	// 履行に成功する
 	f0.execute(b);
 
 	f1.beSigned(b);
 	f1.execute(b);
+
+	f2.beSigned(b);
+	f2.execute(b);
 
 }
 

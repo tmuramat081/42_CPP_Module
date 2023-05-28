@@ -3,7 +3,7 @@ CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic -Wshadow
 # LEAKS := -D LEAKS_CHECK
 
-SRCS := main.cpp Bureaucrat.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp AForm.cpp
+SRCS := main.cpp Bureaucrat.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp AForm.cpp
 OBJS := ${SRCS:.cpp=.o}
 
 # Print variables
