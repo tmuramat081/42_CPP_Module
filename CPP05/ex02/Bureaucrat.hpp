@@ -5,6 +5,8 @@
 #include <string>
 #include <exception>
 
+class AForm;
+
 class Bureaucrat
 {
 public:
@@ -22,6 +24,7 @@ public:
 	// Member functions
 	void incrementGrade();
 	void decrementGrade();
+	void signForm(const AForm &form);
 
 	// Getters / setters
 	const std::string &getName() const;
@@ -29,28 +32,22 @@ public:
 
 	class GradeTooHighException : public std::exception
 	{
-		std::string message;
-
+		static const std::string message;
 	public:
-		GradeTooHighException();
-		virtual ~GradeTooHighException() _NOEXCEPT;
-
-		const char *what() const _NOEXCEPT;
+    	~GradeTooHighException() throw();
+		const char *what() const throw();
 	};
 
 	class GradeTooLowException : public std::exception
 	{
-		std::string message;
-
+		static const std::string message;
 	public:
-		GradeTooLowException();
-		virtual ~GradeTooLowException() _NOEXCEPT;
-
-		const char *what() const _NOEXCEPT;
+    	~GradeTooLowException() throw();
+		const char *what() const throw();
 	};
 
 private:
-	const std::string _name;
+	std::string _name;
 	int _grade;
 };
 

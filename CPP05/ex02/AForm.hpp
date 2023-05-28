@@ -5,26 +5,28 @@
 #include <string>
 #include "Bureaucrat.hpp"
 
-class Form
+class AForm
 {
 public:
 	// Constructors
-	Form();
-	Form(const std::string &name, const int signableGrade, const int executableGrade);
-	Form(const Form &other);
+	AForm();
+	AForm(const std::string &name, const int signableGrade, const int executableGrade);
+	AForm(const AForm &other);
 
 	// Destructor
-	~Form();
+	virtual ~AForm() = 0;
 
 	// Operators
-	Form &operator=(const Form &assign);
+	AForm &operator=(const AForm &assign);
 
 	// Member functions
 	void beSigned(const Bureaucrat &bureaucrat);
+	virtual void execute(Bureaucrat const & executor) const = 0;
 
 	// Getters / setters
 	const std::string &getName() const;
 	int getSignableGrade() const;
+	int getExecutableGrade() const;
 	bool isSigned() const;
 
 	class GradeTooHighException : public std::exception
@@ -42,7 +44,7 @@ public:
 		const char *what() const throw();
 	};
 
-private:
+protected:
 	// 書類名
 	const std::string _name;
 	// 署名の有無
@@ -52,7 +54,5 @@ private:
 	// 履行可能な等級
 	const int _executableGrade;
 };
-
-std::ostream &operator<<(std::ostream &os, const Form form);
 
 #endif
