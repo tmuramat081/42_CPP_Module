@@ -28,8 +28,6 @@ void successfulCaseTest()
 	std::cout << GREEN;
 	std::cout << b;
 	std::cout << DEFAULT << std::endl;
-
-
 }
 
 void failureCaseTest1()
@@ -42,7 +40,8 @@ void failureCaseTest1()
 	catch (Bureaucrat::GradeTooHighException &e)
 	{
 		std::cout << RED;
-		std::cerr << "Caught exception: " << e.what();;
+		std::cerr << "Caught exception: " << e.what();
+		;
 		std::cout << DEFAULT << std::endl;
 	}
 	catch (...)
@@ -69,7 +68,6 @@ void failureCaseTest2()
 		std::cerr << "Caught unknown exception" << std::endl;
 	}
 }
-
 
 int main()
 {

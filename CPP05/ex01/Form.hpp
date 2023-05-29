@@ -30,15 +30,17 @@ public:
 	class GradeTooHighException : public std::exception
 	{
 		static const std::string message;
+
 	public:
-    	~GradeTooHighException() throw();
+		~GradeTooHighException() throw();
 		const char *what() const throw();
 	};
 	class GradeTooLowException : public std::exception
 	{
 		static const std::string message;
+
 	public:
-    	~GradeTooLowException() throw();
+		~GradeTooLowException() throw();
 		const char *what() const throw();
 	};
 

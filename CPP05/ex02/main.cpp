@@ -10,24 +10,24 @@
 
 void successfulCaseTest()
 {
-	// 役人
+	// 役人クラスを実体化
 	Bureaucrat b("Tom", 1);
 	std::cout << GREEN << b << DEFAULT << std::endl;
 
 	// 書類クラスを実体化
-	ShrubberyCreationForm f0("contract");
-	RobotomyRequestForm f1("contract");
-	PresidentialPardonForm f2("contract");
+	AForm *f0 = new ShrubberyCreationForm("Shrubbery_Creation");
+	AForm *f1 = new RobotomyRequestForm("Robotomy_Request");
+	AForm *f2 = new PresidentialPardonForm("Presidential_Pardon");
 
 	// 署名と履行
-	f0.beSigned(b);
-	f0.execute(b);
+	b.signForm(*f0);
+	b.executeForm(*f0);
 
-	f1.beSigned(b);
-	f1.execute(b);
+	b.signForm(*f1);
+	b.executeForm(*f1);
 
-	f2.beSigned(b);
-	f2.execute(b);
+	b.signForm(*f2);
+	b.executeForm(*f2);
 
 }
 

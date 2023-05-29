@@ -31,15 +31,12 @@ void successfulCaseTest()
 		f1.beSigned(b);
 		std::cout << f1 << std::endl;
 	}
-	catch(Form::GradeTooLowException &e)
+	catch (Form::GradeTooLowException &e)
 	{
 		std::cerr << RED << "Caught exception: " << e.what() << DEFAULT << std::endl;
 	}
 
 	b.signForm(f0);
-
-
-
 }
 
 int main()
