@@ -49,13 +49,13 @@ void Bureaucrat::signForm(AForm &form)
 {
 	if (form.isSigned() == true)
 	{
-		std::cout << RED << this->_name << " couldn't sign " << form.getName() << " because already signed." << DEFAULT << std::endl;
+		std::cout << this->_name << " couldn't sign " << form.getName() << " because already signed." << std::endl;
 		return ;
 	}
 	else if (form.getSignableGrade() < this->_grade)
 	{
-		std::cout << RED << this->_name << " couldn't sign " << form.getName();
-		std::cout << " because not enough grade." << DEFAULT << std::endl;
+		std::cout << this->_name << " couldn't sign " << form.getName();
+		std::cout << " because not enough grade." << std::endl;
 		return ;
 	}
 	std::cout << this->_name << " signed " << form.getName() << std::endl;
@@ -66,12 +66,12 @@ void Bureaucrat::executeForm(AForm const &form)
 {
 	if (form.isSigned() == false)
 	{
-		std::cout << RED << this->_name << " couldn't execute " << form.getName() << " because not signed." << DEFAULT << std::endl;
+		std::cout << this->_name << " couldn't execute " << form.getName() << " because not signed." << std::endl;
 		return ;
 	}
 	else if (form.getExecutableGrade() < this->_grade)
 	{
-		std::cout << RED <<this->_name << " couldn't execute " << form.getName() << " because not enough grade." << DEFAULT << std::endl;
+		std::cout << this->_name << " couldn't execute " << form.getName() << " because not enough grade." << std::endl;
 		return ;
 	}
 	std::cout << this->getName() <<  " executed " << form.getName() << std::endl;

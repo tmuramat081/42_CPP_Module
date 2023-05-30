@@ -9,39 +9,81 @@
 
 void successfulCaseTest()
 {
-	// 役人
+	// 役人クラスを実体化
 	Bureaucrat b("Tom", 50);
 	std::cout << GREEN << b << DEFAULT << std::endl;
 
-	// 書類1
+	// 書類クラスを実体化
 	Form f0("Sales Contract", 100, 50);
 	std::cout << BLUE << f0 << DEFAULT << std::endl;
-
-	// 書類2
 	Form f1("Employment Contract", 10, 50);
 	std::cout << BLUE << f1 << DEFAULT << std::endl;
 
 	// 署名に成功する
-	f0.beSigned(b);
+	b.signForm(f0);
 	std::cout << BLUE << f0 << DEFAULT << std::endl;
 
-	// 署名に失敗する
+	// 署名に失敗する（署名済みの場合・正常系）
+	b.signForm(f0);
+	std::cout << BLUE << f1 << DEFAULT << std::endl;
+
+	// 署名に失敗する（等級が未達の場合・正常系）
+	b.signForm(f1);
+	std::cout << BLUE << f1 << DEFAULT << std::endl;
+}
+
+void failureCaseTest1()
+{
+	// 書類クラスの不正な実体化（範囲外の等級）
 	try
 	{
-		f1.beSigned(b);
-		std::cout << f1 << std::endl;
+		Form f("Invalid Form", 151, 100);
 	}
 	catch (Form::GradeTooLowException &e)
 	{
 		std::cerr << RED << "Caught exception: " << e.what() << DEFAULT << std::endl;
 	}
+}
 
-	b.signForm(f0);
+void failureCaseTest2()
+{
+	// 書類クラスの不正な実体化（範囲外の等級）
+	try
+	{
+		Form f("Invalid Form", 0, 100);
+	}
+	catch (Form::GradeTooHighException &e)
+	{
+		std::cerr << RED << "Caught exception: " << e.what() << DEFAULT << std::endl;
+	}
+}
+
+void failureCaseTest3()
+{
+	// 役人クラスを実体化
+	Bureaucrat b("Tom", 50);
+	std::cout << GREEN << b << DEFAULT << std::endl;
+
+	// 書類クラスを実体化
+	Form f0("Invalid Contract", 10, 50);
+	std::cout << BLUE << f0 << DEFAULT << std::endl;
+
+	// 不正な署名（クラスを直接呼び出し、かつ等級が未達の場合・異常系）
+	try
+	{
+		f0.beSigned(b);
+	}
+	catch (Form::GradeTooLowException &e)
+	{
+		std::cerr << RED << "Caught exception: " << e.what() << DEFAULT << std::endl;
+	}
 }
 
 int main()
 {
 	successfulCaseTest();
-
+	failureCaseTest1();
+	failureCaseTest2();
+	failureCaseTest3();
 	return 0;
 }

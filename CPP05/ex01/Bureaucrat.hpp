@@ -49,7 +49,9 @@ public:
 	};
 
 private:
-	std::string _name;
+	// 名前
+	const std::string _name;
+	// 等級
 	int _grade;
 };
 

@@ -20,7 +20,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
 	if (!AForm::isSigned())
 	{
-		return ;
+		throw AForm::NotSignedException();
 	}
 	else if (executor.getGrade() > AForm::getExecutableGrade())
 	{
@@ -34,9 +34,22 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 		std::cerr << "Error: can't open " << filename << std::endl;
 		return ;
 	}
-	outFile << this->ASCII_TREE;
+	outFile << this->ASCII_BONSAI;
 	outFile.close();
 	std::cout << GREEN << filename << " is created." << DEFAULT << std::endl;
 }
 
-const std::string ShrubberyCreationForm::ASCII_TREE = "...........`....`...`...`...`...`...`...`.......................................\r\n.....`..`...`.`..`.`.`.`.``.`.``.```.``.`.```.``.``.`.`.........................\r\n...`...`.`.....`..`...`..`.`.`.`.`..``.`.`.`.`.`..`..`.`.`.`.`..`...............\r\n....`...`.``.`..`.``.``.`.`.``.``.``.``.```.```.``.``..`.`..`.....`..`..`.......\r\n..`..`..`..`.```.`.``.``````````````````````.````.``.``.`.``..``...`............\r\n.`.`.```.``.`.`````.```.````.``.```````````````````````````.``.``.`..`..........\r\n.`.`..`.``.````.`````````````````````````````````````.``.````.``.``.`.``.`......\r\n`.`.````.`````````````````````````````````````````````````.````.``.``.`.`.`.....\r\n`.``.``````.`````````````````````````````````````````````````````.``.`.`..``....\r\n``````.```````````````````````` `` ` `         ```````````````.````.``.``..`.``.\r\n.``.````````````````````` ``      ....((wwAkVUI+((..  ```````````````.`.``..`...\r\n`````````````````````` ` `  ` .(1zdwrZ0XY1odWkWHHXZwXXn... ````````.````.``.`.`.\r\n`.`````````````````` `` ``  `(+z111w2jIjwXWKzOOwXXHWkWWWdkS```````````.``.``...`\r\n``.`````````````````` ``   .jC1j21XWUy+wdXV+uwAdWXkZrXHHNQc` ````.``.`.`.`..`...\r\n```.``.``````````` ``` `  (OxzzUWSZUOVWXydSodWWHHHHkHWWWWHkd<````````.``.``.``..\r\n.````.``````````````` ` .(<uJZzZZZ9zdWHkXHHSWVWBdkHMWHKWWHHHD ````````.``..`..`.\r\n>.```````````````` `` .(dz1vuUAyv3jgAWHVVzUAH0XWHSwXXkdWWMHHe.........`.``.`...(\r\nI``.` ...```` ......,` ?vzAVwwCzwwddUSzwuAKHNWWQHwXMWHHdWWHHHWk0kAHHkOVwky&+.(Ow\r\nM8+++JwwXWSUI-O0XUdHHR->zOIJOC+wW0ZWmzjHkWHHMMNMMHHHHHMMHMHHwWAdWkHgHfywKWXXXOdk\r\nNMNywwwWk9ZOZwGWyXXWHqWkvI+jdwZOwzWkXUH0XSdWHMMXWHHMMNNWMgHHkdWWH@@HMMkWKkWNHHWM\r\nMNMHmkmQkQVkwWWHHVWHHHmH9+1zXU3XX9WHUdkXWHHMMHkHMMMMHHHg@HHHHWHHMHfWMMMMHHUWkWWU\r\nYM#Y\"YT\"B\"WBU9YWMMTMW96OIOXUkv1OdWXYHSvOVSWHH9WH7TUMHHHHHgHh(.(+wzjzrI<(((((<<<<\r\n<<<<88<?<?<?<<88<<<~~~<<<<<<<<<<<<<<<~_~~~(WD_~~~~_~~~~_~_~~~~_~~~~~~~~~~~~~:~~:\r\n~~~~~~~~~~~~~~~~<~<<<<<<<<<<<<<<<<<<?<88<<88<?77777777<<<<<<<<<<<<<<<<<<<<<<~<<~\r\n::::<<:<<~~~:~:~<<~~~~~~~~~_~~__~~~~~_~..._~.~.~~.~~_.._.~__~..~_____..~~.__~~~~\r\n(--(((((((-((-(-(+(<+<;;::<~~::~~____~~~~~~_~___~<<~<<<<~~~~~~~~~~_~~__~~~_~_~_:\r\n___~____~_~___~~~~~~~~~~~~~~~~_~~~~~~~~~~_~~~~~_~~~~~~_____~~::~<<<<<<<<<<<<<<<<";
+const std::string ShrubberyCreationForm::ASCII_BONSAI =
+        "       ,,,\n"
+        "      MMMM_    ,..,\n"
+        "        \"_ \\\"__\\\"MMMMM          ,...,\n"
+        " ,..., __.\\\" --\\\"    ,.,     _-\\\"MMMMMMM\n"
+        "MMMMMM\\\"___ \\\"_._   MMM\\\".\\\"\" _ \\\"\\\"\\\"\\\"\\\"\\\"\n"
+        " \\\"\\\"\\\"\\\"\\\"    \\\"\\\" , \\_.   \\\"_. .\\\"\n"
+        "        ,., _\\\"__ \\__./ .\\\"\n"
+        "       MMMMM_\\\"_  \\\"_    ./\n"
+        "        ''''      (    )\n"
+        " ._______________.-'____\\\"---._.\n"
+        "  \\                          /\n"
+        "   \\________________________/\n"
+        "   (_)                    (_)\n";

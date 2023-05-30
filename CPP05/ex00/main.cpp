@@ -9,25 +9,19 @@
 void successfulCaseTest()
 {
 	Bureaucrat b("Tom", 75);
-	std::cout << GREEN;
-	std::cout << b;
-	std::cout << DEFAULT << std::endl;
+	std::cout << GREEN << b << DEFAULT << std::endl;
 
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 74; i++)
 	{
 		b.incrementGrade();
 	}
-	std::cout << GREEN;
-	std::cout << b;
-	std::cout << DEFAULT << std::endl;
+	std::cout << GREEN << b << DEFAULT << std::endl;
 
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 149; i++)
 	{
 		b.decrementGrade();
 	}
-	std::cout << GREEN;
-	std::cout << b;
-	std::cout << DEFAULT << std::endl;
+	std::cout << GREEN << b << DEFAULT << std::endl;
 }
 
 void failureCaseTest1()
@@ -39,10 +33,7 @@ void failureCaseTest1()
 	}
 	catch (Bureaucrat::GradeTooHighException &e)
 	{
-		std::cout << RED;
-		std::cerr << "Caught exception: " << e.what();
-		;
-		std::cout << DEFAULT << std::endl;
+		std::cerr << RED << "Caught exception: " << e.what() << DEFAULT << std::endl;
 	}
 	catch (...)
 	{
@@ -59,9 +50,43 @@ void failureCaseTest2()
 	}
 	catch (Bureaucrat::GradeTooLowException &e)
 	{
-		std::cout << RED;
-		std::cerr << "Caught exception: " << e.what();
-		std::cout << DEFAULT << std::endl;
+		std::cerr << RED << "Caught exception: " << e.what() << DEFAULT << std::endl;
+	}
+	catch (...)
+	{
+		std::cerr << "Caught unknown exception" << std::endl;
+	}
+}
+
+void failureCaseTest3()
+{
+	try
+	{
+		Bureaucrat b("Tom", 1);
+		std::cout << b << std::endl;
+		b.incrementGrade();
+	}
+	catch (Bureaucrat::GradeTooHighException &e)
+	{
+		std::cerr << RED << "Caught exception: " << e.what() << DEFAULT << std::endl;
+	}
+	catch (...)
+	{
+		std::cerr << "Caught unknown exception" << std::endl;
+	}
+}
+
+void failureCaseTest4()
+{
+	try
+	{
+		Bureaucrat b("Tom", 150);
+		std::cout << b << std::endl;
+		b.decrementGrade();
+	}
+	catch (Bureaucrat::GradeTooLowException &e)
+	{
+		std::cerr << RED << "Caught exception: " << e.what() << DEFAULT << std::endl;
 	}
 	catch (...)
 	{
@@ -74,6 +99,8 @@ int main()
 	successfulCaseTest();
 	failureCaseTest1();
 	failureCaseTest2();
+	failureCaseTest3();
+	failureCaseTest4();
 
 	return 0;
 }

@@ -29,28 +29,28 @@ public:
 
 	class GradeTooHighException : public std::exception
 	{
-		std::string message;
+		static const std::string message;
 
 	public:
-		GradeTooHighException();
-		virtual ~GradeTooHighException() _NOEXCEPT;
+		virtual ~GradeTooHighException() throw();
 
-		const char *what() const _NOEXCEPT;
+		const char *what() const throw();
 	};
 
 	class GradeTooLowException : public std::exception
 	{
-		std::string message;
+		static const std::string message;
 
 	public:
-		GradeTooLowException();
-		virtual ~GradeTooLowException() _NOEXCEPT;
+		virtual ~GradeTooLowException() throw();
 
-		const char *what() const _NOEXCEPT;
+		const char *what() const throw();
 	};
 
 private:
+	// 名前
 	const std::string _name;
+	// 等級
 	int _grade;
 };
 

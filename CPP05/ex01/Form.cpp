@@ -67,6 +67,8 @@ bool Form::isSigned() const
 	return this->_isSigned;
 }
 
+const std::string Form::GradeTooHighException::message = "Grade is too high";
+
 Form::GradeTooHighException::~GradeTooHighException() throw() {}
 
 const char *Form::GradeTooHighException::what()const throw()
@@ -81,7 +83,6 @@ const char *Form::GradeTooLowException::what()const throw()
 	return this->message.c_str();
 }
 
-const std::string Form::GradeTooHighException::message = "Grade is too high";
 const std::string Form::GradeTooLowException::message = "Grade is too low";
 
 std::ostream &operator<<(std::ostream &os, const Form form)

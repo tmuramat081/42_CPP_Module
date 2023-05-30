@@ -20,7 +20,7 @@ public:
 	virtual void execute(Bureaucrat const &executor) const;
 
 private:
-	static const std::string ASCII_TREE;
+	static const std::string ASCII_BONSAI;
 };
 
 #endif

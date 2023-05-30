@@ -12,13 +12,13 @@ void PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
 	if (!AForm::isSigned())
 	{
-		return ;
+		throw AForm::NotSignedException();
 	}
 	else if (executor.getGrade() > AForm::getExecutableGrade())
 	{
 		throw AForm::GradeTooHighException();
 	}
-	std::cout << "\033[0;34m<< Listen up, <target>! The coolest guy in the universe – yeah, that\'s me, Zaphod Beeblebrox – is giving you a full, all-access pardon!  >>" << std::endl;
+	std::cout << "\033[0;34m<< Listen up, " << this->_name << "! The coolest guy in the universe – yeah, that\'s me, Zaphod Beeblebrox – is giving you a full, all-access pardon!  >>" << std::endl;
 	std::cout << ASCII_PRESIDENT << "\033[0m" << std::endl;
 }
 
