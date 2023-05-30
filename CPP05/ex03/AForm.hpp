@@ -29,6 +29,14 @@ public:
 	int getExecutableGrade() const;
 	bool isSigned() const;
 
+	class NotSignedException : public std::exception
+	{
+		static const std::string message;
+	public:
+		~NotSignedException() throw();
+		const char *what() const throw();
+	};
+
 	class GradeTooHighException : public std::exception
 	{
 		static const std::string message;
@@ -37,6 +45,7 @@ public:
 		~GradeTooHighException() throw();
 		const char *what() const throw();
 	};
+
 	class GradeTooLowException : public std::exception
 	{
 		static const std::string message;

@@ -15,10 +15,10 @@ public:
 	// Destructor
 	~Intern();
 
-	Intern &operator=(const Intern &assign);
+	Intern &operator=(const Intern &rhs);
 
 	// Member functions
-	void makeForm(const std::string &form, const std::string &target);
+	AForm *makeForm(const std::string &form, const std::string &target);
 
 private:
 	std::string _nameRepository[4];

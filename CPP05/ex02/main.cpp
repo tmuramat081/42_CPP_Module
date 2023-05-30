@@ -30,6 +30,10 @@ void successfulCaseTest1()
 	// 署名と履行：銀河系大統領の恩赦
 	b.signForm(*f2);
 	b.executeForm(*f2);
+
+	delete f0;
+	delete f1;
+	delete f2;
 }
 
 void successfulCaseTest2()
@@ -57,6 +61,10 @@ void successfulCaseTest2()
 	b.signForm(*f2);
 	// 履行失敗（未署名・正常系）
 	b.executeForm(*f2);
+
+	delete f0;
+	delete f1;
+	delete f2;
 }
 
 void failureCaseTest()
@@ -97,6 +105,10 @@ void failureCaseTest()
 	{
 		std::cerr << RED << "Caught exception: " << e.what() << DEFAULT << std::endl;
 	}
+
+	delete f0;
+	delete f1;
+	delete f2;
 }
 
 int main()
