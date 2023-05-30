@@ -36,8 +36,10 @@ AForm *Intern::makeForm(const std::string &form, const std::string &target)
 	{
 		if (this->_nameRepository[i] == form)
 		{
+			std::cout << "Create " << form << std::endl;
 			return this->_formRepository[i];
 		}
 	}
+	std::cout << "Not exist form." << std::endl;
 	return NULL;
 }

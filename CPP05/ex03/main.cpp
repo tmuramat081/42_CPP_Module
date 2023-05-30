@@ -11,12 +11,30 @@
 
 void successfulCaseTest()
 {
+	Bureaucrat b("Tom", 1);
 	Intern deNiro;
-	AForm *f;
+	AForm *f0;
+	AForm *f1;
+	AForm *f2;
+	AForm *f3;
 
-	f = deNiro.makeForm("robotomy request", "RoboCop");
+	f0 = deNiro.makeForm("shrubbery creation", "Castle");
+	f1 = deNiro.makeForm("robotomy request", "RoboCop");
+	f2 = deNiro.makeForm("presidential pardon", "A");
+	f3 = deNiro.makeForm("notexistform", "B");
 
-	delete f;
+	b.signForm(*f0);
+	b.executeForm(*f0);
+
+	b.signForm(*f1);
+	b.executeForm(*f1);
+
+	b.signForm(*f2);
+	b.executeForm(*f2);
+
+	delete f0;
+	delete f1;
+	delete f2;
 }
 
 int main()
