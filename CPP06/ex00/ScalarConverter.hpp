@@ -7,25 +7,27 @@
 class ScalarConverter
 {
 	public:
-		// Constructors
-		ScalarConverter();
-		ScalarConverter(const ScalarConverter &copy);
-
 		// Destructor
 		~ScalarConverter();
 
-		// Operators
-		ScalarConverter & operator=(const ScalarConverter &assign);
-
-		// Function Members
-		char convert(const std::string &param);
-		int convert(const std::string &param);
-		float convert(const std::string &param);
-		double convert(const std::string &param);
-
+		// Member functions
+		static void convert(const std::string &param);
 
 	private:
+		ScalarConverter();
 
+		ScalarConverter(const ScalarConverter &other);
+		ScalarConverter & operator=(const ScalarConverter &rhs);
+
+		static bool isChar(const std::string &param);
+		static bool isInt(const std::string &param);
+		static bool isFloat(const std::string &param);
+		static bool isDouble(const std::string &param);
+
+		static bool convertFromChar(const std::string &param);
+		static bool convertFromInt(const std::string &param);
+		static bool convertFromFloat(const std::string &param);
+		static bool convertFromDouble(const std::string &param);
 };
 
 #endif
