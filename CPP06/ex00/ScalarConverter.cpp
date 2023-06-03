@@ -22,13 +22,15 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &rhs)
 
 void ScalarConverter::convert(const std::string &param)
 {
+	t_scalar s;
+
 	if (isChar(param))
 	{
-		std::cout << param << std::endl;
+		s = convertFromChar(param.c_str()[0]);
 	}
 	else if (isInt(param))
 	{
-		std::cout << stoi(param) << std::endl;
+		s = convertFromInt(std::stoi(param));
 	}
 	else if (isFloat(param))
 	{
@@ -38,6 +40,48 @@ void ScalarConverter::convert(const std::string &param)
 	{
 		std::cout << stod(param) << std::endl;
 	}
+	std::cout << s << std::endl;
+}
+
+ScalarConverter::t_scalar ScalarConverter::convertFromChar(const char param)
+{
+	t_scalar s;
+
+	s.as_char = param;
+	s.as_int = static_cast<int>(param);
+	s.as_float = static_cast<float>(param);
+	s.as_double = static_cast<double>(param);
+	return s;
+}
+
+ScalarConverter::t_scalar ScalarConverter::convertFromInt(const int param)
+{
+	t_scalar s;
+
+	if (isprint(static_cast<char>(param)))
+	{
+		s.as_char = static_cast<char>(param);
+	}
+	else
+	{
+		s.as_char = "No displayable";
+	}
+	s.as_int = param;
+	s.as_float = static_cast<float>(param);
+	s.as_double = static_cast<double>(param);
+	return s;
+}
+
+ScalarConverter::t_scalar ScalarConverter::convertFromFloat(const float param)
+{
+	t_scalar s;
+
+	s.as_char = static_cast<char>(param);
+	s.as_int = static_cast<int>(param);
+	s.as_float = static_cast<float>(param);
+	s.as_double = static_cast<double>(param);
+	return s;
+
 }
 
 bool ScalarConverter::isChar(const std::string &param)
@@ -94,7 +138,11 @@ bool ScalarConverter::isDouble(const std::string &param)
 	}
 }
 
-bool ScalarConverter::convertFromChar(const std::string &param)
+std::ostream &operator<<(std::ostream &os, const ScalarConverter::t_scalar &s)
 {
-	std::cout << "char: " << c <<
+	std::cout << "char: " << s.as_char << std::endl;
+	std::cout << "int: " << s.as_int << std::endl;
+	std::cout << "float: " << s.as_float << std::endl;
+	std::cout << "double: " << s.as_double;
+	return os;
 }

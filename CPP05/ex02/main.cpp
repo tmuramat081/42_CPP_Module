@@ -119,3 +119,11 @@ int main()
 
 	return 0;
 }
+
+#ifdef LEAKS_CHECK
+__attribute__((destructor))
+void end()
+{
+	system("leaks -q a.out");
+}
+#endif

@@ -12,16 +12,16 @@
 void successfulCaseTest()
 {
 	Bureaucrat b("Tom", 1);
-	Intern deNiro;
+	Intern i;
 	AForm *f0;
 	AForm *f1;
 	AForm *f2;
 	AForm *f3;
 
-	f0 = deNiro.makeForm("shrubbery creation", "Castle");
-	f1 = deNiro.makeForm("robotomy request", "RoboCop");
-	f2 = deNiro.makeForm("presidential pardon", "A");
-	f3 = deNiro.makeForm("notexistform", "B");
+	f0 = i.makeForm("shrubbery creation", "Castle");
+	f1 = i.makeForm("robotomy request", "RoboCop");
+	f2 = i.makeForm("presidential pardon", "Arthur_Dent");
+	f3 = i.makeForm("not_exist", "undefined");
 
 	b.signForm(*f0);
 	b.executeForm(*f0);
@@ -35,6 +35,7 @@ void successfulCaseTest()
 	delete f0;
 	delete f1;
 	delete f2;
+	delete f3;
 }
 
 int main()
@@ -43,3 +44,12 @@ int main()
 
 	return 0;
 }
+
+#ifdef LEAKS_CHECK
+__attribute__((destructor))
+void end()
+{
+	system("leaks -q a.out");
+}
+#endif
+

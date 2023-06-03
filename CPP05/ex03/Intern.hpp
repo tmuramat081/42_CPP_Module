@@ -22,7 +22,12 @@ public:
 
 private:
 	std::string _nameRepository[4];
-	AForm *_formRepository[4];
+	typedef AForm *(Intern::*formPtr)(const std::string &target);
+	formPtr _formRepository[4];
+
+	AForm *generateShrubberyCreationForm(const std::string &target);
+	AForm *generateRobotomyRequestForm(const std::string &target);
+	AForm *generatePresidentialPardonForm(const std::string &target);
 };
 
 #endif
