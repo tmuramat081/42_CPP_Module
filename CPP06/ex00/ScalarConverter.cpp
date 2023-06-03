@@ -1,5 +1,6 @@
 #include "ScalarConverter.hpp"
 #include <cctype>
+#include <iomanip>
 
 // Constructors
 ScalarConverter::ScalarConverter() {}
@@ -24,7 +25,12 @@ void ScalarConverter::convert(const std::string &param)
 {
 	t_scalar s;
 
-	if (isChar(param))
+	if (param == "nan")
+	{
+		s =
+
+	}
+	else if (isChar(param))
 	{
 		s = convertFromChar(param.c_str()[0]);
 	}
@@ -34,11 +40,11 @@ void ScalarConverter::convert(const std::string &param)
 	}
 	else if (isFloat(param))
 	{
-		std::cout << stof(param) << std::endl;
+		s = convertFromFloat(std::stof(param));
 	}
 	else if (isDouble(param))
 	{
-		std::cout << stod(param) << std::endl;
+		s = convertFromDouble(std::stod(param));
 	}
 	std::cout << s << std::endl;
 }
@@ -56,16 +62,11 @@ ScalarConverter::t_scalar ScalarConverter::convertFromChar(const char param)
 
 ScalarConverter::t_scalar ScalarConverter::convertFromInt(const int param)
 {
-	t_scalar s;
+	t_scalar ss;
 
-	if (isprint(static_cast<char>(param)))
-	{
-		s.as_char = static_cast<char>(param);
-	}
-	else
-	{
-		s.as_char = "No displayable";
-	}
+	std::stringstream ss;
+	ss << static_cast<char>(param);
+	s.as_int = ss.str();
 	s.as_int = param;
 	s.as_float = static_cast<float>(param);
 	s.as_double = static_cast<double>(param);
@@ -78,10 +79,20 @@ ScalarConverter::t_scalar ScalarConverter::convertFromFloat(const float param)
 
 	s.as_char = static_cast<char>(param);
 	s.as_int = static_cast<int>(param);
-	s.as_float = static_cast<float>(param);
+	s.as_float = param;
 	s.as_double = static_cast<double>(param);
 	return s;
+}
 
+ScalarConverter::t_scalar ScalarConverter::convertFromDouble(const double param)
+{
+	t_scalar s;
+
+	s.as_char = static_cast<char>(param);
+	s.as_int = static_cast<int>(param);
+	s.as_float = static_cast<float>(param);
+	s.as_double = param;
+	return s;
 }
 
 bool ScalarConverter::isChar(const std::string &param)
@@ -140,9 +151,17 @@ bool ScalarConverter::isDouble(const std::string &param)
 
 std::ostream &operator<<(std::ostream &os, const ScalarConverter::t_scalar &s)
 {
-	std::cout << "char: " << s.as_char << std::endl;
+	std::cout << "char: ";
+	if (std::isprint(s.as_char))
+	{
+		std::cout << "'" << s.as_char << "'" << std::endl;
+	}
+	else
+	{
+		std::cout << "Non displayable" << std::endl;
+	}
 	std::cout << "int: " << s.as_int << std::endl;
-	std::cout << "float: " << s.as_float << std::endl;
-	std::cout << "double: " << s.as_double;
+	std::cout << "float: " << std::fixed << std::setprecision(1) << s.as_float << "f" << std::endl;
+	std::cout << "double: " << std::fixed << std::setprecision(1) << s.as_double;
 	return os;
 }

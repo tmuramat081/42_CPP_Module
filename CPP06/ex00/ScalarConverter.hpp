@@ -14,11 +14,11 @@ public:
 	static void convert(const std::string &param);
 	typedef struct s_scalar
 	{
-		char as_char;
-		int as_int;
-		float as_float;
-		double as_double;
-	}	t_scalar;
+		std::string as_char;
+		std::string as_int;
+		std::string as_float;
+		std::string as_double;
+	} t_scalar;
 
 private:
 	ScalarConverter();
@@ -36,10 +36,9 @@ private:
 	static t_scalar convertFromChar(const char param);
 	static t_scalar convertFromInt(const int param);
 	static t_scalar convertFromFloat(const float param);
-	static t_scalar convertFromDouble(const std::string &param);
+	static t_scalar convertFromDouble(const double param);
 };
 
 std::ostream &operator<<(std::ostream &os, const ScalarConverter::t_scalar &s);
 
 #endif
-
