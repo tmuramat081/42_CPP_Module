@@ -6,7 +6,7 @@
 #define RED "\033[0;91m"
 #define DEFAULT "\033[0;39m"
 
-DiamondTrap::DiamondTrap(const std::string &name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FlagTrap(name), _name(name)
+DiamondTrap::DiamondTrap(const std::string &name) : ClapTrap(name), ScavTrap(name), FlagTrap(name), _name(name)
 {
 	this->_hitPoint = 100;
 	this->_energyPoint = 50;

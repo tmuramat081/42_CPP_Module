@@ -1,6 +1,7 @@
 #include "ScalarConverter.hpp"
 #include <cctype>
 #include <iomanip>
+#include <sstream>
 
 // Constructors
 ScalarConverter::ScalarConverter() {}
@@ -25,12 +26,7 @@ void ScalarConverter::convert(const std::string &param)
 {
 	t_scalar s;
 
-	if (param == "nan")
-	{
-		s =
-
-	}
-	else if (isChar(param))
+	if (isChar(param))
 	{
 		s = convertFromChar(param.c_str()[0]);
 	}
@@ -62,14 +58,20 @@ ScalarConverter::t_scalar ScalarConverter::convertFromChar(const char param)
 
 ScalarConverter::t_scalar ScalarConverter::convertFromInt(const int param)
 {
-	t_scalar ss;
-
+	t_scalar s;
 	std::stringstream ss;
+
 	ss << static_cast<char>(param);
+	s.as_char = ss.str();
+
+	ss << static_cast<int>(param);
 	s.as_int = ss.str();
-	s.as_int = param;
-	s.as_float = static_cast<float>(param);
-	s.as_double = static_cast<double>(param);
+
+	ss << static_cast<float>(param);
+	s.as_float = ss.str();
+
+	ss << static_cast<double>(param);
+	s.as_double = ss.str();
 	return s;
 }
 
@@ -151,17 +153,9 @@ bool ScalarConverter::isDouble(const std::string &param)
 
 std::ostream &operator<<(std::ostream &os, const ScalarConverter::t_scalar &s)
 {
-	std::cout << "char: ";
-	if (std::isprint(s.as_char))
-	{
-		std::cout << "'" << s.as_char << "'" << std::endl;
-	}
-	else
-	{
-		std::cout << "Non displayable" << std::endl;
-	}
+	std::cout << "char: " << s.as_char << std::endl;
 	std::cout << "int: " << s.as_int << std::endl;
-	std::cout << "float: " << std::fixed << std::setprecision(1) << s.as_float << "f" << std::endl;
-	std::cout << "double: " << std::fixed << std::setprecision(1) << s.as_double;
+	std::cout << "float: " << std::fixed << s.as_float << std::endl;
+	std::cout << "double: " << std::fixed << s.as_double;
 	return os;
 }
