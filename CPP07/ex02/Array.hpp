@@ -18,7 +18,7 @@ public:
 
 	// Operator
 	Array &operator=(const Array &rhs);
-	T &operator[](T index);
+	T &operator[](size_t index);
 
 	// Member functions
 	size_t size() const;
