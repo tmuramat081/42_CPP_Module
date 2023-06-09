@@ -26,6 +26,7 @@ private:
 	ScalarConverter(const ScalarConverter &other);
 	ScalarConverter &operator=(const ScalarConverter &rhs);
 
+	static bool isInvalid(const std::string &param);
 	static bool isChar(const std::string &param);
 	static bool isInt(const std::string &param);
 	static bool isFloat(const std::string &param);

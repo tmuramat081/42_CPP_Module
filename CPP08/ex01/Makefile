@@ -3,7 +3,7 @@ CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic -Wshadow
 # LEAKS := -D LEAKS_CHECK
 
-SRCS := main.cpp
+SRCS := main.cpp Span.cpp
 OBJS := ${SRCS:.cpp=.o}
 
 # Print variables

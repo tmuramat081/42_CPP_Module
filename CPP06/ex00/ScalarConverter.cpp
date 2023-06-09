@@ -26,7 +26,11 @@ void ScalarConverter::convert(const std::string &param)
 {
 	t_scalar s;
 
-	if (isChar(param))
+	if (isInvalid(param))
+	{
+
+	}
+	else if (isChar(param))
 	{
 		s = convertFromChar(param.c_str()[0]);
 	}
@@ -95,6 +99,15 @@ ScalarConverter::t_scalar ScalarConverter::convertFromDouble(const double param)
 	s.as_float = static_cast<float>(param);
 	s.as_double = param;
 	return s;
+}
+
+bool ScalarConverter::isInvalid(const std::string &param)
+{
+
+	if (param == "inf" || param == "inff" || param == "")
+	{
+
+	}
 }
 
 bool ScalarConverter::isChar(const std::string &param)
