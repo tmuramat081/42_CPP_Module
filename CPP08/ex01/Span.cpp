@@ -1,4 +1,5 @@
 #include "Span.hpp"
+#include <limits>
 
 // Constructors
 Span::Span() : _n(0) {}
@@ -28,29 +29,38 @@ size_t Span::getSize() const
 
 void Span::addNumber(const int number)
 {
-	if (this->getSize() + 1 == _n)
+	if (this->getSize() == _n)
 	{
-		return;
+		throw std::length_error("Maximum capacity of data reached");
 	}
 	this->_numbers.insert(number);
 }
 
 int Span::shortestSpan() const
 {
+	if (this->getSize() < 2)
+	{
+		throw std::range_error("Not enough elements in data for comparison");
+	}
 	std::multiset<int>::const_iterator first = _numbers.begin();
 	std::multiset<int>::const_iterator second = _numbers.begin();
 	++second;
 
-	int min = 0;
+	int span = std::numeric_limits<int>::max();
 	for (; second != _numbers.cend(); first++, second++)
 	{
-		min = std::max(min, (*second - *first));
+		// std::cout << *first << ", " << *second << std::endl;
+		span = std::min(span, (*second - *first));
 	}
-	return min;
+	return span;
 }
 
 int Span::longestSpan() const
 {
+	if (this->getSize() < 2)
+	{
+		throw std::range_error("Not enough elements in data for comparison");
+	}
 	int first_value = *_numbers.begin();
 	int last_value = *_numbers.rbegin();
 
