@@ -15,11 +15,13 @@ static inline void trimSpace(std::string &s)
 
 void calculateValue(std::string filename)
 {
+	// DBのマスタを読み込む
 	BitcoinExchange be("./data.csv");
 
+	// 入力ファイルを開く
 	std::fstream file(filename);
 
-	// 先頭行をスキップする
+	// 先頭の一行をスキップする
 	std::string line;
 	std::getline(file, line);
 
@@ -28,23 +30,19 @@ void calculateValue(std::string filename)
 		// 文字列を分割
 		std::stringstream ss(line);
 		std::string date, value;
-		if (std::getline(ss, date, '|') && std::getline(ss, value))
+		std::getline(ss, date, '|');
+		std::getline(ss, value);
+
+		// 前後の空白をトリム
+		trimSpace(date);
+		trimSpace(value);
+		try
 		{
-			// 前後の空白をトリム
-			trimSpace(date);
-			trimSpace(value);
-			try
-			{
-				be.calculateValue(date, std::stod(value));
-			}
-			catch(std::exception &e)
-			{
-				std::cerr << "Error: " << e.what() << std::endl;
-			}
+			be.calculateValue(date, std::stod(value));
 		}
-		else
+		catch(std::exception &e)
 		{
-			throw std::
+			std::cerr << "Error: " << e.what() << std::endl;
 		}
 	}
 }
