@@ -18,12 +18,16 @@ public:
 	// Operators
 	BitcoinExchange &operator=(const BitcoinExchange &rhs);
 
-	void calculateValue(const std::string &date, const double value);
+	// Member functions
+	static inline void trimSpace(std::string &s);
+	void calculateValues(const std::string &filename);
 
 private:
 	BitcoinExchange();
 	std::map<std::string, double> _rates;
-	void loadRates(const std::string &filename);
+	void loadRatesMaster(const std::string &filename);
+	void calculateValue(const std::string &date, const double value);
+
 };
 
 #endif
