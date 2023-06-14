@@ -26,6 +26,10 @@ RPN &RPN::operator=(const RPN &rhs)
 
 int RPN::calculate(const std::string &s)
 {
+	if (s.empty())
+	{
+		throw std::invalid_argument("Invalid expression");
+	}
 	std::istringstream iss(s);
 	std::string token;
 
