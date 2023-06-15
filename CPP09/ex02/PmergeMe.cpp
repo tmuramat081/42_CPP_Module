@@ -1,6 +1,7 @@
 #include "PmergeMe.hpp"
 #include <utility>
 #include <queue>
+#include <deque>
 
 // Constructors
 PmergeMe::PmergeMe() {}
@@ -40,7 +41,7 @@ void PmergeMe::sort(int *&elems, size_t len)
 
 	if (len & 1)
 	{
-		individual = elems[len];
+		individual = elems[len-1];
 		size = len - 1;
 	}
 
@@ -59,26 +60,23 @@ void PmergeMe::sort(int *&elems, size_t len)
 	// std::cout << _pq << std::endl;
 
 	// 二分法でペアの大きい値をマージする
-	std::vector<int> list;
-	list.reserve(len);
+	std::deque<int> list;
 
 	while (!_pq.empty())
 	{
 		std::pair<int, int> p = _pq.top();
 		_pq.pop();
-		list.push_back(p.first);
-		std::vector<int>::iterator it = std::lower_bound(list.begin(), list.end(), p.second);
+		list.push_front(p.first);
+		std::deque<int>::iterator it = std::lower_bound(list.begin(), list.end(), p.second);
 		list.insert(it, p.second);
-		std::cout << "After insertion: ";
-for (size_t i = 0; i < list.size(); i++) {
-    std::cout << list[i] << " ";
-}
-std::cout << std::endl;
 	}
-	std::cout << list << std::endl;
-	for (size_t i = 0; i < len; i++)
+	if (len & 1)
 	{
-		elems[i] = list[i];
+		std::deque<int>::iterator it = std::lower_bound(list.begin(), list.end(), individual);
+		list.insert(it, individual);
+	}
+	for (size_t i = 0; i < len; i++) {
+ 		elems[i] = list[i];
 	}
 }
 
