@@ -33,9 +33,9 @@ struct PmergeMe::comparePair
 	}
 };
 
-void PmergeMe::sort(int *&elems, size_t len)
+void PmergeMe::sortByPqueue(int *&elems, size_t len)
 {
-	// 奇数の場合は最後の要素を別に持つ
+	// 奇数の場合は余剰要素を別に持つ
 	int individual;
 	size_t size = len;
 
@@ -48,35 +48,60 @@ void PmergeMe::sort(int *&elems, size_t len)
 	// ペアの要素に分割する
 	for (size_t i = 0, j = 0; i < size; i += 2, ++j)
 	{
-		int first = elems[i], second = elems[i + 1];
-		// ペアの小さい値が先になるように交換する
-		if (first > second)
-			std::swap(first, second);
-		std::pair<int, int> p = std::make_pair(first, second);
-		// 優先度付きキューに格納する
-		this->_pq.push(p);
+		int& first = elems[i], second = elems[i + 1];
+		// ペアの要素をソートし、大きい要素を小さい要素の数列にマージする
+			_pq.push(first);
+		if (first < second) {
+			_pq.push(second);
+		} else {
+			_pq.push(second);
+			_pq.push(first);
+		}
 	}
-
-	// std::cout << _pq << std::endl;
-
-	// 二分法でペアの大きい値をマージする
-	std::deque<int> list;
-
-	while (!_pq.empty())
-	{
-		std::pair<int, int> p = _pq.top();
-		_pq.pop();
-		list.push_front(p.first);
-		std::deque<int>::iterator it = std::lower_bound(list.begin(), list.end(), p.second);
-		list.insert(it, p.second);
-	}
+	//　余剰要素をマージする
 	if (len & 1)
 	{
-		std::deque<int>::iterator it = std::lower_bound(list.begin(), list.end(), individual);
-		list.insert(it, individual);
+		_pq.push(individual);
 	}
-	for (size_t i = 0; i < len; i++) {
- 		elems[i] = list[i];
+	for (size_t i = 0; i < len; i++)
+	{
+		elems[i] = _pq.top(); _pq.pop();
+	}
+}
+
+void PmergeMe::sortByVector(int *&elems, size_t len)
+{
+	// 奇数の場合は余剰要素を別に持つ
+	int individual;
+	size_t size = len;
+
+	if (len & 1)
+	{
+		individual = elems[len-1];
+		size = len - 1;
+	}
+
+	// ペアの要素に分割する
+	for (size_t i = 0, j = 0; i < size; i += 2, ++j)
+	{
+		int& first = elems[i], second = elems[i + 1];
+		// ペアの要素をソートし、大きい要素を小さい要素の数列にマージする
+		if (first < second) {
+			_pq.push(first);
+			_pq.push(second);
+		} else {
+			_pq.push(second);
+			_pq.push(first);
+		}
+	}
+	//　余剰要素をマージする
+	if (len & 1)
+	{
+		_pq.push(individual);
+	}
+	for (size_t i = 0; i < len; i++)
+	{
+		elems[i] = _pq.top(); _pq.pop();
 	}
 }
 

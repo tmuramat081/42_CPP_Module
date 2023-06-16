@@ -19,14 +19,13 @@ public:
 
 	// Operators
 	PmergeMe &operator=(const PmergeMe &rhs);
-	void sort(int* &elems, size_t len);
+	void sortByVector(int* &elems, size_t len);
+	void sortByDeque(int* &elems, size_t len);
 	struct comparePair;
 
 private:
-	void sortOnePair(std::pair<int, int> &p);
-	void insertionPairs(std::priority_queue<std::pair<int, int> > p, size_t len);
-	void insert(std::pair<int, int> &p, std::priority_queue<std::pair<int, int> > ps, size_t len);
-	std::priority_queue<std::pair<int, int> > _pq;
+	std::vector<int> _vec;
+	std::deque<int> _deq;
 };
 
 std::ostream& operator<<(std::ostream& os, const std::pair<int, int>& p);
