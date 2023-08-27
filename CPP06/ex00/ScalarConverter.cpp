@@ -2,6 +2,10 @@
 #include <cctype>
 #include <iomanip>
 #include <sstream>
+#include <string>
+#include <limits>
+#include <cmath>
+#include "Scalar.hpp"
 
 // Constructors
 ScalarConverter::ScalarConverter() {}
@@ -22,153 +26,75 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &rhs)
 	return *this;
 }
 
-void ScalarConverter::convert(const std::string &param)
-{
-	t_scalar s;
+Scalar ScalarConverter::convert(const std::string &param)
+{;
+	Scalar s;
 
-	if (isInvalid(param))
+	// char, int, float, double
+	if (isChar(param))
 	{
-
-	}
-	else if (isChar(param))
-	{
-		s = convertFromChar(param.c_str()[0]);
+		char charVal = param[0];
+		s.as_char = charVal;
+		s.as_int = static_cast<int>(charVal);
+		s.as_float = static_cast<float>(charVal);
+		s.as_double = static_cast<double>(charVal);
 	}
 	else if (isInt(param))
 	{
-		s = convertFromInt(std::stoi(param));
+		int intVal = std::atoi(param.c_str());
+		s.as_char =  static_cast<char>(intVal);
+		s.as_int = intVal;
+		s.as_float = static_cast<float>(intVal);
+		s.as_double = static_cast<double>(intVal);
 	}
 	else if (isFloat(param))
 	{
-		s = convertFromFloat(std::stof(param));
+		float floatVal = static_cast<float>(std::atof(param.c_str()));
+		s.as_char =  static_cast<char>(floatVal);
+		s.as_int = static_cast<int>(floatVal);
+		s.as_float = floatVal;
+		s.as_double = static_cast<double>(floatVal);
 	}
 	else if (isDouble(param))
 	{
-		s = convertFromDouble(std::stod(param));
+		double doubleVal = std::atof(param.c_str());
+		s.as_char =  static_cast<char>(doubleVal);
+		s.as_int = static_cast<int>(doubleVal);
+		s.as_float = static_cast<float>(doubleVal);
+		s.as_double = doubleVal;
 	}
-	std::cout << s << std::endl;
-}
-
-ScalarConverter::t_scalar ScalarConverter::convertFromChar(const char param)
-{
-	t_scalar s;
-
-	s.as_char = param;
-	s.as_int = static_cast<int>(param);
-	s.as_float = static_cast<float>(param);
-	s.as_double = static_cast<double>(param);
+	else
+	{
+		s.char_possible = s.int_possible = s.double_possible = s.float_possible = false;
+	}
 	return s;
 }
 
-ScalarConverter::t_scalar ScalarConverter::convertFromInt(const int param)
+bool ScalarConverter::isChar(const std::string &value)
 {
-	t_scalar s;
-	std::stringstream ss;
-
-	ss << static_cast<char>(param);
-	s.as_char = ss.str();
-
-	ss << static_cast<int>(param);
-	s.as_int = ss.str();
-
-	ss << static_cast<float>(param);
-	s.as_float = ss.str();
-
-	ss << static_cast<double>(param);
-	s.as_double = ss.str();
-	return s;
+	return value.length() == 1 && !std::isdigit(value[0]);
 }
 
-ScalarConverter::t_scalar ScalarConverter::convertFromFloat(const float param)
+bool ScalarConverter::isInt(const std::string &value)
 {
-	t_scalar s;
-
-	s.as_char = static_cast<char>(param);
-	s.as_int = static_cast<int>(param);
-	s.as_float = param;
-	s.as_double = static_cast<double>(param);
-	return s;
+	std::istringstream iss(value);
+	int intVal;
+	iss >> intVal;
+	return !iss.fail() && iss.eof();
 }
 
-ScalarConverter::t_scalar ScalarConverter::convertFromDouble(const double param)
+bool ScalarConverter::isFloat(const std::string &value)
 {
-	t_scalar s;
-
-	s.as_char = static_cast<char>(param);
-	s.as_int = static_cast<int>(param);
-	s.as_float = static_cast<float>(param);
-	s.as_double = param;
-	return s;
+	std::istringstream iss(value);
+	float intVal;
+	iss >> intVal;
+	return !iss.fail() && iss.eof();
 }
 
-bool ScalarConverter::isInvalid(const std::string &param)
+bool ScalarConverter::isDouble(const std::string &value)
 {
-
-	if (param == "inf" || param == "inff" || param == "")
-	{
-
-	}
-}
-
-bool ScalarConverter::isChar(const std::string &param)
-{
-	return (param.length() == 1 && std::isalpha(param.c_str()[0]));
-}
-
-bool ScalarConverter::isInt(const std::string &param)
-{
-	size_t pos;
-
-	try
-	{
-		std::stoi(param, &pos);
-		return param.length() == pos;
-	}
-	catch (...)
-	{
-		return false;
-	}
-}
-
-bool ScalarConverter::isFloat(const std::string &param)
-{
-	size_t pos;
-
-	if (param.back() != 'f')
-	{
-		return false;
-	}
-	try
-	{
-		std::stof(param, &pos);
-		return param.length() == pos + 1;
-	}
-	catch (...)
-	{
-		return false;
-	}
-}
-
-bool ScalarConverter::isDouble(const std::string &param)
-{
-	size_t pos;
-
-	try
-	{
-		std::stod(param, &pos);
-		return param.length() == pos;
-	}
-	catch (...)
-	{
-		return false;
-	}
-}
-
-std::ostream &operator<<(std::ostream &os, const ScalarConverter::t_scalar &s)
-{
-	std::cout << "char: " << s.as_char << std::endl;
-	std::cout << "int: " << s.as_int << std::endl;
-	std::cout << "float: " << std::fixed << s.as_float << std::endl;
-	std::cout << "double: " << std::fixed << s.as_double;
-	return os;
+	std::istringstream iss(value);
+	double intVal;
+	iss >> intVal;
+	return !iss.fail() && iss.eof();
 }

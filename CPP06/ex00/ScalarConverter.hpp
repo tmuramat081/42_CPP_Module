@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "Scalar.hpp"
 
 class ScalarConverter
 {
@@ -11,14 +12,7 @@ public:
 	~ScalarConverter();
 
 	// Member functions
-	static void convert(const std::string &param);
-	typedef struct s_scalar
-	{
-		std::string as_char;
-		std::string as_int;
-		std::string as_float;
-		std::string as_double;
-	} t_scalar;
+	static Scalar convert(const std::string &param);
 
 private:
 	ScalarConverter();
@@ -26,20 +20,15 @@ private:
 	ScalarConverter(const ScalarConverter &other);
 	ScalarConverter &operator=(const ScalarConverter &rhs);
 
-	static bool isInvalid(const std::string &param);
 	static bool isChar(const std::string &param);
 	static bool isInt(const std::string &param);
 	static bool isFloat(const std::string &param);
 	static bool isDouble(const std::string &param);
 
-	static void putScalarParams(t_scalar s);
-
-	static t_scalar convertFromChar(const char param);
-	static t_scalar convertFromInt(const int param);
-	static t_scalar convertFromFloat(const float param);
-	static t_scalar convertFromDouble(const double param);
+	static std::string convertToChar(const std::string &param);
+	static std::string convertInt(const std::string &param);
+	static std::string convertFloat(const std::string &param);
+	static std::string convertDouble(const std::string &param);
 };
-
-std::ostream &operator<<(std::ostream &os, const ScalarConverter::t_scalar &s);
 
 #endif

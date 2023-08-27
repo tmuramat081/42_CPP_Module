@@ -1,9 +1,9 @@
-NAME := a.out
+NAME := convert
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -Wconversion -pedantic -Wshadow
 # LEAKS := -D LEAKS_CHECK
 
-SRCS := main.cpp ScalarConverter.cpp
+SRCS := main.cpp ScalarConverter.cpp Scalar.cpp
 OBJS := ${SRCS:.cpp=.o}
 
 # Print variables
