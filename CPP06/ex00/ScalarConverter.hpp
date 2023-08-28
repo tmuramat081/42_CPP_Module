@@ -24,11 +24,6 @@ private:
 	static bool isInt(const std::string &param);
 	static bool isFloat(const std::string &param);
 	static bool isDouble(const std::string &param);
-
-	static std::string convertToChar(const std::string &param);
-	static std::string convertInt(const std::string &param);
-	static std::string convertFloat(const std::string &param);
-	static std::string convertDouble(const std::string &param);
 };
 
 #endif

@@ -1,8 +1,34 @@
 #include "Scalar.hpp"
 #include <iomanip>
+#include <typeinfo>
 
 Scalar::Scalar(): char_possible(true), int_possible(true), float_possible(true), double_possible(true)
 {
+}
+
+Scalar::~Scalar()
+{
+}
+
+Scalar::Scalar(const Scalar &other)
+{
+	*this = other;
+}
+
+Scalar &Scalar::operator=(const Scalar &rhs)
+{
+	if (this != &rhs)
+	{
+		char_possible = rhs.char_possible;
+		int_possible = rhs.int_possible;
+		float_possible = rhs.float_possible;
+		double_possible = rhs.double_possible;
+		as_char = rhs.as_char;
+		as_int = rhs.as_int;
+		as_float = rhs.as_float;
+		as_double = rhs.as_double;
+	}
+	return *this;
 }
 
 std::ostream &operator<<(std::ostream &os, const Scalar &scalar)
@@ -41,3 +67,5 @@ std::ostream &operator<<(std::ostream &os, const Scalar &scalar)
 
 	return os;
 }
+
+

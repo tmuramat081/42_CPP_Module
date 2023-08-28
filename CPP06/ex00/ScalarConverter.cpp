@@ -26,6 +26,7 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &rhs)
 	return *this;
 }
 
+
 Scalar ScalarConverter::convert(const std::string &param)
 {;
 	Scalar s;
@@ -34,34 +35,22 @@ Scalar ScalarConverter::convert(const std::string &param)
 	if (isChar(param))
 	{
 		char charVal = param[0];
-		s.as_char = charVal;
-		s.as_int = static_cast<int>(charVal);
-		s.as_float = static_cast<float>(charVal);
-		s.as_double = static_cast<double>(charVal);
+		s.setValues(charVal);
 	}
 	else if (isInt(param))
 	{
 		int intVal = std::atoi(param.c_str());
-		s.as_char =  static_cast<char>(intVal);
-		s.as_int = intVal;
-		s.as_float = static_cast<float>(intVal);
-		s.as_double = static_cast<double>(intVal);
+		s.setValues(intVal);
 	}
 	else if (isFloat(param))
 	{
 		float floatVal = static_cast<float>(std::atof(param.c_str()));
-		s.as_char =  static_cast<char>(floatVal);
-		s.as_int = static_cast<int>(floatVal);
-		s.as_float = floatVal;
-		s.as_double = static_cast<double>(floatVal);
+		s.setValues(floatVal);
 	}
 	else if (isDouble(param))
 	{
 		double doubleVal = std::atof(param.c_str());
-		s.as_char =  static_cast<char>(doubleVal);
-		s.as_int = static_cast<int>(doubleVal);
-		s.as_float = static_cast<float>(doubleVal);
-		s.as_double = doubleVal;
+		s.setValues(doubleVal);
 	}
 	else
 	{
@@ -98,3 +87,5 @@ bool ScalarConverter::isDouble(const std::string &value)
 	iss >> intVal;
 	return !iss.fail() && iss.eof();
 }
+
+

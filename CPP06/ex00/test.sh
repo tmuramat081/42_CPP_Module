@@ -53,18 +53,18 @@ float: 127.0f
 double: 127.0"
 
 # INT_MIN
-run_test "-2147483647" \
+run_test "-2147483648" \
 "char: impossible
-int: 127
-float: 127.0f
-double: 127.0"
+int: -2147483648
+float: -2147483648.0f
+double: -2147483648.0"
 
 # INT_MAX
 run_test "2147483647" \
 "char: impossible
-int: 127
-float: 127.0f
-double: 127.0"
+int: 2147483647
+float: 2147483647.0f
+double: 2147483647.0"
 
 # テストケース2
 run_test "nan" \
