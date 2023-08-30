@@ -1,6 +1,7 @@
 #include "ScalarConverter.hpp"
 #include "Scalar.hpp"
 #include <iostream>
+#include <cfloat>
 
 int main (int ac, char **av)
 {

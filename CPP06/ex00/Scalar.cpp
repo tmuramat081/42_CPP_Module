@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <typeinfo>
 
-Scalar::Scalar(): char_possible(true), int_possible(true), float_possible(true), double_possible(true)
+Scalar::Scalar(): char_possible(false), int_possible(false), float_possible(false), double_possible(false)
 {
 }
 
@@ -31,40 +31,82 @@ Scalar &Scalar::operator=(const Scalar &rhs)
 	return *this;
 }
 
+char Scalar::getChar() const
+{
+	if (!char_possible)
+		throw std::invalid_argument("char is not possible");
+	return as_char;
+}
+
+int Scalar::getInt() const
+{
+	if (!int_possible)
+		throw std::invalid_argument("int is not possible");
+	return as_int;
+}
+
+float Scalar::getFloat() const
+{
+	if (!float_possible)
+		throw std::invalid_argument("float is not possible");
+	return as_float;
+}
+
+double Scalar::getDouble() const
+{
+	if (!double_possible)
+		throw std::invalid_argument("double is not possible");
+	return as_double;
+}
+
 std::ostream &operator<<(std::ostream &os, const Scalar &scalar)
 {
 	os << "char: ";
-	if (scalar.char_possible)
+	try
 	{
-		if (std::isprint(scalar.as_char))
-			os << scalar.as_char;
+		if (std::isprint(scalar.getChar()))
+			os << "'" << scalar.getChar() << "'";
 		else
 			os << "Non displayable";
 	}
-	else
+	catch (std::invalid_argument &e)
+	{
 		os << "impossible";
+	}
 	os << std::endl;
 
 	os << "int: ";
-	if (scalar.int_possible)
-		os << scalar.as_int;
-	else
+	try
+	{
+		os << scalar.getInt();
+	}
+	catch (std::invalid_argument &e)
+	{
 		os << "impossible";
-	os <<  std::endl;
+	}
+	os << std::endl;
 
 	os << "float: ";
-	if (scalar.float_possible)
-		os << std::fixed << std::setprecision(1) << scalar.as_float << "f";
-	else
+	try
+	{
+		os << std::fixed << std::setprecision(1) << scalar.getFloat() << "f";
+
+	}
+	catch (std::invalid_argument &e)
+	{
 		os << "impossible";
+	}
 	os <<  std::endl;
 
 	os << "double: ";
-	if (scalar.double_possible)
-		os << scalar.as_double;
-	else
+	try
+	{
+		os << std::fixed << std::setprecision(1) << scalar.getDouble();
+	}
+	catch (std::invalid_argument &e)
+	{
 		os << "impossible";
-
+	}
 	return os;
 }
 

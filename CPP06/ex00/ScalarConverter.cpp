@@ -35,26 +35,34 @@ Scalar ScalarConverter::convert(const std::string &param)
 	if (isChar(param))
 	{
 		char charVal = param[0];
-		s.setValues(charVal);
+		s.setChar(charVal);
+		s.setInt(charVal);
+		s.setFloat(charVal);
+		s.setDouble(charVal);
 	}
 	else if (isInt(param))
 	{
 		int intVal = std::atoi(param.c_str());
-		s.setValues(intVal);
+		s.setChar(intVal);
+		s.setInt(intVal);
+		s.setFloat(intVal);
+		s.setDouble(intVal);
 	}
 	else if (isFloat(param))
 	{
 		float floatVal = static_cast<float>(std::atof(param.c_str()));
-		s.setValues(floatVal);
+		s.setChar(floatVal);
+		s.setInt(floatVal);
+		s.setFloat(floatVal);
+		s.setDouble(floatVal);
 	}
 	else if (isDouble(param))
 	{
 		double doubleVal = std::atof(param.c_str());
-		s.setValues(doubleVal);
-	}
-	else
-	{
-		s.char_possible = s.int_possible = s.double_possible = s.float_possible = false;
+		s.setChar(doubleVal);
+		s.setInt(doubleVal);
+		s.setFloat(doubleVal);
+		s.setDouble(doubleVal);
 	}
 	return s;
 }
@@ -66,6 +74,10 @@ bool ScalarConverter::isChar(const std::string &value)
 
 bool ScalarConverter::isInt(const std::string &value)
 {
+	if (value.empty())
+	{
+		return false;
+	}
 	std::istringstream iss(value);
 	int intVal;
 	iss >> intVal;
@@ -74,25 +86,38 @@ bool ScalarConverter::isInt(const std::string &value)
 
 bool ScalarConverter::isFloat(const std::string &value)
 {
-	if (value == "nanf" || value == "+inff" || value == "-inff")
+	if (value.empty())
+	{
+		return false;
+	}
+	else if (value == "nanf" || value == "+inff" || value == "-inff")
 	{
 		return true;
 	}
-	std::istringstream iss(value);
-	float intVal;
-	iss >> intVal;
-	return !iss.fail() && iss.eof();
+	char lastChar = value[value.length() - 1];
+	 if (lastChar == 'f' || lastChar == 'F')
+	{
+		std::istringstream iss(value.substr(0, value.length() - 1));
+		float floatVal;
+		iss >> floatVal;
+		return !iss.fail() && iss.eof();
+	}
+	return false;
 }
 
 bool ScalarConverter::isDouble(const std::string &value)
 {
-	if (value == "nan" || value == "+inf" || value == "-inf")
+	if (value.empty())
+	{
+		return false;
+	}
+	else if (value == "nan" || value == "+inf" || value == "-inf")
 	{
 		return true;
 	}
 	std::istringstream iss(value);
-	double intVal;
-	iss >> intVal;
+	double doubleVal;
+	iss >> doubleVal;
 	return !iss.fail() && iss.eof();
 }
 
