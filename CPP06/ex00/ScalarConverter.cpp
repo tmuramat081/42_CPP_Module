@@ -74,6 +74,10 @@ bool ScalarConverter::isInt(const std::string &value)
 
 bool ScalarConverter::isFloat(const std::string &value)
 {
+	if (value == "nanf" || value == "+inff" || value == "-inff")
+	{
+		return true;
+	}
 	std::istringstream iss(value);
 	float intVal;
 	iss >> intVal;
@@ -82,6 +86,10 @@ bool ScalarConverter::isFloat(const std::string &value)
 
 bool ScalarConverter::isDouble(const std::string &value)
 {
+	if (value == "nan" || value == "+inf" || value == "-inf")
+	{
+		return true;
+	}
 	std::istringstream iss(value);
 	double intVal;
 	iss >> intVal;
