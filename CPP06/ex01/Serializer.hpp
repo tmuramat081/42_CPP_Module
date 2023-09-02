@@ -10,6 +10,8 @@ class Serializer
 public:
 	static uintptr_t serialize(Data *ptr);
 	static Data *deserialize(uintptr_t raw);
+	static float serializeIntToFloat(int i);
+	static int deserializeFloatToInt(float f);
 
 private:
 	Serializer();

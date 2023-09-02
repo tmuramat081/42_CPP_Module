@@ -13,6 +13,16 @@ Data *Serializer::deserialize(uintptr_t raw)
 	return reinterpret_cast<Data *>(raw);
 }
 
+float Serializer::serializeIntToFloat(int i)
+{
+	return static_cast<float>(i);
+}
+
+int Serializer::deserializeFloatToInt(float f)
+{
+	return static_cast<int>(f);
+}
+
 std::ostream &operator<<(std::ostream &os, const Data &data)
 {
 	os << "s1: " << data.s1 << std::endl;

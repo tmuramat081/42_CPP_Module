@@ -95,7 +95,7 @@ bool ScalarConverter::isFloat(const std::string &value)
 		return true;
 	}
 	char lastChar = value[value.length() - 1];
-	 if (lastChar == 'f' || lastChar == 'F')
+	if (lastChar == 'f' || lastChar == 'F')
 	{
 		std::istringstream iss(value.substr(0, value.length() - 1));
 		float floatVal;
