@@ -8,7 +8,8 @@ PmergeMe::PmergeMe() {}
 
 PmergeMe::PmergeMe(const PmergeMe &other)
 {
-	this->_pq = other._pq;
+	this->_deq = other._deq;
+	this->_vec = other._vec;
 }
 
 // Destructor
@@ -19,7 +20,8 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &rhs)
 {
 	if (this != &rhs)
 	{
-		this->_pq = rhs._pq;
+		this->_deq = rhs._deq;
+		this->_vec = rhs._vec;
 	}
 	return *this;
 }
@@ -33,7 +35,7 @@ struct PmergeMe::comparePair
 	}
 };
 
-void PmergeMe::sortByPqueue(int *&elems, size_t len)
+void PmergeMe::sortByDeque(int *&elems, size_t len)
 {
 	// 奇数の場合は余剰要素を別に持つ
 	int individual;
@@ -50,22 +52,22 @@ void PmergeMe::sortByPqueue(int *&elems, size_t len)
 	{
 		int& first = elems[i], second = elems[i + 1];
 		// ペアの要素をソートし、大きい要素を小さい要素の数列にマージする
-			_pq.push(first);
+			_deq.push_back(first);
 		if (first < second) {
-			_pq.push(second);
+			_deq.push_back(second);
 		} else {
-			_pq.push(second);
-			_pq.push(first);
+			_deq.push_back(second);
+			_deq.push_back(first);
 		}
 	}
 	//　余剰要素をマージする
 	if (len & 1)
 	{
-		_pq.push(individual);
+		_deq.push_back(individual);
 	}
 	for (size_t i = 0; i < len; i++)
 	{
-		elems[i] = _pq.top(); _pq.pop();
+		elems[i] = _deq.top(); _deq.pop_front();
 	}
 }
 
@@ -87,21 +89,21 @@ void PmergeMe::sortByVector(int *&elems, size_t len)
 		int& first = elems[i], second = elems[i + 1];
 		// ペアの要素をソートし、大きい要素を小さい要素の数列にマージする
 		if (first < second) {
-			_pq.push(first);
-			_pq.push(second);
+			_vec.push_back(first);
+			_vec.push_back(second);
 		} else {
-			_pq.push(second);
-			_pq.push(first);
+			_vec.push_back(second);
+			_vec.push_back(first);
 		}
 	}
 	//　余剰要素をマージする
 	if (len & 1)
 	{
-		_pq.push(individual);
+		_vec.push(individual);
 	}
 	for (size_t i = 0; i < len; i++)
 	{
-		elems[i] = _pq.top(); _pq.pop();
+		elems[i] = _vec.top(); _vec.pop();
 	}
 }
 
