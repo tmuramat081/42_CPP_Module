@@ -12,7 +12,7 @@ class PmergeMe
 public:
 	// Constructors
 	PmergeMe();
-	PmergeMe(const PmergeMe &orher);
+	PmergeMe(const PmergeMe &other);
 
 	// Destructor
 	~PmergeMe();
@@ -24,12 +24,13 @@ public:
 	struct comparePair;
 
 private:
+	void insertion(std::deque<int> &elems, size_t start, size_t end);
 	std::vector<int> _vec;
 	std::deque<int> _deq;
 };
 
 std::ostream& operator<<(std::ostream& os, const std::pair<int, int>& p);
-std::ostream& operator<<(std::ostream& os, const std::priority_queue<std::pair<int, int> >& pq);
+std::ostream& operator<<(std::ostream& os, const std::deque<int> & dq);
 std::ostream& operator<<(std::ostream& os, const std::vector<int>& v);
 
 #endif

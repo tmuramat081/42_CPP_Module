@@ -17,7 +17,7 @@ void sort(int *elems, size_t len)
 	std::cout << std::endl;
 
 	PmergeMe pm;
-	pm.sortByPriorityQueue(elems, len);
+	pm.sortByDeque(elems, len);
 
 	std::cout << "After:\t";
 	for (size_t i = 0; i < len; ++i)

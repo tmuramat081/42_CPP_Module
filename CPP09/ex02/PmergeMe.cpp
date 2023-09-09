@@ -26,24 +26,22 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &rhs)
 	return *this;
 }
 
-struct PmergeMe::comparePair
+void PmergeMe::sortByDeque(int *&elems, size_t start, size_t)
 {
-	bool operator()(std::pair<int, int> const &p1, std::pair<int, int> const &p2)
-	{
-		// 'greater' comparison for min heap
-		return p1.first > p2.first;
-	}
-};
+	std::deque<int> deq(elems, elems + len);
+	size_t start = 0;
+	size_t end = len - 1;
 
-void PmergeMe::sortByDeque(int *&elems, size_t len)
-{
+	std::deque<int> main;
+	std::deque<int> sub;
+
 	// 奇数の場合は余剰要素を別に持つ
 	int individual;
 	size_t size = len;
 
 	if (len & 1)
 	{
-		individual = elems[len-1];
+		individual = elems[len - 1];
 		size = len - 1;
 	}
 
@@ -52,60 +50,76 @@ void PmergeMe::sortByDeque(int *&elems, size_t len)
 	{
 		int& first = elems[i], second = elems[i + 1];
 		// ペアの要素をソートし、大きい要素を小さい要素の数列にマージする
-			_deq.push_back(first);
-		if (first < second) {
-			_deq.push_back(second);
-		} else {
-			_deq.push_back(second);
-			_deq.push_back(first);
+		if (first < second)
+		{
+			main.push_back(first);
+			sub.push_back(second);
+		} else
+		{
+			sub.push_back(second);
+			main.push_back(first);
 		}
 	}
 	//　余剰要素をマージする
 	if (len & 1)
 	{
-		_deq.push_back(individual);
+		main.push_back(individual);
 	}
-	for (size_t i = 0; i < len; i++)
+	insertion(main, 0, main.size() - 1);
+
+	for (size_t i = 0, j = 0; i < len; i++, j += 2)
 	{
-		elems[i] = _deq.top(); _deq.pop_front();
+		elems[i] = deq.front(); deq.pop_front();
 	}
-}
-
-void PmergeMe::sortByVector(int *&elems, size_t len)
-{
-	// 奇数の場合は余剰要素を別に持つ
-	int individual;
-	size_t size = len;
-
-	if (len & 1)
+	for (size_t i = 0; i < len; ++i)
 	{
-		individual = elems[len-1];
-		size = len - 1;
-	}
-
-	// ペアの要素に分割する
-	for (size_t i = 0, j = 0; i < size; i += 2, ++j)
-	{
-		int& first = elems[i], second = elems[i + 1];
-		// ペアの要素をソートし、大きい要素を小さい要素の数列にマージする
-		if (first < second) {
-			_vec.push_back(first);
-			_vec.push_back(second);
-		} else {
-			_vec.push_back(second);
-			_vec.push_back(first);
+		for (size_t j = end; j >= start; --j)
+		{
+			if (elems[i] <= sub[i])
+			{
+				arr[i + 1] = pend;
+				break;
+			}
+			arr[i + 1] = arr[i];
 		}
 	}
-	//　余剰要素をマージする
-	if (len & 1)
-	{
-		_vec.push(individual);
-	}
-	for (size_t i = 0; i < len; i++)
-	{
-		elems[i] = _vec.top(); _vec.pop();
-	}
 }
+
+// void PmergeMe::sortByVector(int *&elems, size_t len)
+// {
+// 	// 奇数の場合は余剰要素を別に持つ
+// 	int individual;
+// 	size_t size = len;
+
+// 	if (len & 1)
+// 	{
+// 		individual = elems[len - 1];
+// 		size = len - 1;
+// 	}
+
+// 	// ペアの要素に分割する
+// 	for (size_t i = 0, j = 0; i < size; i += 2, ++j)
+// 	{
+// 		int& first = elems[i], second = elems[i + 1];
+// 		// ペアの要素をソートし、大きい要素を小さい要素の数列にマージする
+// 		if (first < second) {
+// 			_vec.push_back(first);
+// 			_vec.push_back(second);
+// 		} else {
+// 			_vec.push_back(second);
+// 			_vec.push_back(first);
+// 		}
+// 	}
+// 	//　余剰要素をマージする
+// 	if (len & 1)
+// 	{
+// 		_vec.push(individual);
+// 	}
+// 	for (size_t i = 0; i < len; i++)
+// 	{
+// 		elems[i] = _vec.top(); _vec.pop();
+// 	}
+// }
 
 std::ostream &operator<<(std::ostream &os, const std::pair<int, int> &p)
 {
@@ -113,14 +127,14 @@ std::ostream &operator<<(std::ostream &os, const std::pair<int, int> &p)
 	return os;
 }
 
-std::ostream &operator<<(std::ostream &os, const std::priority_queue<std::pair<int, int> > &pq)
+std::ostream &operator<<(std::ostream &os, const std::deque<int> &dq)
 {
-	std::priority_queue<std::pair<int, int> > pq_copy = pq;
+	std::deque<int> dq_copy = dq;
 
-	while (!pq_copy.empty())
+	while (!dq_copy.empty())
 	{
-		std::cout << pq_copy.top() << ' ';
-		pq_copy.pop();
+		std::cout << dq_copy[0] << ' ';
+		dq_copy.pop_front();
 	}
 	return os;
 }
