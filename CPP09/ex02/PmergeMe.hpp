@@ -10,27 +10,17 @@
 class PmergeMe
 {
 public:
-	// Constructors
-	PmergeMe();
-	PmergeMe(const PmergeMe &other);
-
-	// Destructor
-	~PmergeMe();
-
-	// Operators
-	PmergeMe &operator=(const PmergeMe &rhs);
-	void sortByVector(int* &elems, size_t len);
-	void sortByDeque(int* &elems, size_t len);
-	struct comparePair;
+	template<class RandomIt>
+	static void sort(RandomIt first, RandomIt last);
 
 private:
-	void insertion(std::deque<int> &elems, size_t start, size_t end);
-	std::vector<int> _vec;
-	std::deque<int> _deq;
+	template<class RandomIt>
+	static void mergeInsertSort(RandomIt first, RandomIt last);
+
+	PmergeMe();
+	~PmergeMe();
 };
 
-std::ostream& operator<<(std::ostream& os, const std::pair<int, int>& p);
-std::ostream& operator<<(std::ostream& os, const std::deque<int> & dq);
-std::ostream& operator<<(std::ostream& os, const std::vector<int>& v);
+#include "PmergeMe.tpp"
 
 #endif

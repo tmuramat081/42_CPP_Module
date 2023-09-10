@@ -3,27 +3,26 @@
 #include <string>
 #include <ctime>
 
-void sort(int *elems, size_t len)
+static void sortTest(std::vector<int> elems)
 {
 	clock_t start = clock();
 
 	std::cout << "Before:\t";
-	for (size_t i = 0; i < len; ++i)
+	for (size_t i = 0; i < elems.size(); ++i)
 	{
 		std::cout << elems[i];
-		if (i != len)
+		if (i != elems.size())
 			std::cout << ' ';
 	}
 	std::cout << std::endl;
 
-	PmergeMe pm;
-	pm.sortByDeque(elems, len);
+	PmergeMe::sort(elems.begin(), elems.end());
 
 	std::cout << "After:\t";
-	for (size_t i = 0; i < len; ++i)
+	for (size_t i = 0; i < elems.size(); ++i)
 	{
 		std::cout << elems[i];
-		if (i != len)
+		if (i != elems.size())
 			std::cout << ' ';
 	}
 	std::cout << std::endl;
@@ -31,7 +30,7 @@ void sort(int *elems, size_t len)
 	clock_t end = clock();
 	double duration = (end - start) * 1000000.0 / CLOCKS_PER_SEC;
 
-	std::cout << "Time to process a range of\t" << len << " elements with std::priority_queue : " << duration << " us" << std::endl;
+	std::cout << "Time to process a range of\t" << elems.size() << " elements with std::priority_queue : " << duration << " us" << std::endl;
 }
 
 int main(int ac, char **av)
@@ -45,12 +44,12 @@ int main(int ac, char **av)
 	size_t len = ac - 1;
 	try
 	{
-		int *elems = new int[len];
+		std::vector<int> elems;
 		for (size_t i = 0; i < len; ++i)
 		{
-			elems[i] = std::stoi(args[i]);
+			elems.push_back(std::stoi(args[i]));
 		}
-		sort(elems, len);
+		sortTest(elems);
 	}
 	catch (...)
 	{
