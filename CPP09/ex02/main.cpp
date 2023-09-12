@@ -69,7 +69,12 @@ int main(int ac, char **av)
 		std::vector<int> elems;
 		for (int i = 1; i < ac; ++i)
 		{
-			elems.push_back(std::stoi(av[i]));
+			std::size_t idx = 0;
+			std::string arg = av[i];
+			int num = std::stoi(av[i], &idx);
+			if (num < 0 || arg.size() != idx)
+				throw std::invalid_argument("Error: invalid argument");
+			elems.push_back(num);
 		}
 		sortTest(elems);
 	}

@@ -28,6 +28,21 @@ function run_test()
 	total_tests=$((total_tests+1))
 }
 
+function error_test()
+{
+	local args="$1"
+
+	"$PRG" $args
+	if [ $? -eq 1 ]; then
+		echo -e "✅ ${green}Test passed! ${default}"
+		passed_tests=$((passed_tests+1))
+	else
+		echo -e "❌ ${red}Test passed! ${default}"
+	fi
+	total_tests=$((total_tests+1))
+
+}
+
 run_test 1
 run_test 3
 run_test 10
@@ -36,8 +51,16 @@ run_test 100
 run_test 1000
 run_test 3000
 
+error_test ""
+error_test "-1"
+error_test "2147483648"
+error_test "-2147483649"
+error_test "1 2 three"
+error_test "1a"
+
+
 if [ $total_tests -eq $passed_tests ]; then
-	echo -e "\n---- 🍺 ${green}All tests passed ${default} ----"
+	echo -e "\n---- 🍺 ${green}All tests passed! ${default} ----"
 else
 	echo -e "\n---- 🍺 ${red}tests failed ${default} ----"
 fi
