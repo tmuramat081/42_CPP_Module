@@ -6,18 +6,39 @@ green='\033[0;32m'
 blue='\033[0;34m'
 default='\033[0m'
 
-# 関数定義
-function run_test() {
-    local test_case="$1"
+# Initialize counters
+total_tests=0
+passed_tests=0
 
-    echo "----------------------------------"
-	echo -e "Test Case: ${blue}$test_case${default}"
-    "$PRG" "$test_case"
-    echo -e "✅ ${green}Test passed! ${default}"
+# function
+function run_test()
+{
+	local n="$1"
+
+	random_array=$(jot -r $n 1 100000 | tr '\n' ' ')
+	echo "----------------------------------"
+	"$PRG" $random_array
+
+	if [ $? -eq 0 ]; then
+		echo -e "✅ ${green}Test passed! ${default}"
+		passed_tests=$((passed_tests+1))
+	else
+		echo -e "❌ ${red}Test passed! ${default}"
+	fi
+	total_tests=$((total_tests+1))
 }
 
-# 正常系
-run_test "8 6 5 7 3 4 9 1 10 2"
+run_test 1
+run_test 3
+run_test 10
+run_test 50
+run_test 100
+run_test 1000
+run_test 3000
 
-echo -e "\n---- 🍺 ${green}All tests passed ${default} ----"
+if [ $total_tests -eq $passed_tests ]; then
+	echo -e "\n---- 🍺 ${green}All tests passed ${default} ----"
+else
+	echo -e "\n---- 🍺 ${red}tests failed ${default} ----"
+fi
 exit 0

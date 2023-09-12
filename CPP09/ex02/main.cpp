@@ -1,12 +1,12 @@
-#include "PmergeMe.hpp"
+#include "SortByVector.hpp"
+#include "SortByDeque.hpp"
 #include <iostream>
 #include <string>
 #include <ctime>
 
 static void sortTest(std::vector<int> elems)
 {
-	clock_t start = clock();
-
+	// 元の配列を表示
 	std::cout << "Before:\t";
 	for (size_t i = 0; i < elems.size(); ++i)
 	{
@@ -16,21 +16,45 @@ static void sortTest(std::vector<int> elems)
 	}
 	std::cout << std::endl;
 
-	PmergeMe::sort(elems.begin(), elems.end());
+	// std::vectorを用いたソート
+	std::vector<int> e1 = elems;
+	clock_t start;
+	start = clock();
+	SortByVector::sort(e1.begin(), e1.end());
+	clock_t end;
+	end = clock();
+	double duration1 = (end - start) * 1000000.0 / CLOCKS_PER_SEC;
 
-	std::cout << "After:\t";
-	for (size_t i = 0; i < elems.size(); ++i)
+	// std::dequeを用いたソート
+	std::vector<int> e2 = elems;
+	start = clock();
+	SortByDeque::sort(e2.begin(), e2.end());
+	end = clock();
+	double duration2 = (end - start) * 1000000.0 / CLOCKS_PER_SEC;
+
+	// std::sort
+	SortByVector::sort(elems.begin(), elems.end());
+
+	// ソート結果に誤りがないか確認
+	if (e1 != elems || e2 != elems || e1 != e2)
 	{
-		std::cout << elems[i];
-		if (i != elems.size())
+		std::cerr << "Error: different results" << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+	// ソート結果を表示
+	std::cout << "After:\t";
+	for (size_t i = 0; i < e1.size(); ++i)
+	{
+		std::cout << e1[i];
+		if (i != e1.size())
 			std::cout << ' ';
 	}
 	std::cout << std::endl;
 
-	clock_t end = clock();
-	double duration = (end - start) * 1000000.0 / CLOCKS_PER_SEC;
-
-	std::cout << "Time to process a range of\t" << elems.size() << " elements with std::priority_queue : " << duration << " us" << std::endl;
+	// ソートにかかった時間を表示
+	std::cout << "Time to process a range of\t" << elems.size() << " elements with std::vector : " << duration1 << " us" << std::endl;
+	std::cout << "Time to process a range of\t" << elems.size() << " elements with std::deque : " << duration2 << " us" << std::endl;
 }
 
 int main(int ac, char **av)
@@ -40,14 +64,12 @@ int main(int ac, char **av)
 		std::cerr << "Error: wrong argument" << std::endl;
 		exit(EXIT_FAILURE);
 	}
-	char **args = &av[1];
-	size_t len = ac - 1;
 	try
 	{
 		std::vector<int> elems;
-		for (size_t i = 0; i < len; ++i)
+		for (int i = 1; i < ac; ++i)
 		{
-			elems.push_back(std::stoi(args[i]));
+			elems.push_back(std::stoi(av[i]));
 		}
 		sortTest(elems);
 	}

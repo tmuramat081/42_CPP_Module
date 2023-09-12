@@ -1,9 +1,9 @@
 NAME := PmergeMe
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++11 -pedantic
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
 # LEAKS := -D LEAKS_CHECK
 
-SRCS := main.cpp 
+SRCS := main.cpp
 OBJS := ${SRCS:.cpp=.o}
 
 # Print variables
