@@ -30,11 +30,13 @@ int RPN::calculate(const std::string &s)
 	{
 		throw std::invalid_argument("Invalid expression");
 	}
-	std::istringstream iss(s);
-	std::string token;
 
-	while (iss >> token)
+	for (std::string::const_iterator it = s.begin(); it != s.end(); ++it)
 	{
+		char token = *it;
+
+		if (std::isspace(token)) continue;
+
 		if (std::string("+-*/").find(token) != std::string::npos)
 		{
 			if (_s.size() < 2)
@@ -44,15 +46,24 @@ int RPN::calculate(const std::string &s)
 			int a = _s.top(); _s.pop();
 			int b = _s.top(); _s.pop();
 
-			if (token == "+") _s.push(b + a);
-			else if (token == "-") _s.push(b - a);
-			else if (token == "*") _s.push(b * a);
-			else if (token == "/") _s.push(b / a);
+			if (token == '+') _s.push(b + a);
+			else if (token == '-') _s.push(b - a);
+			else if (token == '*') _s.push(b * a);
+			else if (token == '/') {
+				if (a == 0)
+					throw std::invalid_argument("Invalid expression");
+				else
+					_s.push(b / a);
+			}
+		}
+		else if (std::isdigit(token))
+		{
+			int n = token - '0';
+			_s.push(n);
 		}
 		else
 		{
-			int n = std::stoi(token);
-			_s.push(n);
+			throw std::invalid_argument("Invalid expression");
 		}
 	}
 	return _s.top();
