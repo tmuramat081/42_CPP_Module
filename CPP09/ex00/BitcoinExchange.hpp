@@ -9,7 +9,7 @@ class BitcoinExchange
 {
 public:
 	// Constructors
-	BitcoinExchange(const std::string &filename);
+	BitcoinExchange(const std::string &filename, bool visualMode = false);
 	BitcoinExchange(const BitcoinExchange &other);
 
 	// Destructor
@@ -20,14 +20,16 @@ public:
 
 	// Member functions
 	static inline void trimSpace(std::string &s);
-	void calculateValues(const std::string &filename);
+	void calculateAllValues(const std::string &filename);
+	void setVisualMode(bool visualMode);
 
 private:
+	bool _visualMode;
 	BitcoinExchange();
-	std::map<std::string, double> _rates;
+	std::map<std::string, float> _rates;
 	void loadRatesMaster(const std::string &filename);
-	void calculateValue(const std::string &date, const double value);
-
+	void calculateValue(const std::string &date, const float value);
+	bool validateDateFormat(const std::string &date);
 };
 
 #endif
