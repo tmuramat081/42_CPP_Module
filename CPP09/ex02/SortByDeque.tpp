@@ -10,7 +10,7 @@ void SortByDeque::mergeInsertSort(RandomIt first, RandomIt last)
 	typedef typename std::iterator_traits<RandomIt>::value_type ValueType;
 	std::ptrdiff_t n = std::distance(first, last);
 
-	if (n <= 1) return ;
+	if (n < 2) return ;
 
 	std::deque<ValueType> mainChain;
 	std::deque<std::pair<ValueType, ValueType> > pairs;
