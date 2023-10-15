@@ -25,8 +25,7 @@ void putIdeaByRandom(const Brain *brain)
 	srand(static_cast<unsigned int>(time(0)));
 	int index = rand() % 100;
 
-	std::cout << GREEN;
-	std::cout << "Pick up a next idea: ";
+	std::cout << GREEN; std::cout << "Pick up a next idea: ";
 	std::cout << brain->getIdea(index);
 	std::cout << DEFAULT << std::endl;
 }
@@ -42,6 +41,25 @@ void setIdeas(Brain *brain, const std::string ideas[100])
 
 int main()
 {
+	const Animal* array[10];
+	for (int i = 0; i < 10; ++i)
+	{
+		if (i < 5)
+			array[i] = new Dog;
+		else
+			array[i] = new Cat;
+	}
+	for (int i = 0; i < 10; ++i)
+	{
+		delete array[i];
+	}
+
+	Cat *test = new Cat;
+	Cat *copy = new Cat(*test);
+
+	std::cout << test->getBrain() << std::endl;
+	std::cout << copy->getBrain() << std::endl;
+
 	// 動物クラスのインスタンスを生成
 	const Dog *dog = new Dog();
 	Cat *cat = new Cat();

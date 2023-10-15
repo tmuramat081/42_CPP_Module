@@ -1,0 +1,5 @@
+UPPERCASE
+LOWERCASE
+CamelCase
+snake_case
+kebab-case

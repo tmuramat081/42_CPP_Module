@@ -1,7 +1,8 @@
 NAME := a.out
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
-SRCS := megaphone.cpp
+
+SRCS := Account.cpp tests.cpp
 OBJS := ${SRCS:.cpp=.o}
 
 # Print variables
@@ -21,7 +22,7 @@ all: ${NAME}
 
 #: Remove all object files.
 clean:
-	@${RM} ${OBJS}
+	@${RM} ${OBJS} ${DEPS}
 	@${PRINTF} "${RED}Cleaned up object files in ${NAME} ${DEFAULT}\n"
 
 #: Remove all object and executable files.
@@ -32,6 +33,7 @@ fclean:	clean
 #: Remove and recompile all.
 re: fclean all
 
+#: Display all commands.
 .PHONY:
-	all clean fclean re
+	all clean fclean re run dev git norm nm help
 

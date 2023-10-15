@@ -1,8 +1,18 @@
 NAME := a.out
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
-SRCS := megaphone.cpp
-OBJS := ${SRCS:.cpp=.o}
+CXXFLAGS += -I./Model/ -I./Controller/ -I./Repository -I./Service -I./View -I./Validator/ -I./Constant/
+SRCS := \
+	main.cpp \
+	Model/Contact.cpp \
+	Controller/Controller.cpp \
+	Service/PhoneBook.cpp \
+	View/PhoneBookView.cpp \
+	Validator/PhoneBookValidator.cpp \
+	Constant/MessageConstant.cpp \
+	Constant/PhoneBookConstant.cpp \
+
+OBJS := ${SRCS:%.cpp=%.o}
 
 # Print variables
 PRINTF := printf
@@ -13,7 +23,7 @@ RED := \033[0;91m
 
 # Commands
 ${NAME}: ${OBJS}
-	@${CXX} ${CXXFLAGS} ${OBJS} -o $@
+	${CXX} ${CXXFLAGS} ${OBJS} -o $@
 	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 #: Make executable file.

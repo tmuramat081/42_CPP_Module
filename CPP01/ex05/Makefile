@@ -1,7 +1,8 @@
 NAME := a.out
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
-SRCS := megaphone.cpp
+
+SRCS := main.cpp Harl.cpp
 OBJS := ${SRCS:.cpp=.o}
 
 # Print variables
@@ -14,14 +15,14 @@ RED := \033[0;91m
 # Commands
 ${NAME}: ${OBJS}
 	@${CXX} ${CXXFLAGS} ${OBJS} -o $@
-	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
+	@${PRINTF} "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}\n"
 
 #: Make executable file.
 all: ${NAME}
 
 #: Remove all object files.
 clean:
-	@${RM} ${OBJS}
+	@${RM} ${OBJS} ${DEPS}
 	@${PRINTF} "${RED}Cleaned up object files in ${NAME} ${DEFAULT}\n"
 
 #: Remove all object and executable files.
